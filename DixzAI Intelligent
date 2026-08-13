@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DixzAI Intelligent</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#050914;
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(0,162,255,.20),transparent 32%),
+    radial-gradient(circle at 85% 70%,rgba(88,70,255,.16),transparent 34%),
+    linear-gradient(135deg,#050914,#08162b 55%,#04070d);
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:-1;opacity:.18;
+  background-image:radial-gradient(#fff .7px,transparent .7px);
+  background-size:42px 42px;
+}
+.app{width:min(100%,980px);margin:auto;min-height:100vh}
+header{
+  height:76px;padding:0 24px;display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(4,9,20,.72);backdrop-filter:blur(18px);
+  position:sticky;top:0;z-index:20
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logoMark{
+  width:42px;height:42px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#00a2ff,#6b5cff);
+  box-shadow:0 0 28px rgba(0,162,255,.35);
+  font-weight:900;font-size:20px
+}
+.brand b{font-size:19px}.brand span{display:block;color:#8fa3bd;font-size:11px;margin-top:2px}
+nav{display:flex;gap:8px}
+nav button{
+  border:0;background:transparent;color:#8fa3bd;padding:10px 13px;
+  border-radius:10px;cursor:pointer;font-weight:700
+}
+nav button.active,nav button:hover{background:#102442;color:#fff}
+main{padding:38px 24px 80px}
+.screen{display:none}.screen.active{display:block}
+.hero{
+  min-height:440px;display:flex;flex-direction:column;justify-content:center;
+  padding:40px;border:1px solid rgba(0,162,255,.2);border-radius:30px;
+  background:linear-gradient(135deg,rgba(8,26,55,.92),rgba(8,13,27,.88));
+  box-shadow:0 25px 80px rgba(0,0,0,.35)
+}
+.badge{
+  width:max-content;padding:8px 12px;border-radius:999px;
+  background:rgba(0,162,255,.1);border:1px solid rgba(0,162,255,.28);
+  color:#63c7ff;font-size:12px;font-weight:800;letter-spacing:.5px
+}
+h1{font-size:clamp(42px,8vw,78px);line-height:.98;margin:22px 0 18px}
+.gradient{background:linear-gradient(90deg,#fff,#68caff,#8f7cff);
+-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:690px;color:#b5c4d8;font-size:17px;line-height:1.7}
+.actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{
+  padding:14px 20px;border-radius:13px;border:1px solid #23476e;
+  background:#102542;color:#fff;font-weight:800;cursor:pointer
+}
+.btn.primary{background:linear-gradient(90deg,#008fe6,#5b5cff);border:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px}
+.card{
+  background:rgba(8,22,43,.82);border:1px solid rgba(95,143,194,.18);
+  border-radius:22px;padding:24px;box-shadow:0 12px 35px rgba(0,0,0,.18)
+}
+.card h2{font-size:21px;margin-bottom:10px}
+.card p,.card li{color:#aebed1;line-height:1.65;font-size:14px}
+.card ul{padding-left:20px}.card li{margin:7px 0}
+.section-title{font-size:34px;margin-bottom:8px}
+.muted{color:#8fa3bd;margin-bottom:22px}
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.person{padding:16px;border-radius:15px;background:#0b1b34;border:1px solid #173657}
+.person b{display:block}.person span{display:block;color:#7fa0bf;font-size:12px;margin-top:5px}
+.aiBox{
+  padding:26px;border-radius:24px;background:linear-gradient(135deg,#0b2342,#101a3b);
+  border:1px solid rgba(0,162,255,.22);margin-bottom:18px
+}
+.aiBox textarea{
+  width:100%;min-height:120px;margin-top:16px;border-radius:14px;
+  padding:15px;background:#050c18;border:1px solid #24466c;color:#fff;
+  resize:vertical;font:inherit
+}
+.answer{display:none;margin-top:14px;padding:15px;border-radius:14px;background:#071426;color:#bcd0e5;line-height:1.65}
+footer{padding:25px 0;text-align:center;color:#60758e;font-size:12px}
+@media(max-width:700px){
+  header{padding:0 14px}.brand span{display:none}nav button{padding:8px}
+  main{padding:22px 14px 50px}.hero{padding:27px;min-height:500px}
+  .grid,.team{grid-template-columns:1fr}h1{font-size:48px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">
+    <div class="logoMark">D</div>
+    <div><b>DixzAI Intelligent</b><span>Intelligence for the next generation.</span></div>
+  </div>
+  <nav>
+    <button class="active" onclick="show('home',this)">Inicio</button>
+    <button onclick="show('ai',this)">IA</button>
+    <button onclick="show('company',this)">Empresa</button>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="screen active">
+  <div class="hero">
+    <div class="badge">PRIVATE AI TECHNOLOGY COMPANY</div>
+    <h1><span class="gradient">DixzAI</span><br>Intelligent</h1>
+    <p>
+      Una empresa privada de tecnología e inteligencia artificial enfocada en
+      construir soluciones inteligentes, accesibles y escalables para la próxima generación.
+    </p>
+    <div class="actions">
+      <button class="btn primary" onclick="show('ai',document.querySelectorAll('nav button')[1])">Explorar DixzAI</button>
+      <button class="btn" onclick="show('company',document.querySelectorAll('nav button')[2])">Conocer el equipo</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h2>🧠 Inteligencia artificial</h2><p>Herramientas de IA orientadas a asistencia, productividad, generación de contenido y experiencias digitales inteligentes.</p></div>
+    <div class="card"><h2>⚙️ Tecnología escalable</h2><p>Una visión tecnológica preparada para evolucionar, incorporar nuevas capacidades y crecer hacia productos globales.</p></div>
+    <div class="card"><h2>🌎 Visión global</h2><p>DixzAI Intelligent busca desarrollar tecnología accesible con una perspectiva internacional y orientada al futuro.</p></div>
+    <div class="card"><h2>🔐 Seguridad y privacidad</h2><p>La seguridad, la privacidad y el uso responsable de la inteligencia artificial forman parte de la visión del producto.</p></div>
+  </div>
+</section>
+
+<section id="ai" class="screen">
+  <h2 class="section-title">DixzAI AI Lab</h2>
+  <p class="muted">Prototipo de experiencia de inteligencia artificial.</p>
+  <div class="aiBox">
+    <h2>🤖 Asistente DixzAI</h2>
+    <p class="muted">Escribe una consulta para probar la interfaz.</p>
+    <textarea id="question" placeholder="¿En qué puede ayudarme DixzAI Intelligent?"></textarea>
+    <div class="actions"><button class="btn primary" onclick="askAI()">Preguntar a DixzAI</button></div>
+    <div id="answer" class="answer"></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h2>✨ Asistencia inteligente</h2><p>Interacción natural para consultas, ideas, redacción y apoyo en tareas.</p></div>
+    <div class="card"><h2>⚡ Productividad</h2><p>Diseñada para ayudar a simplificar procesos y trabajar con mayor eficiencia.</p></div>
+    <div class="card"><h2>🔧 Automatización</h2><p>Visión de herramientas capaces de apoyar flujos de trabajo y operaciones digitales.</p></div>
+    <div class="card"><h2>🚀 Evolución continua</h2><p>La plataforma está concebida para incorporar nuevas funciones de inteligencia artificial.</p></div>
+  </div>
+</section>
+
+<section id="company" class="screen">
+  <h2 class="section-title">Nuestra empresa</h2>
+  <p class="muted">DixzAI Intelligent — tecnología e inteligencia artificial.</p>
+
+  <div class="card">
+    <h2>🏢 Identidad</h2><br>
+    <p><b>Nombre:</b> DixzAI Intelligent</p>
+    <p><b>Tipo:</b> Empresa privada de tecnología e inteligencia artificial</p>
+    <p><b>Enfoque:</b> Inteligencia artificial, software, automatización y soluciones digitales</p>
+    <p><b>Visión:</b> Intelligence for the next generation.</p>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h2>👥 Equipo directivo y técnico</h2><br>
+    <div class="team">
+      <div class="person"><b>Adilson Smith</b><span>CEO & Fundador</span></div>
+      <div class="person"><b>Ale Michelle</b><span>Co-Fundadora</span></div>
+      <div class="person"><b>Jeff Padilla F</b><span>Presidente</span></div>
+      <div class="person"><b>Adilson Smith</b><span>Ingeniero Principal de Software</span></div>
+      <div class="person"><b>Torine Soe</b><span>Desarrollador</span></div>
+      <div class="person"><b>Alex Asla</b><span>Desarrollador</span></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h2>🎯 Misión</h2><p>Crear soluciones de inteligencia artificial que permitan a personas y organizaciones aprovechar tecnología avanzada de una manera accesible y práctica.</p></div>
+    <div class="card"><h2>🔭 Visión</h2><p>Construir una plataforma de IA innovadora, escalable y con alcance global, orientada a la siguiente generación de tecnología.</p></div>
+  </div>
+</section>
+
+<footer>DixzAI Intelligent © 2026 · Private AI Technology</footer>
+</main>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function askAI(){
+  const q=document.getElementById('question').value.trim();
+  const a=document.getElementById('answer');
+  if(!q){a.style.display='block';a.textContent='Escribe una consulta para probar la interfaz de DixzAI.';return;}
+  a.style.display='block';
+  a.innerHTML='<b>DixzAI:</b> Esta es una demostración de interfaz. La conexión con un modelo de IA real puede integrarse posteriormente mediante una API de inteligencia artificial.';
+}
+</script>
+</body>
+</html>
