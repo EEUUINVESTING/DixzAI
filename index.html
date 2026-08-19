@@ -313,12 +313,44 @@ function show(id,btn){
   if(btn) btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function askAI(){
-  const q=document.getElementById('question').value.trim();
-  const a=document.getElementById('answer');
-  if(!q){a.style.display='block';a.textContent='Escribe una consulta para probar la interfaz de DixzAI.';return;}
-  a.style.display='block';
-  a.innerHTML='<b>DixzAI:</b> Esta es una demostración de interfaz. La conexión con un modelo de IA real puede integrarse posteriormente mediante una API de inteligencia artificial.';
+async function askAI(){
+  const q = document.getElementById('question').value.trim();
+  const a = document.getElementById('answer');
+
+  if(!q){
+    a.style.display = 'block';
+    a.textContent = 'Escribe una consulta para probar la interfaz de DixzAI.';
+    return;
+  }
+
+  a.style.display = 'block';
+  a.innerHTML = '<b>DixzAI:</b> Pensando...';
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        question: q
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || 'Error en la conexión.');
+    }
+
+    a.innerHTML = '<b>DixzAI:</b><br>' + data.answer.replace(/\n/g, '<br>');
+
+  } catch(error) {
+    console.error(error);
+
+    a.innerHTML =
+      '<b>DixzAI:</b> No pude conectarme con el sistema de inteligencia artificial. Inténtalo nuevamente.';
+  }
 }
 </script>
 </body>
