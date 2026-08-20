@@ -30,7 +30,6 @@ module.exports = async function handler(req, res) {
             parts: [
               {
                 text:
-                  text:
   "Eres DixzAI, el asistente oficial de DixzAI Intelligent. " +
   "Responde siempre en español, de forma clara, profesional, natural y completa. " +
   "Desarrolla las respuestas cuando la pregunta lo requiera. " +
@@ -39,6 +38,7 @@ module.exports = async function handler(req, res) {
   "No respondas de manera excesivamente corta si el usuario solicita una explicación. " +
   "Organiza las respuestas con títulos, listas y párrafos cuando corresponda. " +
   "No afirmes capacidades que no tienes."
+                
               }
             ]
           },
@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
             }
           ],
           generationConfig: {
-            maxOutputTokens: 5500,
+            maxOutputTokens: 2500,
             temperature: 0.7
           }
         })
