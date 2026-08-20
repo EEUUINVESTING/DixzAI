@@ -146,6 +146,7 @@ footer{padding:25px 0;text-align:center;color:#60758e;font-size:12px}
     <h2>🤖 Asistente DixzAI</h2>
     <p class="muted">Escribe una consulta para probar la interfaz.</p>
     <textarea id="question" placeholder="¿En qué puede ayudarme DixzAI Intelligent?"></textarea>
+    <div id="chatMessages"></div>
     <div class="actions"><button class="btn primary" onclick="askAI()">Preguntar a DixzAI</button></div>
     <div id="answer" class="answer"></div>
   </div>
@@ -314,6 +315,65 @@ function show(id,btn){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 async function askAI(){
+  const input = document.getElementById('question');
+  const messages = document.getElementById('chatMessages');
+  const q = input.value.trim();
+
+  if(!q) return;
+
+  messages.innerHTML += `
+    <div class="chat-message chat-user">${q}</div>
+  `;
+
+  input.value = '';
+
+  messages.innerHTML += `
+    <div id="thinking" class="chat-message chat-ai">
+      <b>DixzAI:</b> Pensando...
+    </div>
+  `;
+
+  messages.scrollIntoView({behavior:'smooth', block:'end'});
+
+  try {
+    const response = await fetch('/api/chat', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        question:q
+      })
+    });
+
+    const data = await response.json();
+
+    document.getElementById('thinking')?.remove();
+
+    if(!response.ok){
+      throw new Error(data.error || 'Error de conexión');
+    }
+
+    messages.innerHTML += `
+      <div class="chat-message chat-ai">
+        <b>DixzAI:</b><br>${data.answer}
+      </div>
+    `;
+
+    messages.scrollIntoView({behavior:'smooth', block:'end'});
+
+  } catch(error) {
+
+    document.getElementById('thinking')?.remove();
+
+    messages.innerHTML += `
+      <div class="chat-message chat-ai">
+        <b>DixzAI:</b><br>
+        No pude procesar tu solicitud. Inténtalo nuevamente.
+      </div>
+    `;
+  }
+}
   const q = document.getElementById('question').value.trim();
   const a = document.getElementById('answer');
 
@@ -325,7 +385,33 @@ async function askAI(){
 
   a.style.display = 'block';
   a.innerHTML = '<b>DixzAI:</b> Pensando...';
+#chatMessages{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:18px;
+}
 
+.chat-message{
+  padding:13px 16px;
+  border-radius:15px;
+  line-height:1.6;
+  max-width:85%;
+  white-space:pre-wrap;
+}
+
+.chat-user{
+  align-self:flex-end;
+  background:linear-gradient(90deg,#008fe6,#5b5cff);
+  color:#fff;
+}
+
+.chat-ai{
+  align-self:flex-start;
+  background:#071426;
+  border:1px solid #173657;
+  color:#c7d7e8;
+}
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
