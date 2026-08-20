@@ -4,7 +4,7 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-module.exports = async (req, res) => {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Método no permitido"
@@ -12,27 +12,22 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { question } = req.body;
+    const { question } = req.body || {};
 
     if (!question || !question.trim()) {
       return res.status(400).json({
-        error: "Escribe una pregunta."
+        error: "No se recibió ninguna pregunta."
       });
     }
 
     const response = await client.responses.create({
       model: "gpt-5-mini",
-      input: [
-        {
-          role: "system",
-          content:
-            "Eres DixzAI, el asistente de inteligencia artificial de DixzAI Intelligent. Responde de manera clara, útil y profesional."
-        },
-        {
-          role: "user",
-          content: question
-        }
-      ]
+      input: `Eres DixzAI, el asistente oficial de DixzAI Intelligent.
+
+Responde de forma clara, profesional y útil.
+
+Pregunta del usuario:
+${question}`
     });
 
     return res.status(200).json({
@@ -40,10 +35,10 @@ module.exports = async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("ERROR OPENAI:", error);
 
     return res.status(500).json({
-      error: "No se pudo conectar con DixzAI."
+      error: error.message || "Error interno del servidor."
     });
   }
 };
