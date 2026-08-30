@@ -419,6 +419,61 @@ footer{
     max-width:95%;
   }
 }
+
+/* ===== DIXZAI GLASS UI + EXTENSIONS ===== */
+:root{
+  --glass:rgba(255,255,255,.055);
+  --glass2:rgba(255,255,255,.085);
+  --line:rgba(255,255,255,.13);
+  --cyan:#72e7ff;
+  --purple:#a78bfa;
+}
+body{background:#030303;color:#f7f7f7}
+body:before{
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.09),transparent 28%),
+    radial-gradient(circle at 88% 70%,rgba(120,120,255,.12),transparent 30%),
+    linear-gradient(135deg,#000,#090909 55%,#020202);
+}
+body:after{opacity:.09}
+header,.hero,.card,.aiBox,.person,.modal-card,.dashboard-card,.feature-card,.pricing-card,.auth-card,.toast{
+  background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
+  border:1px solid var(--line);
+  box-shadow:0 24px 80px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+}
+.logoMark{background:linear-gradient(135deg,#fff,#777);color:#000;box-shadow:0 0 35px rgba(255,255,255,.18)}
+nav button.active,nav button:hover{background:rgba(255,255,255,.11);color:#fff}
+.btn{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
+.btn.primary{background:linear-gradient(135deg,#fff,#bdbdbd);color:#000}
+.gradient{background:linear-gradient(90deg,#fff,#cfcfcf,#8f8f8f);-webkit-background-clip:text;background-clip:text}
+.feature-grid,.dashboard-grid,.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.feature-card,.dashboard-card,.pricing-card,.auth-card{padding:22px;border-radius:20px}
+.feature-card h3,.dashboard-card h3,.pricing-card h3{margin-bottom:8px}
+.feature-card p,.dashboard-card p,.pricing-card p{color:#aaa;line-height:1.6;font-size:14px}
+.stat{font-size:30px;font-weight:900;margin:8px 0}
+.pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;color:#ccc}
+.input,.select{
+  width:100%;padding:13px 14px;border-radius:13px;border:1px solid var(--line);
+  background:rgba(0,0,0,.35);color:#fff;outline:none;margin-top:8px
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+.modal.open{display:flex}
+.modal-card{width:min(100%,520px);padding:25px;border-radius:24px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.close{border:0;background:rgba(255,255,255,.08);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+.toast{position:fixed;right:18px;bottom:18px;z-index:200;padding:14px 17px;border-radius:14px;display:none;max-width:330px}
+.toast.show{display:block;animation:pop .2s ease}
+@keyframes pop{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+.progress{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#fff,#777);transition:.4s}
+.chat-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.small-btn{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#ddd;cursor:pointer}
+@media(max-width:800px){.feature-grid,.dashboard-grid,.pricing-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -441,6 +496,12 @@ footer{
     <button class="active" onclick="show('home',this)">Inicio</button>
     <button onclick="show('ai',this)">IA</button>
     <button onclick="show('company',this)">Empresa</button>
+<!-- EXTENDED NAV BUTTONS -->
+<button onclick="show('dashboard',this)">Dashboard</button>
+<button onclick="show('features',this)">Plataforma</button>
+<button onclick="show('pricing',this)">Planes</button>
+<button onclick="openAuth('register')">Registrarse</button>
+
   </nav>
 
 </header>
@@ -970,6 +1031,85 @@ footer{
 </section>
 
 
+
+<!-- ===== DIXZAI EXTENDED NAV ===== -->
+<!-- Existing navigation is preserved above. These additional screens expand the prototype. -->
+
+<section id="dashboard" class="screen">
+  <h2 class="section-title">DixzAI Command Center</h2>
+  <p class="muted">Tu centro de control inteligente.</p>
+  <div class="dashboard-grid">
+    <div class="dashboard-card"><span class="pill">Cuenta</span><h3 id="dashName">Invitado</h3><p>Estado de sesión</p></div>
+    <div class="dashboard-card"><span class="pill">Consultas</span><div class="stat" id="dashQueries">0</div><p>Consultas realizadas en este navegador</p></div>
+    <div class="dashboard-card"><span class="pill">Plan</span><div class="stat" id="dashPlan">Free</div><p>Plan actual</p></div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h2>⚡ Acciones rápidas</h2>
+    <div class="toolbar">
+      <button class="btn primary" onclick="show('ai')">Abrir IA</button>
+      <button class="btn" onclick="openAuth('login')">Iniciar sesión</button>
+      <button class="btn" onclick="openAuth('register')">Crear cuenta</button>
+      <button class="btn" onclick="show('pricing')">Ver planes</button><button class="btn" onclick="logoutUser()">Cerrar sesión</button>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="screen">
+  <h2 class="section-title">DixzAI Platform</h2>
+  <p class="muted">Un ecosistema preparado para crecer.</p>
+  <div class="feature-grid">
+    <div class="feature-card"><h3>🤖 AI Assistant</h3><p>Chat inteligente conectado a tu endpoint /api/chat.</p></div>
+    <div class="feature-card"><h3>🧩 AI Agents</h3><p>Espacio para agentes especializados y automatizaciones.</p></div>
+    <div class="feature-card"><h3>📁 Knowledge</h3><p>Base para documentos, conocimiento y RAG.</p></div>
+    <div class="feature-card"><h3>🎙️ Voice</h3><p>Interfaz preparada para futuras funciones de voz.</p></div>
+    <div class="feature-card"><h3>👁️ Vision</h3><p>Área preparada para análisis multimodal.</p></div>
+    <div class="feature-card"><h3>⚙️ Automation</h3><p>Flujos para ejecutar tareas y procesos digitales.</p></div>
+  </div>
+</section>
+
+<section id="pricing" class="screen">
+  <h2 class="section-title">Planes DixzAI</h2>
+  <p class="muted">Precios de demostración. Configúralos antes de publicar.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card"><span class="pill">START</span><h3>Free</h3><div class="stat">$0</div><p>Acceso básico al prototipo.</p><button class="btn" onclick="selectPlan('Free')">Elegir</button></div>
+    <div class="pricing-card"><span class="pill">POPULAR</span><h3>Pro</h3><div class="stat">$19</div><p>Más capacidad y funciones avanzadas.</p><button class="btn primary" onclick="selectPlan('Pro')">Elegir Pro</button></div>
+    <div class="pricing-card"><span class="pill">BUSINESS</span><h3>Enterprise</h3><div class="stat">Custom</div><p>Soluciones para organizaciones.</p><button class="btn" onclick="showToast('Contacta a DixzAI para Enterprise')">Contactar</button></div>
+  </div>
+</section>
+
+<section id="workspace" class="screen">
+  <h2 class="section-title">DixzAI Workspace</h2>
+  <p class="muted">Herramientas rápidas para tu espacio de trabajo.</p>
+  <div class="card">
+    <h2>📝 Smart Notes</h2>
+    <textarea id="notes" class="input" style="min-height:180px" placeholder="Escribe tus ideas..."></textarea>
+    <div class="toolbar"><button class="btn primary" onclick="saveNotes()">Guardar notas</button><button class="btn" onclick="clearNotes()">Limpiar</button></div>
+    <div class="progress"><i id="noteProgress"></i></div>
+  </div>
+</section>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="modal" onclick="if(event.target===this)closeAuth()">
+  <div class="modal-card">
+    <div class="modal-head"><h2 id="authTitle">Crear cuenta</h2><button class="close" onclick="closeAuth()">×</button></div>
+    <div id="authRegister">
+      <label>Nombre</label><input id="regName" class="input" placeholder="Tu nombre">
+      <label style="display:block;margin-top:12px">Correo</label><input id="regEmail" type="email" class="input" placeholder="tu@email.com">
+      <label style="display:block;margin-top:12px">Contraseña</label><input id="regPass" type="password" class="input" placeholder="••••••••">
+      <button class="btn primary" style="margin-top:16px;width:100%" onclick="registerUser()">Crear cuenta</button>
+      <div class="divider"></div><p class="muted">¿Ya tienes cuenta? <button class="small-btn" onclick="openAuth('login')">Iniciar sesión</button></p>
+    </div>
+    <div id="authLogin" style="display:none">
+      <label>Correo</label><input id="loginEmail" type="email" class="input" placeholder="tu@email.com">
+      <label style="display:block;margin-top:12px">Contraseña</label><input id="loginPass" type="password" class="input" placeholder="••••••••">
+      <button class="btn primary" style="margin-top:16px;width:100%" onclick="loginUser()">Iniciar sesión</button>
+      <div class="divider"></div><p class="muted">¿No tienes cuenta? <button class="small-btn" onclick="openAuth('register')">Registrarte</button></p>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
 <footer>
   DixzAI Intelligent © 2026 · Private AI Technology
 </footer>
@@ -1178,6 +1318,80 @@ function clearChat(){
   input.focus();
 
 }
+
+
+/* ===== DIXZAI EXTENSIONS ===== */
+const DIXZAI_STORE = {
+  get users(){ try{return JSON.parse(localStorage.getItem('dixzai_users')||'[]')}catch{return[]} },
+  set users(v){localStorage.setItem('dixzai_users',JSON.stringify(v))},
+  get current(){try{return JSON.parse(localStorage.getItem('dixzai_current')||'null')}catch{return null}},
+  set current(v){localStorage.setItem('dixzai_current',JSON.stringify(v))}
+};
+
+function showToast(msg){
+  const t=document.getElementById('toast'); if(!t)return;
+  t.textContent=msg;t.classList.add('show');clearTimeout(window.__toast);
+  window.__toast=setTimeout(()=>t.classList.remove('show'),3000);
+}
+function openAuth(mode='register'){
+  document.getElementById('authModal').classList.add('open');
+  const reg=mode==='register';
+  document.getElementById('authTitle').textContent=reg?'Crear cuenta':'Iniciar sesión';
+  document.getElementById('authRegister').style.display=reg?'block':'none';
+  document.getElementById('authLogin').style.display=reg?'none':'block';
+}
+function closeAuth(){document.getElementById('authModal').classList.remove('open')}
+function registerUser(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('regPass').value;
+  if(!name||!email||pass.length<6){showToast('Completa los datos. La contraseña debe tener 6+ caracteres.');return}
+  const users=DIXZAI_STORE.users;
+  if(users.some(u=>u.email===email)){showToast('Ese correo ya está registrado.');return}
+  users.push({name,email,pass,plan:'Free',createdAt:new Date().toISOString()});
+  DIXZAI_STORE.users=users;DIXZAI_STORE.current={name,email,plan:'Free'};
+  closeAuth();refreshDashboard();showToast('Cuenta creada correctamente.');
+  show('dashboard');
+}
+function loginUser(){
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('loginPass').value;
+  const user=DIXZAI_STORE.users.find(u=>u.email===email&&u.pass===pass);
+  if(!user){showToast('Correo o contraseña incorrectos.');return}
+  DIXZAI_STORE.current={name:user.name,email:user.email,plan:user.plan||'Free'};
+  closeAuth();refreshDashboard();showToast('Bienvenido a DixzAI, '+user.name+'.');show('dashboard');
+}
+function logoutUser(){localStorage.removeItem('dixzai_current');refreshDashboard();showToast('Sesión cerrada.')}
+function refreshDashboard(){
+  const u=DIXZAI_STORE.current;
+  const n=document.getElementById('dashName'),p=document.getElementById('dashPlan');
+  if(n)n.textContent=u?u.name:'Invitado';
+  if(p)p.textContent=u?u.plan:'Free';
+  const q=Number(localStorage.getItem('dixzai_queries')||0);
+  const dq=document.getElementById('dashQueries');if(dq)dq.textContent=q;
+}
+function selectPlan(plan){
+  const u=DIXZAI_STORE.current;
+  if(!u){openAuth('register');showToast('Crea una cuenta para seleccionar un plan.');return}
+  const users=DIXZAI_STORE.users;
+  const i=users.findIndex(x=>x.email===u.email);
+  if(i>=0){users[i].plan=plan;DIXZAI_STORE.users=users}
+  DIXZAI_STORE.current={...u,plan};refreshDashboard();showToast('Plan '+plan+' seleccionado (demo).');
+}
+function saveNotes(){
+  const n=document.getElementById('notes').value;
+  localStorage.setItem('dixzai_notes',n);updateNoteProgress();showToast('Notas guardadas.');
+}
+function clearNotes(){document.getElementById('notes').value='';saveNotes()}
+function updateNoteProgress(){
+  const n=document.getElementById('notes'),p=document.getElementById('noteProgress');
+  if(n&&p)p.style.width=Math.min(100,(n.value.length/1000)*100)+'%';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const n=document.getElementById('notes');
+  if(n){n.value=localStorage.getItem('dixzai_notes')||'';n.addEventListener('input',updateNoteProgress);updateNoteProgress()}
+  refreshDashboard();
+});
 
 </script>
 
