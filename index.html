@@ -800,11 +800,13 @@ backdrop-filter:blur(42px) saturate(145%)!important;-webkit-backdrop-filter:blur
 
     <h2>🤖 Asistente DixzAI</h2>
 
-    
+    <p class="muted">
+      Escribe una consulta para probar la interfaz.
+    </p>
 
     <textarea
       id="question"
-      placeholder="Preguntar a DixzAI"
+      placeholder="¿En qué puede ayudarme DixzAI Intelligent?"
       onkeydown="handleEnter(event)"
     ></textarea>
 
@@ -1467,8 +1469,6 @@ backdrop-filter:blur(42px) saturate(145%)!important;-webkit-backdrop-filter:blur
 /* =========================
    NAVEGACIÓN
 ========================= */
-
-function stripMarkdown(t){return String(t).replace(/\*\*/g,"").replace(/\*/g,"");}
 
 function show(id,btn){
 
