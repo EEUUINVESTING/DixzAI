@@ -637,6 +637,36 @@ nav button.active{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(2
 .muted,.card p,.card li,.feature-card p,.dashboard-card p,.pricing-card p{color:#aeb2b8!important}
 .badge,.pill{background:rgba(255,255,255,.065)!important;color:#d7d9dc!important;border-color:rgba(255,255,255,.16)!important}
 
+
+/* DIXZAI AMOLED GLASS */
+html,body{background:#000!important}
+body{color:#f5f6f7!important;background:radial-gradient(circle at 50% -15%,rgba(255,255,255,.08),transparent 32%),radial-gradient(circle at 10% 75%,rgba(180,190,205,.045),transparent 25%),#000!important}
+header,.hero,.card,.aiBox,.person,.modal-card,.dashboard-card,.feature-card,.pricing-card,.auth-card,.toast{
+background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.045) 30%,rgba(255,255,255,.015) 58%,rgba(0,0,0,.76))!important;
+color:#f5f6f7!important;border:1px solid rgba(255,255,255,.18)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(255,255,255,.025),0 30px 100px rgba(0,0,0,.85)!important;
+backdrop-filter:blur(42px) saturate(145%)!important;-webkit-backdrop-filter:blur(42px) saturate(145%)!important}
+.logoMark{background:linear-gradient(145deg,#fff,#cdd1d6 35%,#777d84 65%,#18191b)!important;color:#050505!important}
+.btn,.small-btn,nav button{color:#f4f5f6!important;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.025))!important;border:1px solid rgba(255,255,255,.16)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 10px 32px rgba(0,0,0,.55)!important}
+.btn.primary{background:linear-gradient(145deg,#fff,#d8dbe0 38%,#737980 72%,#2d2f32)!important;color:#050505!important}
+.input,.select,.aiBox textarea{color:#f5f5f6!important;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(0,0,0,.5))!important;border-color:rgba(255,255,255,.14)!important}
+.chat-ai{color:#f2f3f5!important;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(0,0,0,.58))!important}
+.chat-user{background:linear-gradient(145deg,#f5f5f5,#bfc3c8,#686d73)!important;color:#050505!important}
+.gradient{background:linear-gradient(90deg,#fff,#d8dce1,#777e86)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.muted,.card p,.card li,.feature-card p,.dashboard-card p,.pricing-card p{color:#a9adb3!important}
+.badge,.pill{background:rgba(255,255,255,.06)!important;color:#d9dce0!important;border-color:rgba(255,255,255,.14)!important}
+
+/* ONE WINDOW PER OPTION */
+.dix-window{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.68);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px)}
+.dix-window.open{display:flex}
+.dix-window-panel{width:min(980px,96vw);max-height:90vh;overflow:auto;border-radius:30px;padding:28px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.045),rgba(0,0,0,.85));border:1px solid rgba(255,255,255,.19);box-shadow:0 40px 120px #000,inset 0 1px 0 rgba(255,255,255,.2);color:#f5f6f7}
+.dix-window-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.dix-window-close{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:22px;cursor:pointer}
+.dix-window-body .screen{display:block!important}
+
+/* IMAGE UPLOAD */
+.dix-upload{border:1px dashed rgba(255,255,255,.28);border-radius:22px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(0,0,0,.42));cursor:pointer}
+.dix-upload-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}.dix-upload-item{position:relative;width:105px}.dix-upload-item img{width:105px;height:85px;object-fit:cover;border-radius:16px;border:1px solid rgba(255,255,255,.18)}.dix-upload-item span{display:block;font-size:10px;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dix-upload-item button{position:absolute;right:-5px;top:-5px;border:0;border-radius:50%;width:23px;height:23px;background:#fff;color:#000;cursor:pointer}
+
 </style>
 </head>
 
@@ -791,6 +821,11 @@ nav button.active{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(2
   <button class="small-btn" onclick="stopSpeaking()">⏹ Detener voz</button>
 </div>
 <div id="imagePreview" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"></div>
+
+
+<div class="dix-upload" id="dixUploadZone" onclick="document.getElementById('dixImagePicker').click()" ondragover="event.preventDefault()" ondrop="event.preventDefault();handleDixImages(event.dataTransfer.files)">
+<div style="font-size:28px">🖼️</div><strong>Subir imágenes a DixzAI</strong><div style="font-size:12px;color:#aaa;margin-top:5px">Haz clic o arrastra imágenes aquí</div>
+<input id="dixImagePicker" type="file" accept="image/*" multiple hidden onchange="handleDixImages(this.files)"></div><div id="dixUploadList" class="dix-upload-list"></div>
 
 <div id="chatMessages"></div>
 
@@ -1244,10 +1279,10 @@ nav button.active{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(2
 
 <section id="pricing" class="screen">
   <h2 class="section-title">Planes DixzAI</h2>
-  <p class="muted">Precios de mercado-FREE,PRO</p>
+  <p class="muted">Precios de demostración. Configúralos antes de publicar.</p>
   <div class="pricing-grid">
     <div class="pricing-card"><span class="pill">START</span><h3>Free</h3><div class="stat">$0</div><p>Acceso básico al prototipo.</p><button class="btn" onclick="selectPlan('Free')">Elegir</button></div>
-    <div class="pricing-card"><span class="pill">POPULAR</span><h3>Pro</h3><div class="stat">$19 USD </div><p>Más capacidad y funciones avanzadas.</p><button class="btn primary" onclick="selectPlan('Pro')">Elegir Pro</button></div>
+    <div class="pricing-card"><span class="pill">POPULAR</span><h3>Pro</h3><div class="stat">$19</div><p>Más capacidad y funciones avanzadas.</p><button class="btn primary" onclick="selectPlan('Pro')">Elegir Pro</button></div>
     <div class="pricing-card"><span class="pill">BUSINESS</span><h3>Enterprise</h3><div class="stat">Custom</div><p>Soluciones para organizaciones.</p><button class="btn" onclick="showToast('Contacta a DixzAI para Enterprise')">Contactar</button></div>
   </div>
 </section>
@@ -1820,5 +1855,167 @@ document.addEventListener('DOMContentLoaded',()=>{const box=document.getElementB
 
 </script>
 
+<div id="dixWindows">
+<div class="dix-window" id="win-dashboard" onclick="if(event.target===this)closeDixWindow('dashboard')"><div class="dix-window-panel"><div class="dix-window-head"><h2>📊 Dashboard</h2><button class="dix-window-close" onclick="closeDixWindow('dashboard')">×</button></div><div class="dix-window-body" id="winbody-dashboard"></div></div></div>
+<div class="dix-window" id="win-ai" onclick="if(event.target===this)closeDixWindow('ai')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🤖 IA</h2><button class="dix-window-close" onclick="closeDixWindow('ai')">×</button></div><div class="dix-window-body" id="winbody-ai"></div></div></div>
+<div class="dix-window" id="win-company" onclick="if(event.target===this)closeDixWindow('company')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🏢 Empresa</h2><button class="dix-window-close" onclick="closeDixWindow('company')">×</button></div><div class="dix-window-body" id="winbody-company"></div></div></div>
+<div class="dix-window" id="win-team" onclick="if(event.target===this)closeDixWindow('team')"><div class="dix-window-panel"><div class="dix-window-head"><h2>👥 Equipo</h2><button class="dix-window-close" onclick="closeDixWindow('team')">×</button></div><div class="dix-window-body" id="winbody-team"></div></div></div>
+<div class="dix-window" id="win-mission" onclick="if(event.target===this)closeDixWindow('mission')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🎯 Misión</h2><button class="dix-window-close" onclick="closeDixWindow('mission')">×</button></div><div class="dix-window-body" id="winbody-mission"></div></div></div>
+<div class="dix-window" id="win-vision" onclick="if(event.target===this)closeDixWindow('vision')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🔭 Visión</h2><button class="dix-window-close" onclick="closeDixWindow('vision')">×</button></div><div class="dix-window-body" id="winbody-vision"></div></div></div>
+<div class="dix-window" id="win-market" onclick="if(event.target===this)closeDixWindow('market')"><div class="dix-window-panel"><div class="dix-window-head"><h2>📈 Mercado</h2><button class="dix-window-close" onclick="closeDixWindow('market')">×</button></div><div class="dix-window-body" id="winbody-market"></div></div></div>
+<div class="dix-window" id="win-differentiation" onclick="if(event.target===this)closeDixWindow('differentiation')"><div class="dix-window-panel"><div class="dix-window-head"><h2>⚡ Diferenciación</h2><button class="dix-window-close" onclick="closeDixWindow('differentiation')">×</button></div><div class="dix-window-body" id="winbody-differentiation"></div></div></div>
+<div class="dix-window" id="win-ecosystem" onclick="if(event.target===this)closeDixWindow('ecosystem')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🌐 Ecosistema</h2><button class="dix-window-close" onclick="closeDixWindow('ecosystem')">×</button></div><div class="dix-window-body" id="winbody-ecosystem"></div></div></div>
+<div class="dix-window" id="win-technology" onclick="if(event.target===this)closeDixWindow('technology')"><div class="dix-window-panel"><div class="dix-window-head"><h2>💻 Tecnología</h2><button class="dix-window-close" onclick="closeDixWindow('technology')">×</button></div><div class="dix-window-body" id="winbody-technology"></div></div></div>
+<div class="dix-window" id="win-metrics" onclick="if(event.target===this)closeDixWindow('metrics')"><div class="dix-window-panel"><div class="dix-window-head"><h2>📊 Métricas</h2><button class="dix-window-close" onclick="closeDixWindow('metrics')">×</button></div><div class="dix-window-body" id="winbody-metrics"></div></div></div>
+<div class="dix-window" id="win-features" onclick="if(event.target===this)closeDixWindow('features')"><div class="dix-window-panel"><div class="dix-window-head"><h2>✨ Plataforma</h2><button class="dix-window-close" onclick="closeDixWindow('features')">×</button></div><div class="dix-window-body" id="winbody-features"></div></div></div>
+<div class="dix-window" id="win-pricing" onclick="if(event.target===this)closeDixWindow('pricing')"><div class="dix-window-panel"><div class="dix-window-head"><h2>💳 Planes</h2><button class="dix-window-close" onclick="closeDixWindow('pricing')">×</button></div><div class="dix-window-body" id="winbody-pricing"></div></div></div>
+<div class="dix-window" id="win-workspace" onclick="if(event.target===this)closeDixWindow('workspace')"><div class="dix-window-panel"><div class="dix-window-head"><h2>📝 Workspace</h2><button class="dix-window-close" onclick="closeDixWindow('workspace')">×</button></div><div class="dix-window-body" id="winbody-workspace"></div></div></div>
+<div class="dix-window" id="win-agents" onclick="if(event.target===this)closeDixWindow('agents')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🤖 Agents</h2><button class="dix-window-close" onclick="closeDixWindow('agents')">×</button></div><div class="dix-window-body" id="winbody-agents"></div></div></div>
+<div class="dix-window" id="win-files" onclick="if(event.target===this)closeDixWindow('files')"><div class="dix-window-panel"><div class="dix-window-head"><h2>📁 Files</h2><button class="dix-window-close" onclick="closeDixWindow('files')">×</button></div><div class="dix-window-body" id="winbody-files"></div></div></div>
+<div class="dix-window" id="win-studio" onclick="if(event.target===this)closeDixWindow('studio')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🎨 Studio</h2><button class="dix-window-close" onclick="closeDixWindow('studio')">×</button></div><div class="dix-window-body" id="winbody-studio"></div></div></div>
+<div class="dix-window" id="win-api" onclick="if(event.target===this)closeDixWindow('api')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🔌 API</h2><button class="dix-window-close" onclick="closeDixWindow('api')">×</button></div><div class="dix-window-body" id="winbody-api"></div></div></div>
+<div class="dix-window" id="win-activity" onclick="if(event.target===this)closeDixWindow('activity')"><div class="dix-window-panel"><div class="dix-window-head"><h2>📈 Activity</h2><button class="dix-window-close" onclick="closeDixWindow('activity')">×</button></div><div class="dix-window-body" id="winbody-activity"></div></div></div>
+<div class="dix-window" id="win-settings" onclick="if(event.target===this)closeDixWindow('settings')"><div class="dix-window-panel"><div class="dix-window-head"><h2>⚙️ Settings</h2><button class="dix-window-close" onclick="closeDixWindow('settings')">×</button></div><div class="dix-window-body" id="winbody-settings"></div></div></div>
+<div class="dix-window" id="win-security" onclick="if(event.target===this)closeDixWindow('security')"><div class="dix-window-panel"><div class="dix-window-head"><h2>🔐 Security</h2><button class="dix-window-close" onclick="closeDixWindow('security')">×</button></div><div class="dix-window-body" id="winbody-security"></div></div></div>
+<div class="dix-window" id="win-about" onclick="if(event.target===this)closeDixWindow('about')"><div class="dix-window-panel"><div class="dix-window-head"><h2>ℹ️ About</h2><button class="dix-window-close" onclick="closeDixWindow('about')">×</button></div><div class="dix-window-body" id="winbody-about"></div></div></div>
+<div class="dix-window" id="win-multimodal" onclick="if(event.target===this)closeDixWindow('multimodal')"><div class="dix-window-panel"><div class="dix-window-head"><h2>✨ Multimodal</h2><button class="dix-window-close" onclick="closeDixWindow('multimodal')">×</button></div><div class="dix-window-body" id="winbody-multimodal"></div></div></div>
+</div>
+
+<!-- ===== DIXZAI AMOLED GLASS NAVIGATION V4 ===== -->
+<style>
+/* Oculta las opciones del inicio y la navegación superior sin borrar su contenido */
+#home > .grid{display:none!important}
+header nav{display:none!important}
+
+/* Barra inferior: 4 opciones principales */
+.dix-bottom-nav{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10000;width:min(680px,calc(100vw - 28px));padding:9px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border:1px solid rgba(255,255,255,.18);border-radius:25px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 45%,rgba(0,0,0,.78));box-shadow:0 25px 80px rgba(0,0,0,.82),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(255,255,255,.03);backdrop-filter:blur(38px) saturate(150%);-webkit-backdrop-filter:blur(38px) saturate(150%)}
+.dix-bottom-btn{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:10px 7px;color:#dfe2e6;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.018));cursor:pointer;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 8px 22px rgba(0,0,0,.42);transition:.2s}
+.dix-bottom-btn:before{content:"";position:absolute;left:10%;right:10%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);opacity:.75}
+.dix-bottom-btn:hover,.dix-bottom-btn.active{transform:translateY(-2px);background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.045));color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 12px 32px rgba(0,0,0,.55)}
+.dix-bottom-btn .ico{display:block;font-size:20px;line-height:20px;margin-bottom:3px;filter:drop-shadow(0 2px 5px rgba(255,255,255,.15))}
+.dix-bottom-btn .txt{display:block;font-size:10px;letter-spacing:.2px}
+
+/* Gestor de todas las funciones */
+.dix-manager{position:fixed;inset:0;z-index:10001;display:none;align-items:flex-end;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+.dix-manager.open{display:flex}
+.dix-manager-panel{width:min(900px,96vw);max-height:min(84vh,780px);overflow:auto;padding:25px;border-radius:32px;border:1px solid rgba(255,255,255,.2);background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.045) 35%,rgba(0,0,0,.86));box-shadow:0 45px 130px #000,inset 0 1px 0 rgba(255,255,255,.22);backdrop-filter:blur(45px) saturate(155%);-webkit-backdrop-filter:blur(45px) saturate(155%);animation:dixUp .25s ease}
+@keyframes dixUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.dix-manager-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}
+.dix-manager-head h2{font-size:24px}
+.dix-manager-head p{color:#9fa5ad;font-size:12px;margin-top:4px}
+.dix-manager-close{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;font-size:23px;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.dix-manager-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.dix-manager-card{position:relative;overflow:hidden;text-align:left;min-height:105px;padding:17px;border-radius:21px;border:1px solid rgba(255,255,255,.13);background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.025) 50%,rgba(0,0,0,.58));color:#fff;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 12px 35px rgba(0,0,0,.45);transition:.2s}
+.dix-manager-card:before{content:"";position:absolute;left:-20%;right:-20%;top:-34px;height:70px;background:linear-gradient(180deg,rgba(255,255,255,.13),transparent);transform:rotate(-5deg)}
+.dix-manager-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 18px 45px rgba(0,0,0,.58)}
+.dix-manager-card .mi{font-size:24px;display:block;margin-bottom:10px;position:relative}
+.dix-manager-card b{display:block;font-size:14px;position:relative}
+.dix-manager-card span{display:block;color:#9ea4ac;font-size:11px;margin-top:4px;position:relative}
+.dix-manager-note{margin-top:14px;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);color:#989fa8;font-size:11px;line-height:1.5}
+
+/* Ventanas individuales con efecto vidrio líquido */
+.dix-window-panel{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.055) 28%,rgba(255,255,255,.018) 55%,rgba(0,0,0,.88))!important;border-color:rgba(255,255,255,.23)!important;box-shadow:0 45px 140px #000,inset 0 1px 0 rgba(255,255,255,.24),inset 0 -1px 0 rgba(255,255,255,.025)!important;backdrop-filter:blur(48px) saturate(160%)!important;-webkit-backdrop-filter:blur(48px) saturate(160%)!important}
+.dix-window-panel:before{content:"";position:absolute;left:8%;right:8%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);pointer-events:none}
+.dix-window-body .screen{background:transparent!important}
+.dix-window-body .screen>.grid,.dix-window-body .screen>.feature-grid,.dix-window-body .screen>.dashboard-grid,.dix-window-body .screen>.pricing-grid{margin-bottom:5px}
+
+@media(max-width:700px){
+ .dix-bottom-nav{bottom:10px;border-radius:22px}
+ .dix-bottom-btn{border-radius:16px;padding:9px 4px}
+ .dix-manager{padding:10px}
+ .dix-manager-panel{max-height:88vh;padding:18px;border-radius:27px}
+ .dix-manager-grid{grid-template-columns:repeat(2,1fr);gap:9px}
+ .dix-manager-card{min-height:96px;padding:14px}
+ main{padding-bottom:115px!important}
+}
+</style>
+
+<div class="dix-bottom-nav" aria-label="Navegación principal DixzAI">
+  <button class="dix-bottom-btn active" id="bottomHome" onclick="dixBottom('home')"><span class="ico">⌂</span><span class="txt">Inicio</span></button>
+  <button class="dix-bottom-btn" id="bottomAI" onclick="dixBottom('ai')"><span class="ico">◉</span><span class="txt">IA</span></button>
+  <button class="dix-bottom-btn" id="bottomCompany" onclick="dixBottom('company')"><span class="ico">◇</span><span class="txt">Empresa</span></button>
+  <button class="dix-bottom-btn" id="bottomMore" onclick="openDixManager()"><span class="ico">☷</span><span class="txt">Más</span></button>
+</div>
+
+<div class="dix-manager" id="dixManager" onclick="if(event.target===this)closeDixManager()">
+ <div class="dix-manager-panel">
+  <div class="dix-manager-head">
+   <div><h2>☷ Centro de funciones</h2><p>Administra y abre todas las herramientas de DixzAI desde un solo lugar.</p></div>
+   <button class="dix-manager-close" onclick="closeDixManager()">×</button>
+  </div>
+  <div class="dix-manager-grid">
+   <button class="dix-manager-card" onclick="openDixWindow('dashboard')"><span class="mi">📊</span><b>Dashboard</b><span>Centro de control</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('features')"><span class="mi">✨</span><b>Plataforma</b><span>Ecosistema DixzAI</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('pricing')"><span class="mi">💳</span><b>Planes</b><span>Free, Pro y Enterprise</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('workspace')"><span class="mi">📝</span><b>Workspace</b><span>Notas inteligentes</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('agents')"><span class="mi">🤖</span><b>Agents</b><span>Agentes especializados</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('files')"><span class="mi">📁</span><b>Files</b><span>Archivos y Knowledge</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('studio')"><span class="mi">🎨</span><b>Studio</b><span>Centro creativo</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('api')"><span class="mi">🔌</span><b>API</b><span>Developer Console</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('activity')"><span class="mi">📈</span><b>Activity</b><span>Actividad local</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('settings')"><span class="mi">⚙️</span><b>Settings</b><span>Configuración</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('security')"><span class="mi">🔐</span><b>Security</b><span>Privacidad y sesión</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('about')"><span class="mi">ℹ️</span><b>About</b><span>Sobre DixzAI</span></button>
+   <button class="dix-manager-card" onclick="openDixWindow('multimodal')"><span class="mi">✨</span><b>Multimodal</b><span>Voz + imágenes</span></button>
+   <button class="dix-manager-card" onclick="openAuth('register');closeDixManager()"><span class="mi">🚀</span><b>Crear cuenta</b><span>Comenzar en DixzAI</span></button>
+   <button class="dix-manager-card" onclick="openAuth('login');closeDixManager()"><span class="mi">🔑</span><b>Iniciar sesión</b><span>Acceder a tu cuenta</span></button>
+  </div>
+  <div class="dix-manager-note">💧 Diseño AMOLED + Liquid Glass: las funciones originales se conservan; ahora se organizan en un único centro inferior para mantener la pantalla de inicio limpia y elegante.</div>
+ </div>
+</div>
+
+<script>
+/* ===== DIXZAI NAV V4 ===== */
+const DIXZAI_WINDOW_IDS=['dashboard','features','pricing','workspace','agents','files','studio','api','activity','settings','security','about','multimodal'];
+function dixBottom(id){
+ closeDixManager();
+ if(id==='home'){closeAllDixWindows();document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const h=document.getElementById('home');if(h)h.classList.add('active');}
+ else openDixWindow(id);
+ document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));
+ const map={home:'bottomHome',ai:'bottomAI',company:'bottomCompany'};if(map[id])document.getElementById(map[id]).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function closeAllDixWindows(){DIXZAI_WINDOW_IDS.forEach(id=>{const w=document.getElementById('win-'+id);if(w)w.classList.remove('open')});}
+function openDixWindow(id){
+ closeDixManager();
+ const source=document.getElementById(id);const win=document.getElementById('win-'+id);const body=document.getElementById('winbody-'+id);
+ if(!source||!win||!body){showToast('Esta función todavía no está disponible.');return}
+ if(source.parentElement!==body){body.appendChild(source)}
+ source.classList.add('active');
+ win.classList.add('open');
+ document.querySelectorAll('.screen').forEach(s=>{if(s!==source)s.classList.remove('active')});
+ document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));
+ if(id==='ai')document.getElementById('bottomAI')?.classList.add('active');
+ else if(id==='company')document.getElementById('bottomCompany')?.classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function closeDixWindow(id){
+ const w=document.getElementById('win-'+id);if(w)w.classList.remove('open');
+ const source=document.getElementById(id);
+ if(source){source.classList.remove('active');const main=document.querySelector('main');if(main&&source.parentElement!==main)main.appendChild(source)}
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById('home')?.classList.add('active');
+ document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));
+ document.getElementById('bottomHome')?.classList.add('active');
+}
+function openDixManager(){closeAllDixWindows();document.getElementById('dixManager')?.classList.add('open');document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));document.getElementById('bottomMore')?.classList.add('active')}
+function closeDixManager(){document.getElementById('dixManager')?.classList.remove('open')}
+
+/* Redirección compatible con los botones antiguos: ninguna función se elimina. */
+const dixOldShow=window.show;
+window.show=function(id,btn){
+ if(id==='home'){dixBottom('home');return}
+ if(['ai','company'].includes(id)){dixBottom(id);return}
+ if(DIXZAI_WINDOW_IDS.includes(id)){openDixWindow(id);return}
+ if(typeof dixOldShow==='function')dixOldShow(id,btn);
+};
+
+/* Cerrar con Escape */
+document.addEventListener('keydown',e=>{
+ if(e.key!=='Escape')return;
+ closeDixManager();
+ DIXZAI_WINDOW_IDS.forEach(id=>{const w=document.getElementById('win-'+id);if(w?.classList.contains('open'))closeDixWindow(id)});
+});
+</script>
 </body>
 </html>
