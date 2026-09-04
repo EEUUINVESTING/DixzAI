@@ -2,1393 +2,699 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DixzAI Intelligent</title>
-<link rel="icon" type="image/png" href="/logo.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
 :root{
-  --bg:#f5f5f7;
-  --card:rgba(255,255,255,.72);
-  --glass:rgba(255,255,255,.55);
-  --glass-strong:rgba(255,255,255,.78);
-  --border:rgba(0,0,0,.08);
-  --border-strong:rgba(0,0,0,.12);
   --text:#1d1d1f;
-  --muted:#6e6e73;
+  --muted:#8e8e93;
   --accent:#0071e3;
-  --shadow:0 8px 32px rgba(0,0,0,.06);
-  --radius:20px;
 }
-
 html,body{
-  background:var(--bg);
+  height:100%;
+  background:#ffffff;
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  min-height:100vh;
   -webkit-font-smoothing:antialiased;
+  overflow:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  background:
-    radial-gradient(circle at 20% 10%,rgba(0,113,227,.07),transparent 40%),
-    radial-gradient(circle at 80% 80%,rgba(120,80,255,.05),transparent 35%),
-    linear-gradient(180deg,#fafafa 0%,#f0f0f5 100%);
-}
-
-.app{
-  width:min(100%,980px);
-  margin:0 auto;
-  min-height:100vh;
-  padding-bottom:110px;
-}
-
-/* ===== HEADER ===== */
+/* Header */
 header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  padding:14px 20px;
-  background:rgba(255,255,255,.65);
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.78);
   backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  border-bottom:1px solid rgba(0,0,0,.05);
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
+.logo-icon{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(145deg,#1d1d1f,#3a3a3c);
+  color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.header-actions{display:flex;gap:8px;align-items:center}
+.glass-btn{
+  height:36px;padding:0 14px;border-radius:18px;
+  border:1px solid rgba(0,0,0,.08);
+  background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(245,245,247,.75));
+  box-shadow:0 4px 14px rgba(0,0,0,.06),inset 0 1px 0 #fff;
+  font-size:13px;font-weight:600;cursor:pointer;color:var(--text);
+  display:flex;align-items:center;gap:6px;
+}
+.glass-btn.icon{width:36px;padding:0;justify-content:center;border-radius:50%}
+.user-badge{
+  font-size:12px;padding:4px 10px;border-radius:99px;
+  background:rgba(0,0,0,.05);color:var(--muted);
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+/* Main */
+.main{height:100%;display:flex;flex-direction:column;padding-top:64px;padding-bottom:180px}
+.center-area{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;text-align:center;
 }
-
-.logoMark{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(145deg,#fff,#e8e8ed);
-  border:1px solid var(--border-strong);
-  box-shadow:0 4px 16px rgba(0,0,0,.06),inset 0 1px 0 #fff;
-  font-weight:800;
-  font-size:18px;
-  color:#1d1d1f;
+.big-logo{
+  width:100px;height:100px;border-radius:26px;
+  background:linear-gradient(145deg,#f2f2f7,#e5e5ea);
+  display:grid;place-items:center;font-size:42px;font-weight:800;
+  color:rgba(0,0,0,.07);margin-bottom:16px;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.04);
 }
-
-.brand b{font-size:17px;font-weight:700;letter-spacing:-.3px}
-.brand span{display:block;font-size:11px;color:var(--muted);margin-top:1px}
-
-/* ===== GLASS BUTTONS ===== */
-.btn,.small-btn,nav button,.dix-bottom-btn,.dix-manager-card{
-  border:1px solid var(--border-strong);
-  background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.55));
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  box-shadow:
-    0 4px 16px rgba(0,0,0,.05),
-    inset 0 1px 0 rgba(255,255,255,.9),
-    inset 0 -1px 0 rgba(0,0,0,.03);
-  color:var(--text);
-  font-weight:600;
-  cursor:pointer;
-  transition:all .2s ease;
-  border-radius:14px;
-}
-
-.btn:hover,.small-btn:hover,nav button:hover,.dix-bottom-btn:hover,.dix-manager-card:hover{
-  transform:translateY(-1px);
-  background:linear-gradient(145deg,#fff,rgba(255,255,255,.75));
-  box-shadow:0 8px 24px rgba(0,0,0,.08),inset 0 1px 0 #fff;
-}
-
-.btn.primary{
-  background:linear-gradient(145deg,#0071e3,#0058b0);
-  color:#fff;
-  border-color:transparent;
-  box-shadow:0 6px 20px rgba(0,113,227,.25),inset 0 1px 0 rgba(255,255,255,.25);
-}
-
-.btn.primary:hover{
-  background:linear-gradient(145deg,#0077ed,#0062c4);
-  box-shadow:0 8px 28px rgba(0,113,227,.3),inset 0 1px 0 rgba(255,255,255,.3);
-}
-
-.btn{padding:12px 18px;font-size:14px}
-.small-btn{padding:8px 12px;font-size:13px;border-radius:12px}
-
-/* ===== MAIN ===== */
-main{padding:28px 20px 40px}
-
-.screen{display:none}
-.screen.active{display:block}
-
-.hero{
-  padding:40px 32px;
-  border-radius:28px;
-  background:var(--card);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(20px);
-}
-
-.badge{
-  display:inline-flex;
-  padding:6px 12px;
-  border-radius:999px;
-  background:rgba(0,113,227,.08);
-  color:var(--accent);
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.3px;
-  border:1px solid rgba(0,113,227,.15);
-}
-
-h1{
-  font-size:clamp(36px,7vw,64px);
-  font-weight:800;
-  letter-spacing:-1.5px;
-  line-height:1.05;
-  margin:18px 0 14px;
-}
-
-.gradient{
-  background:linear-gradient(90deg,#1d1d1f,#4a4a4f);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:620px;
-  color:var(--muted);
-  font-size:16px;
-  line-height:1.65;
-}
-
-.actions{
-  display:flex;
-  gap:10px;
-  margin-top:24px;
-  flex-wrap:wrap;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-top:20px;
-}
-
-.card,.aiBox,.person,.dashboard-card,.feature-card,.pricing-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:22px;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(18px);
-}
-
-.card h2,.feature-card h3,.dashboard-card h3,.pricing-card h3{
-  font-size:18px;
-  font-weight:700;
-  margin-bottom:8px;
-  letter-spacing:-.3px;
-}
-
-.card p,.card li,.feature-card p,.dashboard-card p,.pricing-card p,.muted{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
-}
-
-.section-title{
-  font-size:28px;
-  font-weight:800;
-  letter-spacing:-.8px;
-  margin-bottom:6px;
-}
-
-.muted{margin-bottom:18px}
-
-.team{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.person{
-  padding:16px;
-  border-radius:16px;
-}
-
-.person b{display:block;font-size:14px}
-.person span{display:block;color:var(--muted);font-size:12px;margin-top:4px;line-height:1.5}
+.welcome-title{font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px}
+.welcome-sub{color:var(--muted);font-size:14px;max-width:260px;line-height:1.5}
 
 /* Chat */
-.aiBox{padding:24px;border-radius:24px;margin-bottom:16px}
-
-.aiBox textarea,.input,.select{
-  width:100%;
-  min-height:110px;
-  margin-top:12px;
-  border-radius:16px;
-  padding:14px 16px;
-  background:rgba(255,255,255,.7);
-  border:1px solid var(--border-strong);
-  color:var(--text);
-  font:inherit;
-  outline:none;
-  resize:vertical;
-  box-shadow:inset 0 2px 8px rgba(0,0,0,.03);
-}
-
-.aiBox textarea:focus,.input:focus,.select:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(0,113,227,.12);
-}
-
 #chatMessages{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:16px;
-  max-height:420px;
-  overflow-y:auto;
-  padding-right:4px;
+  position:absolute;top:70px;left:0;right:0;bottom:190px;
+  overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;
 }
-
 .chat-message{
-  padding:12px 16px;
-  border-radius:18px;
-  line-height:1.55;
-  max-width:88%;
-  white-space:pre-wrap;
-  word-wrap:break-word;
-  font-size:14.5px;
+  max-width:85%;padding:12px 16px;border-radius:20px;
+  font-size:15px;line-height:1.55;white-space:pre-wrap;
 }
-
 .chat-user{
   align-self:flex-end;
   background:linear-gradient(145deg,#0071e3,#0058b0);
-  color:#fff;
-  border-bottom-right-radius:6px;
+  color:#fff;border-bottom-right-radius:6px;
+  box-shadow:0 4px 16px rgba(0,113,227,.22);
 }
-
 .chat-ai{
   align-self:flex-start;
-  background:rgba(255,255,255,.85);
-  border:1px solid var(--border);
-  color:var(--text);
-  border-bottom-left-radius:6px;
-  box-shadow:0 2px 12px rgba(0,0,0,.04);
-}
-
-.chat-thinking{opacity:.7}
-
-.chat-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-
-.dix-upload{
-  border:1.5px dashed rgba(0,0,0,.15);
-  border-radius:18px;
-  padding:18px;
-  text-align:center;
-  background:rgba(255,255,255,.5);
-  cursor:pointer;
-  margin-top:12px;
-}
-
-.dix-upload-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-.dix-upload-item{position:relative;width:100px}
-.dix-upload-item img{width:100px;height:80px;object-fit:cover;border-radius:12px;border:1px solid var(--border)}
-.dix-upload-item span{display:block;font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dix-upload-item button{position:absolute;right:-6px;top:-6px;border:0;border-radius:50%;width:22px;height:22px;background:#1d1d1f;color:#fff;cursor:pointer;font-size:12px}
-
-.feature-grid,.dashboard-grid,.pricing-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin-top:16px;
-}
-
-.stat{font-size:28px;font-weight:800;margin:6px 0;letter-spacing:-.5px}
-.pill{
-  display:inline-flex;
-  padding:4px 10px;
-  border-radius:999px;
-  background:rgba(0,0,0,.05);
-  font-size:11px;
-  color:var(--muted);
-  font-weight:600;
-}
-
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.progress{height:6px;background:rgba(0,0,0,.06);border-radius:99px;overflow:hidden;margin-top:8px}
-.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#0071e3,#5b5cff);transition:.4s}
-
-.modal{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.35);
-  backdrop-filter:blur(12px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:200;
-}
-.modal.open{display:flex}
-
-.modal-card{
-  width:min(100%,440px);
-  padding:24px;
-  border-radius:24px;
   background:rgba(255,255,255,.92);
-  border:1px solid var(--border);
-  box-shadow:0 24px 80px rgba(0,0,0,.12);
-  backdrop-filter:blur(30px);
+  border:1px solid rgba(0,0,0,.06);
+  color:var(--text);border-bottom-left-radius:6px;
+  box-shadow:0 4px 16px rgba(0,0,0,.05);
+}
+.chat-image{
+  max-width:200px;border-radius:14px;margin-top:6px;
+  border:1px solid rgba(0,0,0,.08);
+}
+.file-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,0,0,.06);padding:6px 10px;border-radius:12px;
+  font-size:13px;margin-top:6px;
 }
 
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.close{
-  width:34px;height:34px;border-radius:50%;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.7);
-  color:var(--text);
-  font-size:20px;
-  cursor:pointer;
+/* Bottom bar */
+.bottom-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  padding:10px 14px 28px;
+  background:linear-gradient(to top,rgba(255,255,255,.97) 65%,transparent);
+}
+.promo-row{display:flex;gap:8px;margin-bottom:10px;overflow-x:auto}
+.promo-chip{
+  flex-shrink:0;padding:7px 13px;border-radius:999px;
+  background:linear-gradient(145deg,rgba(0,113,227,.1),rgba(0,113,227,.05));
+  border:1px solid rgba(0,113,227,.15);
+  color:#0071e3;font-size:12px;font-weight:600;
+}
+.input-wrap{
+  display:flex;align-items:center;gap:6px;
+  background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,255,255,.8));
+  border:1px solid rgba(0,0,0,.09);
+  border-radius:28px;padding:5px 6px 5px 12px;
+  box-shadow:0 8px 28px rgba(0,0,0,.08),inset 0 1px 0 #fff;
+  backdrop-filter:blur(24px);
+}
+.input-wrap input{
+  flex:1;border:0;background:transparent;font-size:16px;
+  color:var(--text);outline:none;padding:11px 4px;
+}
+.input-wrap input::placeholder{color:#aeaeb2}
+
+.tool-btn{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.08);
+  background:linear-gradient(145deg,#fff,#f5f5f7);
+  display:grid;place-items:center;cursor:pointer;font-size:15px;
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+  flex-shrink:0;
+}
+.mode-btn{
+  height:32px;padding:0 12px;border-radius:16px;
+  border:1px solid rgba(0,0,0,.08);
+  background:linear-gradient(145deg,#fff,#f5f5f7);
+  font-size:12px;font-weight:600;cursor:pointer;
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+  display:flex;align-items:center;gap:4px;
+}
+.send-btn{
+  width:42px;height:42px;border-radius:50%;
+  border:none;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);
+  color:#fff;display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.15);
+  font-size:18px;flex-shrink:0;
+}
+.voice-btn{
+  height:36px;padding:0 14px;border-radius:18px;
+  border:none;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);
+  color:#fff;font-size:13px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);
+  transition:.2s;
+}
+.voice-btn.listening{
+  background:linear-gradient(145deg,#e11d48,#be123c);
+  animation:pulse 1.2s infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(225,29,72,.4)}
+  50%{box-shadow:0 0 0 8px rgba(225,29,72,0)}
 }
 
-.divider{height:1px;background:var(--border);margin:16px 0}
-
-.toast{
-  position:fixed;right:18px;bottom:100px;z-index:300;
-  padding:12px 16px;border-radius:14px;
-  background:rgba(30,30,30,.92);
-  color:#fff;font-size:13px;
-  display:none;max-width:300px;
-  box-shadow:0 12px 40px rgba(0,0,0,.2);
+/* Preview de archivos */
+#filePreview{
+  display:flex;gap:8px;flex-wrap:wrap;padding:0 4px 8px;
 }
-.toast.show{display:block;animation:pop .2s ease}
-@keyframes pop{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
-
-footer{
-  padding:24px 0;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
+.preview-item{
+  position:relative;
+  width:64px;height:64px;border-radius:12px;
+  border:1px solid rgba(0,0,0,.1);
+  overflow:hidden;background:#f5f5f7;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;text-align:center;padding:4px;
 }
-
-/* ===== BOTTOM NAV (Glass) ===== */
-.dix-bottom-nav{
-  position:fixed;
-  left:50%;
-  bottom:18px;
-  transform:translateX(-50%);
-  z-index:100;
-  width:min(420px,calc(100vw - 28px));
-  padding:8px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:6px;
-  border-radius:22px;
-  background:rgba(255,255,255,.7);
-  border:1px solid var(--border-strong);
-  box-shadow:0 12px 40px rgba(0,0,0,.1),inset 0 1px 0 #fff;
-  backdrop-filter:blur(28px) saturate(180%);
-  -webkit-backdrop-filter:blur(28px) saturate(180%);
+.preview-item img{width:100%;height:100%;object-fit:cover}
+.preview-item .remove{
+  position:absolute;top:-4px;right:-4px;
+  width:20px;height:20px;border-radius:50%;
+  background:#1d1d1f;color:#fff;border:none;
+  font-size:12px;cursor:pointer;display:grid;place-items:center;
 }
 
-.dix-bottom-btn{
-  padding:10px 4px;
-  border-radius:16px;
-  font-size:11px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:2px;
-}
-
-.dix-bottom-btn .ico{font-size:18px}
-.dix-bottom-btn.active{
-  background:linear-gradient(145deg,#0071e3,#0058b0);
-  color:#fff;
-  border-color:transparent;
-  box-shadow:0 4px 16px rgba(0,113,227,.25);
-}
-
-/* Manager */
-.dix-manager{
-  position:fixed;inset:0;z-index:150;
+/* Sheets */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.28);
+  backdrop-filter:blur(10px);z-index:100;
   display:none;align-items:flex-end;justify-content:center;
-  padding:16px;
-  background:rgba(0,0,0,.25);
-  backdrop-filter:blur(16px);
 }
-.dix-manager.open{display:flex}
-
-.dix-manager-panel{
-  width:min(880px,96vw);
-  max-height:min(82vh,720px);
-  overflow:auto;
-  padding:22px;
-  border-radius:28px;
-  background:rgba(255,255,255,.88);
-  border:1px solid var(--border);
-  box-shadow:0 30px 100px rgba(0,0,0,.15);
-  backdrop-filter:blur(40px);
-  animation:dixUp .25s ease;
+.overlay.open{display:flex}
+.sheet{
+  width:100%;max-height:88vh;overflow-y:auto;
+  background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,255,255,.9));
+  border-radius:28px 28px 0 0;padding:18px 20px 36px;
+  box-shadow:0 -16px 50px rgba(0,0,0,.12);
+  animation:up .25s ease;
 }
-@keyframes dixUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
-
-.dix-manager-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.dix-manager-head h2{font-size:22px;font-weight:800}
-.dix-manager-head p{color:var(--muted);font-size:12px;margin-top:2px}
-
-.dix-manager-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+@keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.sheet-handle{width:38px;height:5px;background:rgba(0,0,0,.12);border-radius:99px;margin:0 auto 16px}
+.sheet h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.sheet .muted{color:var(--muted);font-size:13px;margin-bottom:16px}
+.info-card{
+  background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.06);
+  border-radius:16px;padding:14px;margin-bottom:10px;
 }
-
-.dix-manager-card{
-  text-align:left;
-  min-height:96px;
-  padding:16px;
-  border-radius:18px;
+.info-card b{display:block;font-size:13px;margin-bottom:3px}
+.info-card span{font-size:13px;color:var(--muted)}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.person{
+  background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);
+  border-radius:14px;padding:12px;
+}
+.person b{font-size:13px;display:block}
+.person span{font-size:11px;color:var(--muted)}
+.close-btn{
+  width:100%;margin-top:18px;padding:14px;border-radius:16px;
+  border:1px solid rgba(0,0,0,.08);background:linear-gradient(145deg,#fff,#f5f5f7);
+  font-weight:600;font-size:15px;cursor:pointer;
 }
 
-.dix-manager-card .mi{font-size:22px;display:block;margin-bottom:8px}
-.dix-manager-card b{display:block;font-size:13px}
-.dix-manager-card span{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-
-.dix-manager-note{
-  margin-top:14px;
-  padding:12px 14px;
-  border-radius:14px;
-  background:rgba(0,0,0,.03);
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.5;
+/* Auth */
+.auth-form label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+.auth-form input{
+  width:100%;padding:13px 14px;border-radius:14px;
+  border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.85);
+  font-size:15px;outline:none;
 }
-
-/* Windows */
-.dix-window{
-  position:fixed;inset:0;z-index:120;
-  display:none;align-items:center;justify-content:center;
-  padding:16px;
-  background:rgba(0,0,0,.25);
-  backdrop-filter:blur(14px);
+.auth-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,.12)}
+.auth-submit{
+  width:100%;margin-top:18px;padding:14px;border-radius:16px;border:none;
+  background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;
+  font-weight:600;font-size:15px;cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,.18);
 }
-.dix-window.open{display:flex}
+.auth-switch{text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
+.auth-switch button{background:none;border:none;color:var(--accent);font-weight:600;cursor:pointer}
 
-.dix-window-panel{
-  width:min(920px,96vw);
-  max-height:90vh;
-  overflow:auto;
-  border-radius:28px;
-  padding:24px;
-  background:rgba(255,255,255,.9);
-  border:1px solid var(--border);
-  box-shadow:0 30px 100px rgba(0,0,0,.12);
-  backdrop-filter:blur(36px);
-  color:var(--text);
+/* Plans */
+.plan-card{
+  background:rgba(255,255,255,.8);
+  border:1px solid rgba(0,0,0,.07);
+  border-radius:18px;padding:18px;margin-bottom:12px;
 }
-
-.dix-window-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.dix-window-close{
-  width:38px;height:38px;border-radius:50%;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.7);
-  color:var(--text);
-  font-size:20px;
-  cursor:pointer;
+.plan-card.popular{border-color:rgba(0,113,227,.3);box-shadow:0 4px 20px rgba(0,113,227,.1)}
+.plan-card h3{font-size:17px;margin-bottom:4px}
+.plan-price{font-size:26px;font-weight:800;margin:8px 0}
+.plan-card p{font-size:13px;color:var(--muted);margin-bottom:12px}
+.plan-btn{
+  width:100%;padding:12px;border-radius:14px;border:none;
+  background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;
+  font-weight:600;cursor:pointer;
 }
-
-.dix-window-body .screen{display:block!important}
-
-.market-title{font-size:20px;margin-bottom:14px}
-.market-item,.ecosystem-item,.metrics-item{margin:8px 0;color:var(--muted);line-height:1.55;font-size:14px}
-.tech-list{margin-top:8px;padding-left:18px;color:var(--muted);font-size:14px}
-
-@media(max-width:700px){
-  .grid,.team,.feature-grid,.dashboard-grid,.pricing-grid,.dix-manager-grid{grid-template-columns:1fr}
-  .dix-manager-grid{grid-template-columns:repeat(2,1fr)}
-  h1{font-size:40px}
-  .hero{padding:28px 20px}
-  main{padding:20px 14px 100px}
-  .chat-message{max-width:94%}
+.plan-btn.outline{
+  background:linear-gradient(145deg,#fff,#f5f5f7);
+  color:var(--text);border:1px solid rgba(0,0,0,.1);
 }
 </style>
 </head>
 <body>
 
-<div class="app">
-
 <header>
-  <div class="brand">
-    <div class="logoMark">D</div>
-    <div>
-      <b>DixzAI Intelligent</b>
-      <span>Intelligence for the next generation</span>
-    </div>
+  <div class="logo">
+    <div class="logo-icon">D</div>
+    <span>DixzAI</span>
+  </div>
+  <div class="header-actions">
+    <span class="user-badge" id="userBadge">Invitado</span>
+    <button class="glass-btn icon" onclick="openCompany()" title="Empresa">ⓘ</button>
+    <button class="glass-btn" onclick="openPlans()">Planes</button>
+    <button class="glass-btn" id="authBtn" onclick="openAuth()">Entrar</button>
   </div>
 </header>
 
-<main>
-
-<!-- INICIO -->
-<section id="home" class="screen active">
-  <div class="hero">
-    <div class="badge">PRIVATE AI TECHNOLOGY</div>
-    <h1><span class="gradient">DixzAI</span><br>Intelligent</h1>
-    <p>
-      Plataforma de inteligencia artificial enfocada en construir soluciones inteligentes,
-      accesibles y escalables. Analiza información, automatiza procesos, genera contenido
-      y ejecuta tareas con sistemas inteligentes.
-    </p>
-    <div class="actions">
-      <button class="btn primary" onclick="dixBottom('ai')">Explorar DixzAI</button>
-      <button class="btn" onclick="dixBottom('company')">Conocer el equipo</button>
-    </div>
+<div class="main">
+  <div class="center-area" id="emptyState">
+    <div class="big-logo">D</div>
+    <div class="welcome-title">DixzAI</div>
+    <div class="welcome-sub">Intelligence for the next generation.<br>Pregunta lo que quieras.</div>
   </div>
+  <div id="chatMessages"></div>
+</div>
 
-  <div class="grid">
-    <div class="card">
-      <h2>Inteligencia artificial</h2>
-      <p>Asistencia, productividad, generación de contenido y experiencias digitales inteligentes.</p>
-    </div>
-    <div class="card">
-      <h2>Tecnología escalable</h2>
-      <p>Arquitectura preparada para evolucionar e incorporar nuevas capacidades globales.</p>
-    </div>
-    <div class="card">
-      <h2>Visión global</h2>
-      <p>Tecnología accesible con perspectiva internacional orientada al futuro.</p>
-    </div>
-    <div class="card">
-      <h2>Seguridad y privacidad</h2>
-      <p>Uso responsable de la IA con foco en seguridad y privacidad desde el diseño.</p>
-    </div>
+<!-- Bottom bar -->
+<div class="bottom-bar">
+  <div id="filePreview"></div>
+  <div class="promo-row">
+    <div class="promo-chip">✨ DixzAI Intelligent</div>
+    <div class="promo-chip">Privacidad primero</div>
   </div>
-</section>
+  <div class="input-wrap">
+    <button class="tool-btn" onclick="document.getElementById('filePick').click()" title="Subir foto o documento">+</button>
+    <input type="file" id="filePick" accept="image/*,.pdf,.doc,.docx,.txt,.csv,.xlsx" multiple hidden onchange="handleFiles(this)">
+    
+    <input id="question" type="text" placeholder="Pregunta lo que quieras" onkeydown="if(event.key==='Enter')askAI()">
+    
+    <button class="mode-btn" onclick="toggleMode()" id="modeBtn">⚡ Fast</button>
+    
+    <button class="voice-btn" onclick="toggleVoice()" id="voiceBtn">
+      <span>🎙️</span> Hablar
+    </button>
+    
+    <button class="send-btn" onclick="askAI()" title="Enviar">↑</button>
+  </div>
+</div>
 
-<!-- IA -->
-<section id="ai" class="screen">
-  <h2 class="section-title">DixzAI AI Lab</h2>
-  <p class="muted">Prototipo de experiencia de inteligencia artificial.</p>
+<!-- Auth -->
+<div class="overlay" id="authOverlay" onclick="if(event.target===this)closeAuth()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <h2 id="authTitle">Iniciar sesión</h2>
+    <p class="muted" id="authSubtitle">Accede a tu cuenta de DixzAI</p>
 
-  <div class="aiBox">
-    <h2 style="font-size:18px;margin-bottom:4px">Asistente DixzAI</h2>
-    <p class="muted" style="margin-bottom:0">Escribe una consulta para probar la interfaz.</p>
-
-    <textarea id="question" placeholder="¿En qué puede ayudarme DixzAI Intelligent?" onkeydown="handleEnter(event)"></textarea>
-
-    <div class="chat-tools">
-      <label class="small-btn" style="cursor:pointer">
-        Subir imagen
-        <input id="imageInput" type="file" accept="image/*" multiple hidden onchange="previewImages(event)">
-      </label>
-      <button class="small-btn" id="voiceBtn" onclick="toggleVoice()">Voz</button>
-      <button class="small-btn" onclick="speakLastAnswer()">Leer respuesta</button>
-      <button class="small-btn" onclick="stopSpeaking()">Detener voz</button>
+    <div id="loginForm" class="auth-form">
+      <label>Correo</label>
+      <input type="email" id="loginEmail" placeholder="tu@email.com">
+      <label>Contraseña</label>
+      <input type="password" id="loginPass" placeholder="••••••••">
+      <button class="auth-submit" onclick="loginUser()">Entrar</button>
+      <div class="auth-switch">¿No tienes cuenta? <button onclick="switchAuth('register')">Regístrate</button></div>
     </div>
 
-    <div id="imagePreview" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"></div>
-
-    <div class="dix-upload" id="dixUploadZone" onclick="document.getElementById('dixImagePicker').click()" ondragover="event.preventDefault()" ondrop="event.preventDefault();handleDixImages(event.dataTransfer.files)">
-      <div style="font-size:26px;margin-bottom:4px">🖼️</div>
-      <strong>Subir imágenes</strong>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px">Haz clic o arrastra aquí</div>
-      <input id="dixImagePicker" type="file" accept="image/*" multiple hidden onchange="handleDixImages(this.files)">
-    </div>
-    <div id="dixUploadList" class="dix-upload-list"></div>
-
-    <div id="chatMessages"></div>
-
-    <div class="actions">
-      <button class="btn primary" onclick="askAI()">Preguntar a DixzAI</button>
-      <button class="btn" onclick="clearChat()">Nueva conversación</button>
+    <div id="registerForm" class="auth-form" style="display:none">
+      <label>Nombre</label>
+      <input type="text" id="regName" placeholder="Tu nombre">
+      <label>Correo</label>
+      <input type="email" id="regEmail" placeholder="tu@email.com">
+      <label>Contraseña</label>
+      <input type="password" id="regPass" placeholder="Mínimo 6 caracteres">
+      <button class="auth-submit" onclick="registerUser()">Crear cuenta</button>
+      <div class="auth-switch">¿Ya tienes cuenta? <button onclick="switchAuth('login')">Inicia sesión</button></div>
     </div>
   </div>
+</div>
 
-  <div class="grid">
-    <div class="card"><h2>Asistencia inteligente</h2><p>Interacción natural para consultas, ideas, redacción y apoyo en tareas.</p></div>
-    <div class="card"><h2>Productividad</h2><p>Simplifica procesos y trabaja con mayor eficiencia.</p></div>
-    <div class="card"><h2>Automatización</h2><p>Flujos de trabajo y operaciones digitales.</p></div>
-    <div class="card"><h2>Evolución continua</h2><p>Nueva funciones de IA de forma progresiva.</p></div>
-  </div>
-</section>
+<!-- Plans -->
+<div class="overlay" id="plansOverlay" onclick="if(event.target===this)closePlans()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <h2>Planes DixzAI</h2>
+    <p class="muted">Elige el plan que mejor se adapte a ti</p>
 
-<!-- EMPRESA -->
-<section id="company" class="screen">
-  <h2 class="section-title">Nuestra empresa</h2>
-  <p class="muted">DixzAI Intelligent — tecnología e inteligencia artificial.</p>
-
-  <div class="card">
-    <h2>Información de la empresa</h2>
-    <p style="margin-top:10px"><b>Nombre:</b> DixzAI Intelligent Inc</p>
-    <p><b>Tipo:</b> Empresa privada de tecnología e IA</p>
-    <p><b>Correo:</b> support@dixzai.com</p>
-    <p><b>Ubicación:</b> Silicon Valley</p>
-    <p><b>Enfoque:</b> Inteligencia artificial, software, automatización</p>
-    <p><b>Visión:</b> Intelligence for the next generation.</p>
-  </div>
-
-  <div class="card" style="margin-top:14px">
-    <h2>Equipo directivo y técnico</h2>
-    <div class="team" style="margin-top:14px">
-      <div class="person">
-        <b>Adilson Smith — 20 años 🇵🇪</b>
-        <span>CEO & Fundador · Chief Design & Creative Director</span>
-      </div>
-      <div class="person">
-        <b>Ale Michelle Celi — 27 años 🇺🇸</b>
-        <span>Co-Fundadora · Dirección estratégica</span>
-      </div>
-      <div class="person">
-        <b>Jeff Padilla F — 34 años 🇺🇸</b>
-        <span>Ingeniero Principal de Software</span>
-      </div>
-      <div class="person">
-        <b>Torine Soe — 25 años 🇺🇸</b>
-        <span>Desarrollador · Soluciones de IA</span>
-      </div>
-      <div class="person">
-        <b>Alex Asla — 36 años 🇺🇸</b>
-        <span>Desarrollador · Ingeniería y productos</span>
-      </div>
+    <div class="plan-card">
+      <h3>Free</h3>
+      <div class="plan-price">$0</div>
+      <p>Acceso básico al asistente. Ideal para empezar.</p>
+      <button class="plan-btn outline" onclick="selectPlan('Free')">Plan actual</button>
     </div>
-  </div>
 
-  <div class="grid" style="margin-top:14px">
-    <div class="card">
-      <h2>Misión</h2>
-      <p>Crear soluciones de IA que permitan a personas y organizaciones aprovechar tecnología avanzada de forma accesible y práctica.</p>
+    <div class="plan-card popular">
+      <h3>Pro</h3>
+      <div class="plan-price">$19<span style="font-size:14px;font-weight:500">/mes</span></div>
+      <p>Más capacidad, respuestas prioritarias y funciones avanzadas.</p>
+      <button class="plan-btn" onclick="selectPlan('Pro')">Elegir Pro</button>
     </div>
-    <div class="card">
-      <h2>Visión</h2>
-      <p>Construir una plataforma de IA innovadora, escalable y con alcance global orientada a la siguiente generación.</p>
+
+    <div class="plan-card">
+      <h3>Enterprise</h3>
+      <div class="plan-price">Custom</div>
+      <p>Soluciones personalizadas para equipos y empresas.</p>
+      <button class="plan-btn outline" onclick="selectPlan('Enterprise')">Contactar</button>
     </div>
-  </div>
-</section>
 
-<!-- DASHBOARD -->
-<section id="dashboard" class="screen">
-  <h2 class="section-title">DixzAI Command Center</h2>
-  <p class="muted">Tu centro de control inteligente.</p>
-  <div class="dashboard-grid">
-    <div class="dashboard-card"><span class="pill">Cuenta</span><h3 id="dashName">Invitado</h3><p>Estado de sesión</p></div>
-    <div class="dashboard-card"><span class="pill">Consultas</span><div class="stat" id="dashQueries">0</div><p>Consultas en este navegador</p></div>
-    <div class="dashboard-card"><span class="pill">Plan</span><div class="stat" id="dashPlan">Free</div><p>Plan actual</p></div>
+    <button class="close-btn" onclick="closePlans()">Cerrar</button>
   </div>
-  <div class="card" style="margin-top:16px">
-    <h2>Acciones rápidas</h2>
-    <div class="toolbar">
-      <button class="btn primary" onclick="dixBottom('ai')">Abrir IA</button>
-      <button class="btn" onclick="openAuth('login')">Iniciar sesión</button>
-      <button class="btn" onclick="openAuth('register')">Crear cuenta</button>
-      <button class="btn" onclick="openDixWindow('pricing')">Ver planes</button>
-      <button class="btn" onclick="logoutUser()">Cerrar sesión</button>
-    </div>
-  </div>
-</section>
+</div>
 
-<!-- FEATURES -->
-<section id="features" class="screen">
-  <h2 class="section-title">DixzAI Platform</h2>
-  <p class="muted">Un ecosistema preparado para crecer.</p>
-  <div class="feature-grid">
-    <div class="feature-card"><h3>AI Assistant</h3><p>Chat inteligente conectado a /api/chat.</p></div>
-    <div class="feature-card"><h3>AI Agents</h3><p>Agentes especializados y automatizaciones.</p></div>
-    <div class="feature-card"><h3>Knowledge</h3><p>Documentos, conocimiento y RAG.</p></div>
-    <div class="feature-card"><h3>Voice</h3><p>Interfaz preparada para voz.</p></div>
-    <div class="feature-card"><h3>Vision</h3><p>Análisis multimodal.</p></div>
-    <div class="feature-card"><h3>Automation</h3><p>Flujos para tareas y procesos.</p></div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing" class="screen">
-  <h2 class="section-title">Planes DixzAI</h2>
-  <p class="muted">Precios de demostración.</p>
-  <div class="pricing-grid">
-    <div class="pricing-card"><span class="pill">START</span><h3>Free</h3><div class="stat">$0</div><p>Acceso básico al prototipo.</p><button class="btn" onclick="selectPlan('Free')">Elegir</button></div>
-    <div class="pricing-card"><span class="pill">POPULAR</span><h3>Pro</h3><div class="stat">$19</div><p>Más capacidad y funciones avanzadas.</p><button class="btn primary" onclick="selectPlan('Pro')">Elegir Pro</button></div>
-    <div class="pricing-card"><span class="pill">BUSINESS</span><h3>Enterprise</h3><div class="stat">Custom</div><p>Soluciones para organizaciones.</p><button class="btn" onclick="showToast('Contacta a DixzAI para Enterprise')">Contactar</button></div>
-  </div>
-</section>
-
-<!-- WORKSPACE -->
-<section id="workspace" class="screen">
-  <h2 class="section-title">DixzAI Workspace</h2>
-  <p class="muted">Herramientas rápidas para tu espacio de trabajo.</p>
-  <div class="card">
-    <h2>Smart Notes</h2>
-    <textarea id="notes" class="input" style="min-height:160px" placeholder="Escribe tus ideas..."></textarea>
-    <div class="toolbar">
-      <button class="btn primary" onclick="saveNotes()">Guardar notas</button>
-      <button class="btn" onclick="clearNotes()">Limpiar</button>
-    </div>
-    <div class="progress"><i id="noteProgress"></i></div>
-  </div>
-</section>
-
-<!-- AGENTS -->
-<section id="agents" class="screen">
-  <h2 class="section-title">DixzAI Agents</h2>
-  <p class="muted">Diseña asistentes especializados.</p>
-  <div class="feature-grid">
-    <div class="feature-card"><h3>Research Agent</h3><p>Investiga y prepara resúmenes.</p><button class="btn" onclick="showToast('Research Agent listo')">Configurar</button></div>
-    <div class="feature-card"><h3>Business Agent</h3><p>Análisis y productividad empresarial.</p><button class="btn" onclick="showToast('Business Agent listo')">Configurar</button></div>
-    <div class="feature-card"><h3>Creative Agent</h3><p>Ideas, copywriting y contenido.</p><button class="btn" onclick="showToast('Creative Agent listo')">Configurar</button></div>
-    <div class="feature-card"><h3>Developer Agent</h3><p>Código, arquitectura y documentación.</p><button class="btn" onclick="showToast('Developer Agent listo')">Configurar</button></div>
-  </div>
-</section>
-
-<!-- FILES -->
-<section id="files" class="screen">
-  <h2 class="section-title">Knowledge & Files</h2>
-  <p class="muted">Espacio para documentos y conocimiento.</p>
-  <div class="card">
-    <input id="fileInput" class="input" type="file" multiple style="min-height:auto">
-    <div class="toolbar">
-      <button class="btn primary" onclick="addFiles()">Añadir archivos</button>
-      <button class="btn" onclick="clearFiles()">Vaciar</button>
-    </div>
-    <div id="fileList" class="market-item">No hay archivos añadidos.</div>
-  </div>
-</section>
-
-<!-- STUDIO -->
-<section id="studio" class="screen">
-  <h2 class="section-title">DixzAI Studio</h2>
-  <p class="muted">Centro creativo.</p>
-  <div class="grid">
-    <div class="card"><h2>Text Studio</h2><p>Generación y edición de contenido.</p><button class="btn" onclick="dixBottom('ai')">Abrir</button></div>
-    <div class="card"><h2>Vision Studio</h2><p>Análisis y generación visual.</p><button class="btn" onclick="showToast('Vision Studio próximamente')">Abrir</button></div>
-    <div class="card"><h2>Voice Studio</h2><p>Voz y conversaciones.</p><button class="btn" onclick="showToast('Voice Studio próximamente')">Abrir</button></div>
-    <div class="card"><h2>App Builder</h2><p>Crear aplicaciones con IA.</p><button class="btn" onclick="showToast('App Builder próximamente')">Abrir</button></div>
-  </div>
-</section>
-
-<!-- API -->
-<section id="api" class="screen">
-  <h2 class="section-title">DixzAI API</h2>
-  <p class="muted">Centro para desarrolladores.</p>
-  <div class="card">
-    <h2>API Console</h2>
-    <p>Endpoint actual: <b>/api/chat</b></p>
-    <div class="divider"></div>
-    <p>Estado: <span class="pill">READY</span></p>
-    <div class="toolbar">
-      <button class="btn" onclick="copyText('/api/chat')">Copiar endpoint</button>
-      <button class="btn" onclick="showToast('Documentación próximamente')">Documentación</button>
-    </div>
-  </div>
-</section>
-
-<!-- ACTIVITY -->
-<section id="activity" class="screen">
-  <h2 class="section-title">Activity</h2>
-  <p class="muted">Actividad local del prototipo.</p>
-  <div class="dashboard-grid">
-    <div class="dashboard-card"><span class="pill">Chats</span><div class="stat" id="activityQueries">0</div><p>Consultas registradas</p></div>
-    <div class="dashboard-card"><span class="pill">Notas</span><div class="stat" id="activityNotes">0</div><p>Caracteres guardados</p></div>
-    <div class="dashboard-card"><span class="pill">Archivos</span><div class="stat" id="activityFiles">0</div><p>Archivos seleccionados</p></div>
-  </div>
-</section>
-
-<!-- SETTINGS -->
-<section id="settings" class="screen">
-  <h2 class="section-title">Settings</h2>
-  <p class="muted">Configuración de la experiencia.</p>
-  <div class="card">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div><label style="font-size:13px;color:var(--muted)">Nombre visible</label><input id="settingName" class="input" style="min-height:auto" placeholder="Tu nombre"></div>
-      <div><label style="font-size:13px;color:var(--muted)">Idioma</label><select id="settingLang" class="select" style="min-height:auto"><option>Español</option><option>English</option></select></div>
-    </div>
-    <div class="toolbar">
-      <button class="btn primary" onclick="saveSettings()">Guardar</button>
-      <button class="btn" onclick="resetSettings()">Restablecer</button>
-    </div>
-  </div>
-</section>
-
-<!-- SECURITY -->
-<section id="security" class="screen">
-  <h2 class="section-title">Security</h2>
-  <p class="muted">Centro de seguridad del prototipo.</p>
-  <div class="grid">
-    <div class="card"><h2>Sesión</h2><p>Controla tu sesión actual desde el Dashboard.</p><span class="pill">LOCAL DEMO</span></div>
-    <div class="card"><h2>Privacidad</h2><p>Preferencias almacenadas localmente en el navegador.</p><span class="pill">BROWSER STORAGE</span></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="screen">
-  <h2 class="section-title">About DixzAI</h2>
-  <div class="card">
+<!-- Company -->
+<div class="overlay" id="companyOverlay" onclick="if(event.target===this)closeCompany()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
     <h2>DixzAI Intelligent</h2>
-    <p>Intelligence for the next generation.</p>
-    <div class="divider"></div>
-    <p>Plataforma tecnológica en expansión concebida como un ecosistema de inteligencia artificial.</p>
-    <div class="toolbar">
-      <button class="btn" onclick="dixBottom('company')">Ver empresa</button>
-      <button class="btn" onclick="openDixWindow('features')">Ver plataforma</button>
+    <p class="muted">Empresa privada de tecnología e inteligencia artificial</p>
+
+    <div class="info-card"><b>Nombre</b><span>DixzAI Intelligent Inc</span></div>
+    <div class="info-card"><b>Tipo</b><span>Empresa privada de tecnología e inteligencia artificial</span></div>
+    <div class="info-card"><b>Correo</b><span>support@dixzai.com</span></div>
+    <div class="info-card"><b>Ubicación</b><span>Silicon Valley</span></div>
+    <div class="info-card"><b>Enfoque</b><span>Inteligencia artificial, software, automatización y soluciones digitales</span></div>
+    <div class="info-card"><b>Visión</b><span>Intelligence for the next generation.</span></div>
+
+    <h2 style="font-size:17px;margin:18px 0 8px">Equipo</h2>
+    <div class="team-grid">
+      <div class="person"><b>Adilson Smith</b><span>CEO & Fundador · 20 años 🇵🇪</span></div>
+      <div class="person"><b>Ale Michelle Celi</b><span>Co-Fundadora · 27 años 🇺🇸</span></div>
+      <div class="person"><b>Jeff Padilla F</b><span>Ingeniero Principal · 34 años 🇺🇸</span></div>
+      <div class="person"><b>Torine Soe</b><span>Desarrollador · 25 años 🇺🇸</span></div>
+      <div class="person"><b>Alex Asla</b><span>Desarrollador · 36 años 🇺🇸</span></div>
     </div>
+
+    <div style="margin-top:14px">
+      <div class="info-card"><b>Misión</b><span>Crear soluciones de inteligencia artificial accesibles y prácticas para personas y organizaciones.</span></div>
+      <div class="info-card"><b>Visión</b><span>Construir una plataforma de IA innovadora, escalable y con alcance global.</span></div>
+    </div>
+
+    <button class="close-btn" onclick="closeCompany()">Cerrar</button>
   </div>
-</section>
-
-<!-- MULTIMODAL -->
-<section id="multimodal" class="screen">
-  <h2 class="section-title">DixzAI Multimodal</h2>
-  <p class="muted">Voz e imágenes para la capa multimodal.</p>
-  <div class="aiBox">
-    <h2 style="font-size:17px">Voice Lab</h2>
-    <p class="muted">Pulsa el micrófono y habla.</p>
-    <div class="toolbar">
-      <button class="btn primary" onclick="toggleVoice()">Iniciar voz</button>
-      <button class="btn" onclick="stopSpeaking()">Detener</button>
-    </div>
-    <div id="voiceStatus" class="pill">MICRÓFONO INACTIVO</div>
-  </div>
-  <div class="card" style="margin-top:14px">
-    <h2>Image Lab</h2>
-    <p class="muted">Sube imágenes para la futura capa de visión.</p>
-    <input id="multiImageInput" class="input" type="file" accept="image/*" multiple style="min-height:auto" onchange="previewMultiImages(event)">
-    <div id="multiImagePreview" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px"></div>
-  </div>
-</section>
-
-<footer>DixzAI Intelligent © 2026 · Private AI Technology</footer>
-</main>
-</div>
-
-<!-- AUTH MODAL -->
-<div id="authModal" class="modal" onclick="if(event.target===this)closeAuth()">
-  <div class="modal-card">
-    <div class="modal-head">
-      <h2 id="authTitle" style="font-size:18px">Crear cuenta</h2>
-      <button class="close" onclick="closeAuth()">×</button>
-    </div>
-    <div id="authRegister">
-      <label style="font-size:13px;color:var(--muted)">Nombre</label>
-      <input id="regName" class="input" style="min-height:auto" placeholder="Tu nombre">
-      <label style="display:block;margin-top:12px;font-size:13px;color:var(--muted)">Correo</label>
-      <input id="regEmail" type="email" class="input" style="min-height:auto" placeholder="tu@email.com">
-      <label style="display:block;margin-top:12px;font-size:13px;color:var(--muted)">Contraseña</label>
-      <input id="regPass" type="password" class="input" style="min-height:auto" placeholder="••••••••">
-      <button class="btn primary" style="margin-top:16px;width:100%" onclick="registerUser()">Crear cuenta</button>
-      <div class="divider"></div>
-      <p class="muted" style="margin:0">¿Ya tienes cuenta? <button class="small-btn" onclick="openAuth('login')">Iniciar sesión</button></p>
-    </div>
-    <div id="authLogin" style="display:none">
-      <label style="font-size:13px;color:var(--muted)">Correo</label>
-      <input id="loginEmail" type="email" class="input" style="min-height:auto" placeholder="tu@email.com">
-      <label style="display:block;margin-top:12px;font-size:13px;color:var(--muted)">Contraseña</label>
-      <input id="loginPass" type="password" class="input" style="min-height:auto" placeholder="••••••••">
-      <button class="btn primary" style="margin-top:16px;width:100%" onclick="loginUser()">Iniciar sesión</button>
-      <div class="divider"></div>
-      <p class="muted" style="margin:0">¿No tienes cuenta? <button class="small-btn" onclick="openAuth('register')">Registrarte</button></p>
-    </div>
-  </div>
-</div>
-
-<div id="toast" class="toast"></div>
-
-<!-- BOTTOM NAV -->
-<div class="dix-bottom-nav">
-  <button class="dix-bottom-btn active" id="bottomHome" onclick="dixBottom('home')"><span class="ico">⌂</span><span>Inicio</span></button>
-  <button class="dix-bottom-btn" id="bottomAI" onclick="dixBottom('ai')"><span class="ico">◉</span><span>IA</span></button>
-  <button class="dix-bottom-btn" id="bottomCompany" onclick="dixBottom('company')"><span class="ico">◇</span><span>Empresa</span></button>
-  <button class="dix-bottom-btn" id="bottomMore" onclick="openDixManager()"><span class="ico">☷</span><span>Más</span></button>
-</div>
-
-<!-- MANAGER -->
-<div class="dix-manager" id="dixManager" onclick="if(event.target===this)closeDixManager()">
-  <div class="dix-manager-panel">
-    <div class="dix-manager-head">
-      <div>
-        <h2>Centro de funciones</h2>
-        <p>Todas las herramientas de DixzAI en un solo lugar.</p>
-      </div>
-      <button class="dix-window-close" onclick="closeDixManager()">×</button>
-    </div>
-    <div class="dix-manager-grid">
-      <button class="dix-manager-card" onclick="openDixWindow('dashboard')"><span class="mi">📊</span><b>Dashboard</b><span>Centro de control</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('features')"><span class="mi">✨</span><b>Plataforma</b><span>Ecosistema</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('pricing')"><span class="mi">💳</span><b>Planes</b><span>Free · Pro · Enterprise</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('workspace')"><span class="mi">📝</span><b>Workspace</b><span>Notas inteligentes</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('agents')"><span class="mi">🤖</span><b>Agents</b><span>Agentes especializados</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('files')"><span class="mi">📁</span><b>Files</b><span>Archivos y Knowledge</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('studio')"><span class="mi">🎨</span><b>Studio</b><span>Centro creativo</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('api')"><span class="mi">🔌</span><b>API</b><span>Developer Console</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('activity')"><span class="mi">📈</span><b>Activity</b><span>Actividad local</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('settings')"><span class="mi">⚙️</span><b>Settings</b><span>Configuración</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('security')"><span class="mi">🔐</span><b>Security</b><span>Privacidad</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('about')"><span class="mi">ℹ️</span><b>About</b><span>Sobre DixzAI</span></button>
-      <button class="dix-manager-card" onclick="openDixWindow('multimodal')"><span class="mi">✨</span><b>Multimodal</b><span>Voz + imágenes</span></button>
-      <button class="dix-manager-card" onclick="openAuth('register');closeDixManager()"><span class="mi">🚀</span><b>Crear cuenta</b><span>Comenzar</span></button>
-      <button class="dix-manager-card" onclick="openAuth('login');closeDixManager()"><span class="mi">🔑</span><b>Iniciar sesión</b><span>Acceder</span></button>
-    </div>
-    <div class="dix-manager-note">Diseño light + glass: interfaz limpia inspirada en iOS, con botones de vidrio y fondo claro.</div>
-  </div>
-</div>
-
-<!-- WINDOWS -->
-<div id="dixWindows">
-  <div class="dix-window" id="win-dashboard" onclick="if(event.target===this)closeDixWindow('dashboard')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Dashboard</h2><button class="dix-window-close" onclick="closeDixWindow('dashboard')">×</button></div><div class="dix-window-body" id="winbody-dashboard"></div></div></div>
-  <div class="dix-window" id="win-ai" onclick="if(event.target===this)closeDixWindow('ai')"><div class="dix-window-panel"><div class="dix-window-head"><h2>IA</h2><button class="dix-window-close" onclick="closeDixWindow('ai')">×</button></div><div class="dix-window-body" id="winbody-ai"></div></div></div>
-  <div class="dix-window" id="win-company" onclick="if(event.target===this)closeDixWindow('company')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Empresa</h2><button class="dix-window-close" onclick="closeDixWindow('company')">×</button></div><div class="dix-window-body" id="winbody-company"></div></div></div>
-  <div class="dix-window" id="win-features" onclick="if(event.target===this)closeDixWindow('features')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Plataforma</h2><button class="dix-window-close" onclick="closeDixWindow('features')">×</button></div><div class="dix-window-body" id="winbody-features"></div></div></div>
-  <div class="dix-window" id="win-pricing" onclick="if(event.target===this)closeDixWindow('pricing')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Planes</h2><button class="dix-window-close" onclick="closeDixWindow('pricing')">×</button></div><div class="dix-window-body" id="winbody-pricing"></div></div></div>
-  <div class="dix-window" id="win-workspace" onclick="if(event.target===this)closeDixWindow('workspace')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Workspace</h2><button class="dix-window-close" onclick="closeDixWindow('workspace')">×</button></div><div class="dix-window-body" id="winbody-workspace"></div></div></div>
-  <div class="dix-window" id="win-agents" onclick="if(event.target===this)closeDixWindow('agents')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Agents</h2><button class="dix-window-close" onclick="closeDixWindow('agents')">×</button></div><div class="dix-window-body" id="winbody-agents"></div></div></div>
-  <div class="dix-window" id="win-files" onclick="if(event.target===this)closeDixWindow('files')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Files</h2><button class="dix-window-close" onclick="closeDixWindow('files')">×</button></div><div class="dix-window-body" id="winbody-files"></div></div></div>
-  <div class="dix-window" id="win-studio" onclick="if(event.target===this)closeDixWindow('studio')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Studio</h2><button class="dix-window-close" onclick="closeDixWindow('studio')">×</button></div><div class="dix-window-body" id="winbody-studio"></div></div></div>
-  <div class="dix-window" id="win-api" onclick="if(event.target===this)closeDixWindow('api')"><div class="dix-window-panel"><div class="dix-window-head"><h2>API</h2><button class="dix-window-close" onclick="closeDixWindow('api')">×</button></div><div class="dix-window-body" id="winbody-api"></div></div></div>
-  <div class="dix-window" id="win-activity" onclick="if(event.target===this)closeDixWindow('activity')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Activity</h2><button class="dix-window-close" onclick="closeDixWindow('activity')">×</button></div><div class="dix-window-body" id="winbody-activity"></div></div></div>
-  <div class="dix-window" id="win-settings" onclick="if(event.target===this)closeDixWindow('settings')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Settings</h2><button class="dix-window-close" onclick="closeDixWindow('settings')">×</button></div><div class="dix-window-body" id="winbody-settings"></div></div></div>
-  <div class="dix-window" id="win-security" onclick="if(event.target===this)closeDixWindow('security')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Security</h2><button class="dix-window-close" onclick="closeDixWindow('security')">×</button></div><div class="dix-window-body" id="winbody-security"></div></div></div>
-  <div class="dix-window" id="win-about" onclick="if(event.target===this)closeDixWindow('about')"><div class="dix-window-panel"><div class="dix-window-head"><h2>About</h2><button class="dix-window-close" onclick="closeDixWindow('about')">×</button></div><div class="dix-window-body" id="winbody-about"></div></div></div>
-  <div class="dix-window" id="win-multimodal" onclick="if(event.target===this)closeDixWindow('multimodal')"><div class="dix-window-panel"><div class="dix-window-head"><h2>Multimodal</h2><button class="dix-window-close" onclick="closeDixWindow('multimodal')">×</button></div><div class="dix-window-body" id="winbody-multimodal"></div></div></div>
 </div>
 
 <script>
-/* ===== CORE ===== */
-function escapeHTML(text){
-  return String(text||'')
-    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-}
-
-function showToast(msg){
-  const t=document.getElementById('toast');
-  if(!t)return;
-  t.textContent=msg;
-  t.classList.add('show');
-  clearTimeout(window.__toast);
-  window.__toast=setTimeout(()=>t.classList.remove('show'),2800);
-}
-
-/* ===== NAV ===== */
-const DIXZAI_WINDOW_IDS=['dashboard','features','pricing','workspace','agents','files','studio','api','activity','settings','security','about','multimodal'];
-
-function dixBottom(id){
-  closeDixManager();
-  if(id==='home'){
-    closeAllDixWindows();
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    document.getElementById('home')?.classList.add('active');
-  } else {
-    openDixWindow(id);
-  }
-  document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));
-  const map={home:'bottomHome',ai:'bottomAI',company:'bottomCompany'};
-  if(map[id]) document.getElementById(map[id])?.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function closeAllDixWindows(){
-  DIXZAI_WINDOW_IDS.forEach(id=>{
-    const w=document.getElementById('win-'+id);
-    if(w) w.classList.remove('open');
-  });
-}
-
-function openDixWindow(id){
-  closeDixManager();
-  const source=document.getElementById(id);
-  const win=document.getElementById('win-'+id);
-  const body=document.getElementById('winbody-'+id);
-  if(!source||!win||!body){showToast('Función no disponible');return}
-  if(source.parentElement!==body) body.appendChild(source);
-  source.classList.add('active');
-  win.classList.add('open');
-  document.querySelectorAll('.screen').forEach(s=>{if(s!==source)s.classList.remove('active')});
-  document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));
-  if(id==='ai') document.getElementById('bottomAI')?.classList.add('active');
-  else if(id==='company') document.getElementById('bottomCompany')?.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function closeDixWindow(id){
-  const w=document.getElementById('win-'+id);
-  if(w) w.classList.remove('open');
-  const source=document.getElementById(id);
-  if(source){
-    source.classList.remove('active');
-    const main=document.querySelector('main');
-    if(main && source.parentElement!==main) main.appendChild(source);
-  }
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('home')?.classList.add('active');
-  document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('bottomHome')?.classList.add('active');
-}
-
-function openDixManager(){
-  closeAllDixWindows();
-  document.getElementById('dixManager')?.classList.add('open');
-  document.querySelectorAll('.dix-bottom-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('bottomMore')?.classList.add('active');
-}
-
-function closeDixManager(){
-  document.getElementById('dixManager')?.classList.remove('open');
-}
-
-document.addEventListener('keydown',e=>{
-  if(e.key!=='Escape') return;
-  closeDixManager();
-  DIXZAI_WINDOW_IDS.forEach(id=>{
-    const w=document.getElementById('win-'+id);
-    if(w?.classList.contains('open')) closeDixWindow(id);
-  });
-});
-
-/* ===== CHAT ===== */
-async function askAI(){
-  const input=document.getElementById('question');
-  const messages=document.getElementById('chatMessages');
-  const q=input.value.trim();
-  if(!q) return;
-
-  messages.innerHTML+=`<div class="chat-message chat-user">${escapeHTML(q)}</div>`;
-  input.value='';
-
-  const thinkingId="thinking-"+Date.now();
-  messages.innerHTML+=`<div id="${thinkingId}" class="chat-message chat-ai chat-thinking"><b>DixzAI:</b> Pensando...</div>`;
-  messages.scrollTop=messages.scrollHeight;
-
-  try{
-    const response=await fetch('/api/chat',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({question:q})
-    });
-    const data=await response.json();
-    document.getElementById(thinkingId)?.remove();
-
-    if(!response.ok) throw new Error(data.error||'Error de conexión');
-
-    const answer=data.answer||'No recibí una respuesta.';
-    messages.innerHTML+=`<div class="chat-message chat-ai"><b>DixzAI:</b><br>${escapeHTML(answer).replace(/\n/g,'<br>')}</div>`;
-    messages.scrollTop=messages.scrollHeight;
-
-    const qCount=Number(localStorage.getItem('dixzai_queries')||0)+1;
-    localStorage.setItem('dixzai_queries',qCount);
-    refreshDashboard();
-    updateActivity();
-  }catch(err){
-    document.getElementById(thinkingId)?.remove();
-    messages.innerHTML+=`<div class="chat-message chat-ai"><b>DixzAI:</b><br>No pude procesar tu solicitud. Inténtalo de nuevo.</div>`;
-    messages.scrollTop=messages.scrollHeight;
-  }
-}
-
-function handleEnter(e){
-  if(e.key==='Enter' && !e.shiftKey){
-    e.preventDefault();
-    askAI();
-  }
-}
-
-function clearChat(){
-  document.getElementById('chatMessages').innerHTML='';
-  document.getElementById('question').value='';
-  document.getElementById('question').focus();
-}
-
-/* ===== AUTH & STORE ===== */
-const DIXZAI_STORE={
-  get users(){try{return JSON.parse(localStorage.getItem('dixzai_users')||'[]')}catch{return[]}},
-  set users(v){localStorage.setItem('dixzai_users',JSON.stringify(v))},
-  get current(){try{return JSON.parse(localStorage.getItem('dixzai_current')||'null')}catch{return null}},
-  set current(v){localStorage.setItem('dixzai_current',JSON.stringify(v))}
+/* ===== STORAGE ===== */
+const STORE = {
+  get users(){ try{return JSON.parse(localStorage.getItem('dixzai_users')||'[]')}catch{return[]} },
+  set users(v){ localStorage.setItem('dixzai_users',JSON.stringify(v)) },
+  get current(){ try{return JSON.parse(localStorage.getItem('dixzai_current')||'null')}catch{return null} },
+  set current(v){ localStorage.setItem('dixzai_current',JSON.stringify(v)) }
 };
 
-function openAuth(mode='register'){
-  document.getElementById('authModal').classList.add('open');
-  const reg=mode==='register';
-  document.getElementById('authTitle').textContent=reg?'Crear cuenta':'Iniciar sesión';
-  document.getElementById('authRegister').style.display=reg?'block':'none';
-  document.getElementById('authLogin').style.display=reg?'none':'block';
+function refreshUser(){
+  const u = STORE.current;
+  const badge = document.getElementById('userBadge');
+  const btn = document.getElementById('authBtn');
+  if(u){
+    badge.textContent = u.name + (u.plan ? ' · '+u.plan : '');
+    btn.textContent = 'Salir';
+    btn.onclick = logout;
+  }else{
+    badge.textContent = 'Invitado';
+    btn.textContent = 'Entrar';
+    btn.onclick = openAuth;
+  }
 }
 
-function closeAuth(){document.getElementById('authModal').classList.remove('open')}
+/* ===== AUTH ===== */
+function openAuth(){
+  document.getElementById('authOverlay').classList.add('open');
+  switchAuth('login');
+}
+function closeAuth(){ document.getElementById('authOverlay').classList.remove('open') }
+
+function switchAuth(mode){
+  const isLogin = mode === 'login';
+  document.getElementById('authTitle').textContent = isLogin ? 'Iniciar sesión' : 'Crear cuenta';
+  document.getElementById('authSubtitle').textContent = isLogin ? 'Accede a tu cuenta de DixzAI' : 'Únete a DixzAI';
+  document.getElementById('loginForm').style.display = isLogin ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = isLogin ? 'none' : 'block';
+}
 
 function registerUser(){
-  const name=document.getElementById('regName').value.trim();
-  const email=document.getElementById('regEmail').value.trim().toLowerCase();
-  const pass=document.getElementById('regPass').value;
-  if(!name||!email||pass.length<6){showToast('Completa los datos. Contraseña mínimo 6 caracteres.');return}
-  const users=DIXZAI_STORE.users;
-  if(users.some(u=>u.email===email)){showToast('Ese correo ya está registrado.');return}
-  users.push({name,email,pass,plan:'Free',createdAt:new Date().toISOString()});
-  DIXZAI_STORE.users=users;
-  DIXZAI_STORE.current={name,email,plan:'Free'};
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('regPass').value;
+  if(!name || !email || pass.length < 6){
+    alert('Completa todos los campos. La contraseña debe tener al menos 6 caracteres.');
+    return;
+  }
+  const users = STORE.users;
+  if(users.some(u => u.email === email)){
+    alert('Ese correo ya está registrado.');
+    return;
+  }
+  users.push({name, email, pass, plan:'Free', createdAt: new Date().toISOString()});
+  STORE.users = users;
+  STORE.current = {name, email, plan:'Free'};
   closeAuth();
-  refreshDashboard();
-  showToast('Cuenta creada correctamente.');
-  openDixWindow('dashboard');
+  refreshUser();
+  alert('¡Cuenta creada correctamente!');
 }
 
 function loginUser(){
-  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pass=document.getElementById('loginPass').value;
-  const user=DIXZAI_STORE.users.find(u=>u.email===email&&u.pass===pass);
-  if(!user){showToast('Correo o contraseña incorrectos.');return}
-  DIXZAI_STORE.current={name:user.name,email:user.email,plan:user.plan||'Free'};
-  closeAuth();
-  refreshDashboard();
-  showToast('Bienvenido, '+user.name);
-  openDixWindow('dashboard');
-}
-
-function logoutUser(){
-  localStorage.removeItem('dixzai_current');
-  refreshDashboard();
-  showToast('Sesión cerrada.');
-}
-
-function refreshDashboard(){
-  const u=DIXZAI_STORE.current;
-  const n=document.getElementById('dashName');
-  const p=document.getElementById('dashPlan');
-  if(n) n.textContent=u?u.name:'Invitado';
-  if(p) p.textContent=u?u.plan:'Free';
-  const q=Number(localStorage.getItem('dixzai_queries')||0);
-  const dq=document.getElementById('dashQueries');
-  if(dq) dq.textContent=q;
-}
-
-function selectPlan(plan){
-  const u=DIXZAI_STORE.current;
-  if(!u){openAuth('register');showToast('Crea una cuenta para seleccionar un plan.');return}
-  const users=DIXZAI_STORE.users;
-  const i=users.findIndex(x=>x.email===u.email);
-  if(i>=0){users[i].plan=plan;DIXZAI_STORE.users=users}
-  DIXZAI_STORE.current={...u,plan};
-  refreshDashboard();
-  showToast('Plan '+plan+' seleccionado (demo).');
-}
-
-/* ===== NOTES / FILES / SETTINGS ===== */
-function saveNotes(){
-  const n=document.getElementById('notes').value;
-  localStorage.setItem('dixzai_notes',n);
-  updateNoteProgress();
-  updateActivity();
-  showToast('Notas guardadas.');
-}
-function clearNotes(){document.getElementById('notes').value='';saveNotes()}
-function updateNoteProgress(){
-  const n=document.getElementById('notes');
-  const p=document.getElementById('noteProgress');
-  if(n&&p) p.style.width=Math.min(100,(n.value.length/1000)*100)+'%';
-}
-
-function addFiles(){
-  const input=document.getElementById('fileInput');
-  const list=document.getElementById('fileList');
-  if(!input||!list||!input.files.length){showToast('Selecciona al menos un archivo.');return}
-  const names=[...input.files].map(f=>f.name);
-  localStorage.setItem('dixzai_files',JSON.stringify(names));
-  list.innerHTML=names.map(n=>'📄 '+escapeHTML(n)).join('<br>');
-  updateActivity();
-  showToast(names.length+' archivo(s) añadidos.');
-}
-function clearFiles(){
-  localStorage.removeItem('dixzai_files');
-  const l=document.getElementById('fileList');
-  if(l) l.textContent='No hay archivos añadidos.';
-  const i=document.getElementById('fileInput');
-  if(i) i.value='';
-  updateActivity();
-}
-
-function updateActivity(){
-  const q=Number(localStorage.getItem('dixzai_queries')||0);
-  const notes=(localStorage.getItem('dixzai_notes')||'').length;
-  let files=[];try{files=JSON.parse(localStorage.getItem('dixzai_files')||'[]')}catch{}
-  const a=document.getElementById('activityQueries');
-  const b=document.getElementById('activityNotes');
-  const c=document.getElementById('activityFiles');
-  if(a) a.textContent=q;
-  if(b) b.textContent=notes;
-  if(c) c.textContent=files.length;
-}
-
-function saveSettings(){
-  const name=document.getElementById('settingName')?.value.trim();
-  const lang=document.getElementById('settingLang')?.value;
-  localStorage.setItem('dixzai_settings',JSON.stringify({name,lang}));
-  if(name){
-    const u=DIXZAI_STORE.current;
-    if(u){u.name=name;DIXZAI_STORE.current=u}
-  }
-  refreshDashboard();
-  showToast('Configuración guardada.');
-}
-function resetSettings(){
-  localStorage.removeItem('dixzai_settings');
-  const n=document.getElementById('settingName');
-  if(n) n.value='';
-  showToast('Configuración restablecida.');
-}
-
-function copyText(text){
-  navigator.clipboard?.writeText(text).then(()=>showToast('Copiado: '+text)).catch(()=>showToast(text));
-}
-
-/* ===== VOICE + IMAGES ===== */
-function cleanAIText(text){
-  return String(text||'')
-    .replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*(.*?)\*/g,'$1')
-    .replace(/^\s*#+\s*/gm,'').replace(/^\s*[-•]\s+/gm,'')
-    .replace(/`{1,3}/g,'').replace(/_{1,2}(.*?)_{1,2}/g,'$1')
-    .replace(/\n{3,}/g,'\n\n').trim();
-}
-
-function previewImages(event){
-  const box=document.getElementById('imagePreview');
-  if(!box) return;
-  box.innerHTML='';
-  [...(event.target.files||[])].forEach(file=>{
-    if(!file.type.startsWith('image/')) return;
-    const reader=new FileReader();
-    reader.onload=e=>{
-      const img=document.createElement('img');
-      img.src=e.target.result;
-      img.alt=file.name;
-      img.style.cssText='width:80px;height:80px;object-fit:cover;border-radius:14px;border:1px solid rgba(0,0,0,.1)';
-      box.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  });
-  if(event.target.files.length) showToast(event.target.files.length+' imagen(es) preparada(s).');
-}
-
-function handleDixImages(files){
-  const list=document.getElementById('dixUploadList');
-  if(!list||!files?.length) return;
-  [...files].forEach(file=>{
-    if(!file.type.startsWith('image/')) return;
-    const reader=new FileReader();
-    reader.onload=e=>{
-      const wrap=document.createElement('div');
-      wrap.className='dix-upload-item';
-      wrap.innerHTML=`<img src="${e.target.result}" alt=""><span>${escapeHTML(file.name)}</span><button onclick="this.parentElement.remove()">×</button>`;
-      list.appendChild(wrap);
-    };
-    reader.readAsDataURL(file);
-  });
-  showToast(files.length+' imagen(es) añadida(s).');
-}
-
-function previewMultiImages(event){
-  const box=document.getElementById('multiImagePreview');
-  if(!box) return;
-  box.innerHTML='';
-  [...(event.target.files||[])].forEach(file=>{
-    if(!file.type.startsWith('image/')) return;
-    const reader=new FileReader();
-    reader.onload=e=>{
-      const wrap=document.createElement('div');
-      wrap.style.cssText='width:130px';
-      wrap.innerHTML=`<img src="${e.target.result}" style="width:130px;height:100px;object-fit:cover;border-radius:14px;border:1px solid rgba(0,0,0,.1)"><small style="display:block;color:#6e6e73;margin-top:4px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHTML(file.name)}</small>`;
-      box.appendChild(wrap);
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-let dixzaiRecognition=null;
-function toggleVoice(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  const status=document.getElementById('voiceStatus');
-  const btn=document.getElementById('voiceBtn');
-  if(!SR){showToast('Reconocimiento de voz no disponible en este navegador.');return}
-  if(dixzaiRecognition){
-    dixzaiRecognition.stop();
-    dixzaiRecognition=null;
-    if(status) status.textContent='MICRÓFONO INACTIVO';
-    if(btn) btn.textContent='Voz';
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  const user = STORE.users.find(u => u.email === email && u.pass === pass);
+  if(!user){
+    alert('Correo o contraseña incorrectos.');
     return;
   }
-  dixzaiRecognition=new SR();
-  dixzaiRecognition.lang='es-PE';
-  dixzaiRecognition.interimResults=true;
-  dixzaiRecognition.continuous=false;
-  if(status) status.textContent='ESCUCHANDO...';
-  if(btn) btn.textContent='Detener voz';
-  dixzaiRecognition.onresult=e=>{
-    let text='';
-    for(let i=e.resultIndex;i<e.results.length;i++) text+=e.results[i][0].transcript;
-    const input=document.getElementById('question');
-    if(input) input.value=text;
+  STORE.current = {name: user.name, email: user.email, plan: user.plan || 'Free'};
+  closeAuth();
+  refreshUser();
+}
+
+function logout(){
+  localStorage.removeItem('dixzai_current');
+  refreshUser();
+}
+
+/* ===== PLANS ===== */
+function openPlans(){ document.getElementById('plansOverlay').classList.add('open') }
+function closePlans(){ document.getElementById('plansOverlay').classList.remove('open') }
+
+function selectPlan(plan){
+  const u = STORE.current;
+  if(!u){
+    closePlans();
+    openAuth();
+    alert('Inicia sesión o regístrate para elegir un plan.');
+    return;
+  }
+  const users = STORE.users;
+  const i = users.findIndex(x => x.email === u.email);
+  if(i >= 0){
+    users[i].plan = plan;
+    STORE.users = users;
+  }
+  STORE.current = {...u, plan};
+  refreshUser();
+  closePlans();
+  alert('Plan ' + plan + ' seleccionado (demo).');
+}
+
+/* ===== COMPANY ===== */
+function openCompany(){ document.getElementById('companyOverlay').classList.add('open') }
+function closeCompany(){ document.getElementById('companyOverlay').classList.remove('open') }
+
+/* ===== CLEAN RESPONSE (quita asteriscos y markdown) ===== */
+function cleanResponse(text){
+  return String(text || '')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/__(.*?)__/g, '$1')
+    .replace(/_(.*?)_/g, '$1')
+    .replace(/`{1,3}(.*?)`{1,3}/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^\s*[-•*]\s+/gm, '• ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+/* Detecta si el usuario pide respuesta larga */
+function wantsLongAnswer(text){
+  const t = text.toLowerCase();
+  return /más largo|mas largo|explícame mejor|explica mejor|detalla|más detalle|mas detalle|extiende|desarrolla|hazlo más completo|hazlo mas completo|en profundidad|más información|mas informacion/.test(t);
+}
+
+/* ===== CHAT + FILES ===== */
+const messagesEl = document.getElementById('chatMessages');
+const emptyState = document.getElementById('emptyState');
+const questionInput = document.getElementById('question');
+const filePreview = document.getElementById('filePreview');
+let pendingFiles = [];
+
+function escapeHTML(t){
+  return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showEmpty(show){
+  emptyState.style.display = show ? 'flex' : 'none';
+}
+
+function handleFiles(input){
+  const files = [...(input.files || [])];
+  files.forEach(file => {
+    const isImage = file.type.startsWith('image/');
+    const reader = new FileReader();
+    reader.onload = e => {
+      pendingFiles.push({
+        name: file.name,
+        type: file.type,
+        data: e.target.result,
+        isImage
+      });
+      renderPreview();
+    };
+    if(isImage) reader.readAsDataURL(file);
+    else reader.readAsDataURL(file); // también para documentos (base64)
+  });
+  input.value = '';
+}
+
+function renderPreview(){
+  filePreview.innerHTML = '';
+  pendingFiles.forEach((f, i) => {
+    const div = document.createElement('div');
+    div.className = 'preview-item';
+    if(f.isImage){
+      div.innerHTML = `<img src="${f.data}" alt=""><button class="remove" onclick="removeFile(${i})">×</button>`;
+    } else {
+      div.innerHTML = `<div style="font-size:10px;padding:4px;word-break:break-all">${escapeHTML(f.name)}</div><button class="remove" onclick="removeFile(${i})">×</button>`;
+    }
+    filePreview.appendChild(div);
+  });
+}
+
+function removeFile(index){
+  pendingFiles.splice(index, 1);
+  renderPreview();
+}
+
+async function askAI(){
+  const q = questionInput.value.trim();
+  if(!q && pendingFiles.length === 0) return;
+
+  showEmpty(false);
+
+  // Mensaje del usuario
+  let userHTML = q ? escapeHTML(q) : '';
+  pendingFiles.forEach(f => {
+    if(f.isImage){
+      userHTML += `<br><img class="chat-image" src="${f.data}" alt="${escapeHTML(f.name)}">`;
+    } else {
+      userHTML += `<div class="file-chip">📄 ${escapeHTML(f.name)}</div>`;
+    }
+  });
+  messagesEl.innerHTML += `<div class="chat-message chat-user">${userHTML}</div>`;
+
+  const longMode = wantsLongAnswer(q);
+  const filesToSend = [...pendingFiles];
+  
+  questionInput.value = '';
+  pendingFiles = [];
+  filePreview.innerHTML = '';
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  const tid = 't' + Date.now();
+  messagesEl.innerHTML += `<div id="${tid}" class="chat-message chat-ai">DixzAI está pensando...</div>`;
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  try{
+    const res = await fetch('/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        question: q || 'Analiza los archivos enviados',
+        files: filesToSend,
+        style: longMode ? 'detailed' : 'concise'   // instruye al backend
+      })
+    });
+    const data = await res.json();
+    document.getElementById(tid)?.remove();
+
+    let answer = data.answer || 'No pude generar una respuesta en este momento.';
+    answer = cleanResponse(answer); // elimina asteriscos y markdown
+
+    messagesEl.innerHTML += `<div class="chat-message chat-ai"><b>DixzAI</b><br>${escapeHTML(answer).replace(/\n/g,'<br>')}</div>`;
+  }catch(e){
+    document.getElementById(tid)?.remove();
+    messagesEl.innerHTML += `<div class="chat-message chat-ai">No pude procesar tu solicitud. Inténtalo de nuevo.</div>`;
+  }
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+/* Mode */
+let currentMode = 'Fast';
+function toggleMode(){
+  currentMode = currentMode === 'Fast' ? 'Think' : 'Fast';
+  document.getElementById('modeBtn').innerHTML = currentMode === 'Fast' ? '⚡ Fast' : '🧠 Think';
+}
+
+/* Voice mejorado */
+let recognition = null;
+function toggleVoice(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('voiceBtn');
+  if(!SR){
+    alert('El reconocimiento de voz no está disponible en este navegador.');
+    return;
+  }
+  if(recognition){
+    recognition.stop();
+    recognition = null;
+    btn.classList.remove('listening');
+    btn.innerHTML = '<span>🎙️</span> Hablar';
+    return;
+  }
+
+  recognition = new SR();
+  recognition.lang = 'es-ES';
+  recognition.interimResults = true;
+  recognition.continuous = false;
+
+  btn.classList.add('listening');
+  btn.innerHTML = '<span>⏹</span> Escuchando...';
+
+  recognition.onresult = (e) => {
+    let text = '';
+    for(let i = e.resultIndex; i < e.results.length; i++){
+      text += e.results[i][0].transcript;
+    }
+    questionInput.value = text;
     if(e.results[e.results.length-1].isFinal){
-      if(status) status.textContent='TEXTO RECIBIDO';
-      askAI();
+      setTimeout(() => askAI(), 300);
     }
   };
-  dixzaiRecognition.onerror=()=>{
-    if(status) status.textContent='ERROR DE MICRÓFONO';
-    dixzaiRecognition=null;
-    if(btn) btn.textContent='Voz';
+
+  recognition.onend = () => {
+    recognition = null;
+    btn.classList.remove('listening');
+    btn.innerHTML = '<span>🎙️</span> Hablar';
   };
-  dixzaiRecognition.onend=()=>{
-    if(status&&status.textContent.includes('ESCUCHANDO')) status.textContent='MICRÓFONO INACTIVO';
-    dixzaiRecognition=null;
-    if(btn) btn.textContent='Voz';
+
+  recognition.onerror = () => {
+    recognition = null;
+    btn.classList.remove('listening');
+    btn.innerHTML = '<span>🎙️</span> Hablar';
   };
-  dixzaiRecognition.start();
+
+  recognition.start();
 }
 
-function speakLastAnswer(){
-  const msgs=[...document.querySelectorAll('.chat-ai')];
-  if(!msgs.length){showToast('Todavía no hay una respuesta para leer.');return}
-  if(!('speechSynthesis' in window)){showToast('Lectura por voz no disponible.');return}
-  const text=cleanAIText(msgs[msgs.length-1].innerText.replace(/^DixzAI:\s*/i,''));
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang='es-PE';
-  u.rate=.96;
-  speechSynthesis.speak(u);
-}
-
-function stopSpeaking(){
-  if('speechSynthesis' in window) speechSynthesis.cancel();
-  showToast('Voz detenida.');
-}
-
-/* ===== INIT ===== */
-document.addEventListener('DOMContentLoaded',()=>{
-  const n=document.getElementById('notes');
-  if(n){
-    n.value=localStorage.getItem('dixzai_notes')||'';
-    n.addEventListener('input',updateNoteProgress);
-    updateNoteProgress();
-  }
-  let files=[];try{files=JSON.parse(localStorage.getItem('dixzai_files')||'[]')}catch{}
-  const list=document.getElementById('fileList');
-  if(list&&files.length) list.innerHTML=files.map(n=>'📄 '+escapeHTML(n)).join('<br>');
-  const settings=JSON.parse(localStorage.getItem('dixzai_settings')||'null');
-  if(settings?.name){
-    const sn=document.getElementById('settingName');
-    if(sn) sn.value=settings.name;
-  }
-  refreshDashboard();
-  updateActivity();
-});
+/* Init */
+refreshUser();
+showEmpty(true);
 </script>
 </body>
 </html>
