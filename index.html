@@ -84,7 +84,13 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
 .pay-btn{width:100%;margin-top:16px;padding:15px;border-radius:16px;border:none;background:linear-gradient(145deg,#22c55e,#16a34a);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
 .error-box{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;padding:14px;border-radius:14px;font-size:14px;margin-top:14px;display:none;line-height:1.5}
 
-.new-chat-btn{position:fixed;top:70px;right:16px;z-index:40;padding:8px 14px;border-radius:16px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.85);backdrop-filter:blur(12px);font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.top-actions{position:fixed;top:70px;right:16px;z-index:40;display:flex;gap:8px}
+.new-chat-btn,.history-btn{padding:8px 14px;border-radius:16px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.85);backdrop-filter:blur(12px);font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+
+.history-item{padding:14px;border-radius:16px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);margin-bottom:10px;cursor:pointer}
+.history-item:hover{background:#fff;border-color:var(--accent)}
+.history-item b{display:block;font-size:14px;margin-bottom:4px}
+.history-item span{font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -102,7 +108,10 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
   </div>
 </header>
 
-<button class="new-chat-btn" onclick="newConversation()">＋ Nueva conversación</button>
+<div class="top-actions">
+  <button class="history-btn" onclick="openHistory()">Historial</button>
+  <button class="new-chat-btn" onclick="newConversation()">＋ Nueva</button>
+</div>
 
 <div class="main">
   <div class="center-area" id="emptyState">
@@ -144,6 +153,17 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
       <button class="auth-submit" onclick="registerUser()">Crear cuenta</button>
       <div class="auth-switch">¿Ya tienes cuenta? <button onclick="switchAuth('login')">Inicia sesión</button></div>
     </div>
+  </div>
+</div>
+
+<!-- History -->
+<div class="overlay" id="historyOverlay" onclick="if(event.target===this)closeHistory()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <h2>Historial de conversaciones</h2>
+    <p class="muted">Tus conversaciones guardadas</p>
+    <div id="historyList"></div>
+    <button class="close-btn" onclick="closeHistory()">Cerrar</button>
   </div>
 </div>
 
@@ -191,7 +211,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
   </div>
 </div>
 
-<!-- Company (expandida) -->
+<!-- Company (sin Misión ni Visión) -->
 <div class="overlay" id="companyOverlay" onclick="if(event.target===this)closeCompany()">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -200,29 +220,27 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
 
     <div class="info-card"><b>Nombre legal</b><span>DixzAI Intelligent Inc</span></div>
     <div class="info-card"><b>Tipo</b><span>Empresa privada de tecnología e inteligencia artificial</span></div>
-    <div class="info-card"><b>Fundación</b><span>2024</span></div>
+    <div class="info-card"><b>Fundación</b><span>2026</span></div>
     <div class="info-card"><b>Sede principal</b><span>Silicon Valley, California, Estados Unidos</span></div>
     <div class="info-card"><b>Correo</b><span>support@dixzai.com</span></div>
     <div class="info-card"><b>Sitio web</b><span>www.dixzai.com</span></div>
     <div class="info-card"><b>Enfoque</b><span>Inteligencia artificial, software, automatización, agentes autónomos y soluciones digitales escalables</span></div>
-    <div class="info-card"><b>Visión</b><span>Intelligence for the next generation.</span></div>
-    <div class="info-card"><b>Misión</b><span>Crear soluciones de inteligencia artificial accesibles, seguras y prácticas para personas, empresas y organizaciones de todo el mundo.</span></div>
     <div class="info-card"><b>Valores</b><span>Innovación, privacidad, transparencia, excelencia técnica y accesibilidad global.</span></div>
 
     <h2 style="font-size:17px;margin:20px 0 10px">Equipo directivo y técnico</h2>
     <div class="team-grid">
       <div class="person"><b>Adilson Smith</b><span>CEO & Fundador · 20 años 🇵🇪</span></div>
+      <div class="person"><b>Adilson Smith</b><span>Presidente de esta increíble empresa · 20 años 🇵🇪</span></div>
       <div class="person"><b>Ale Michelle Celi</b><span>Co-Fundadora · 27 años 🇺🇸</span></div>
       <div class="person"><b>Jeff Padilla F</b><span>Ingeniero Principal · 34 años 🇺🇸</span></div>
       <div class="person"><b>Torine Soe</b><span>Desarrollador · 25 años 🇺🇸</span></div>
       <div class="person"><b>Alex Asla</b><span>Desarrollador · 36 años 🇺🇸</span></div>
-      <!-- 7 nuevos integrantes -->
       <div class="person"><b>Sofia Nakamura</b><span>Head of AI Research · 31 años 🇯🇵</span></div>
       <div class="person"><b>Lucas Ferreira</b><span>Lead Backend Engineer · 29 años 🇧🇷</span></div>
       <div class="person"><b>Emma Johansson</b><span>Product Designer · 28 años 🇸🇪</span></div>
       <div class="person"><b>Raj Patel</b><span>ML Engineer · 33 años 🇮🇳</span></div>
       <div class="person"><b>Camille Dubois</b><span>Security Lead · 30 años 🇫🇷</span></div>
-      <div class="person"><b>Marco Rossi</b><span>DevOps Engineer · 32 años 🇮🇹</span></div>
+      <div class="person"><b>Mark Ross</b><span>DevOps Engineer · 32 años 🇮🇹</span></div>
       <div class="person"><b>Aisha Khan</b><span>Data Scientist · 27 años 🇨🇦</span></div>
     </div>
 
@@ -236,9 +254,11 @@ const STORE = {
   set users(v){localStorage.setItem('dixzai_users',JSON.stringify(v))},
   get current(){try{return JSON.parse(localStorage.getItem('dixzai_current')||'null')}catch{return null}},
   set current(v){localStorage.setItem('dixzai_current',JSON.stringify(v))},
-  getHistory(email){try{return JSON.parse(localStorage.getItem('dixzai_history_'+email)||'[]')}catch{return[]}},
-  setHistory(email,h){localStorage.setItem('dixzai_history_'+email,JSON.stringify(h))}
+  getChats(email){try{return JSON.parse(localStorage.getItem('dixzai_chats_'+email)||'[]')}catch{return[]}},
+  setChats(email,chats){localStorage.setItem('dixzai_chats_'+email,JSON.stringify(chats))}
 };
+
+let currentChatId = null;
 
 function refreshUser(){
   const u=STORE.current, badge=document.getElementById('userBadge'), btn=document.getElementById('authBtn');
@@ -262,7 +282,8 @@ function registerUser(){
   STORE.users=[...STORE.users,{name,email,pass,plan:'Free',createdAt:new Date().toISOString()}];
   STORE.current={name,email,plan:'Free'};
   document.getElementById('authOverlay').classList.remove('open');
-  refreshUser();loadHistory();
+  refreshUser();
+  startNewChat();
 }
 function loginUser(){
   const email=document.getElementById('loginEmail').value.trim().toLowerCase(), pass=document.getElementById('loginPass').value;
@@ -270,30 +291,97 @@ function loginUser(){
   if(!user){alert('Correo o contraseña incorrectos');return}
   STORE.current={name:user.name,email:user.email,plan:user.plan||'Free'};
   document.getElementById('authOverlay').classList.remove('open');
-  refreshUser();loadHistory();
+  refreshUser();
+  const chats=STORE.getChats(user.email);
+  if(chats.length){loadChat(chats[chats.length-1].id)} else {startNewChat()}
 }
-function logout(){saveHistory();localStorage.removeItem('dixzai_current');refreshUser();document.getElementById('chatMessages').innerHTML='';showEmpty(true);openAuth()}
-
-function saveHistory(){
-  const u=STORE.current;if(!u)return;
-  const msgs=[...document.querySelectorAll('#chatMessages .chat-message')].map(el=>({type:el.classList.contains('chat-user')?'user':'ai',html:el.innerHTML}));
-  STORE.setHistory(u.email,msgs);
-}
-function loadHistory(){
-  const u=STORE.current;if(!u)return;
-  const h=STORE.getHistory(u.email), box=document.getElementById('chatMessages');
-  box.innerHTML='';
-  if(h.length){showEmpty(false);h.forEach(m=>{const d=document.createElement('div');d.className='chat-message '+(m.type==='user'?'chat-user':'chat-ai');d.innerHTML=m.html;box.appendChild(d)});box.scrollTop=box.scrollHeight}
-  else showEmpty(true);
-}
-
-function newConversation(){
-  saveHistory();
+function logout(){
+  saveCurrentChat();
+  localStorage.removeItem('dixzai_current');
+  refreshUser();
   document.getElementById('chatMessages').innerHTML='';
   showEmpty(true);
-  // Opcional: podrías guardar la conversación anterior con un timestamp si quieres historial de chats
+  openAuth();
 }
 
+/* ===== CHATS HISTORY ===== */
+function getCurrentMessages(){
+  return [...document.querySelectorAll('#chatMessages .chat-message')].map(el=>({
+    type: el.classList.contains('chat-user') ? 'user' : 'ai',
+    html: el.innerHTML
+  }));
+}
+
+function saveCurrentChat(){
+  const u=STORE.current;
+  if(!u || !currentChatId) return;
+  const chats=STORE.getChats(u.email);
+  const idx=chats.findIndex(c=>c.id===currentChatId);
+  const messages=getCurrentMessages();
+  if(messages.length===0) return;
+
+  const title = messages.find(m=>m.type==='user')?.html.replace(/<[^>]*>/g,'').slice(0,40) || 'Nueva conversación';
+  const chatData={id:currentChatId, title, messages, updatedAt:new Date().toISOString()};
+
+  if(idx>=0) chats[idx]=chatData;
+  else chats.push(chatData);
+
+  STORE.setChats(u.email, chats);
+}
+
+function startNewChat(){
+  saveCurrentChat();
+  currentChatId = 'chat_'+Date.now();
+  document.getElementById('chatMessages').innerHTML='';
+  showEmpty(true);
+}
+
+function loadChat(id){
+  const u=STORE.current;
+  if(!u) return;
+  const chats=STORE.getChats(u.email);
+  const chat=chats.find(c=>c.id===id);
+  if(!chat) return;
+
+  currentChatId=id;
+  const box=document.getElementById('chatMessages');
+  box.innerHTML='';
+  showEmpty(false);
+  chat.messages.forEach(m=>{
+    const d=document.createElement('div');
+    d.className='chat-message '+(m.type==='user'?'chat-user':'chat-ai');
+    d.innerHTML=m.html;
+    box.appendChild(d);
+  });
+  box.scrollTop=box.scrollHeight;
+  closeHistory();
+}
+
+function openHistory(){
+  const u=STORE.current;
+  if(!u){openAuth();return}
+  saveCurrentChat();
+  const list=document.getElementById('historyList');
+  const chats=STORE.getChats(u.email).reverse();
+  if(chats.length===0){
+    list.innerHTML='<p class="muted">No tienes conversaciones guardadas todavía.</p>';
+  }else{
+    list.innerHTML=chats.map(c=>`
+      <div class="history-item" onclick="loadChat('${c.id}')">
+        <b>${c.title || 'Conversación'}</b>
+        <span>${new Date(c.updatedAt).toLocaleString()}</span>
+      </div>
+    `).join('');
+  }
+  document.getElementById('historyOverlay').classList.add('open');
+}
+function closeHistory(){document.getElementById('historyOverlay').classList.remove('open')}
+
+function newConversation(){
+  startNewChat();
+}
+
+/* ===== REST ===== */
 let selectedPlan=null;
 function openPlans(){document.getElementById('plansOverlay').classList.add('open')}
 function closePlans(){document.getElementById('plansOverlay').classList.remove('open')}
@@ -305,7 +393,7 @@ function selectPlan(plan){
   if(plan==='Enterprise'){closePlans();alert('Contacta a support@dixzai.com');return}
   selectedPlan=plan;
   document.getElementById('payTitle').textContent='Pagar plan '+plan;
-  document.getElementById('paySubtitle').textContent=({'Starter':'$9 / mes','Pro':'$19 / mes','Business':'$49 / mes'}[plan]||'')+' · Cancela cuando quieras';
+  document.getElementById('paySubtitle').textContent=({'Starter':'$9 USD / mes','Pro':'$19 USD / mes','Business':'$49 USD / mes'}[plan]||'')+' · Cancela cuando quieras';
   document.getElementById('payError').style.display='none';
   closePlans();document.getElementById('paymentOverlay').classList.add('open');
 }
@@ -338,7 +426,7 @@ function cleanResponse(text){
     .replace(/_(.*?)_/g,'$1')
     .replace(/`{1,3}(.*?)`{1,3}/g,'$1')
     .replace(/^#{1,6}\s+/gm,'')
-    .replace(/^\s*[-•*◦▪▸→]\s+/gm,'')      // elimina puntitos y guiones
+    .replace(/^\s*[-•*◦▪▸→]\s+/gm,'')
     .replace(/\n{3,}/g,'\n\n')
     .trim();
 }
@@ -347,9 +435,7 @@ function speakText(text){
   if(!window.speechSynthesis){alert('Tu navegador no soporta lectura de voz');return}
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='es-ES';
-  u.rate=0.92;
-  u.pitch=1;
+  u.lang='es-ES';u.rate=0.92;u.pitch=1;
   speechSynthesis.speak(u);
 }
 
@@ -397,14 +483,14 @@ async function askAI(){
   const hasImage=pendingFiles.some(f=>f.isImage);
   const hasDoc=pendingFiles.some(f=>!f.isImage);
   let finalQ=q;
-  if(hasImage&&!q) finalQ='Analiza y describe detalladamente esta imagen. Dime qué ves, el contexto y cualquier detalle importante.';
-  if(hasDoc&&!q) finalQ='Lee este documento y dame un resumen claro y útil de su contenido.';
-  if(hasImage&&q) finalQ=q+' Analiza también la imagen que te envié.';
-  if(hasDoc&&q) finalQ=q+' Analiza también el documento adjunto.';
+  if(hasImage&&!q) finalQ='Analiza y describe detalladamente esta imagen.';
+  if(hasDoc&&!q) finalQ='Lee este documento y dame un resumen claro.';
+  if(hasImage&&q) finalQ=q+' Analiza también la imagen.';
+  if(hasDoc&&q) finalQ=q+' Analiza también el documento.';
 
   const filesToSend=[...pendingFiles];
   questionInput.value='';pendingFiles=[];filePreview.innerHTML='';
-  messagesEl.scrollTop=messagesEl.scrollHeight;saveHistory();
+  messagesEl.scrollTop=messagesEl.scrollHeight;
 
   const tid='t'+Date.now();
   messagesEl.innerHTML+=`<div id="${tid}" class="chat-message chat-ai">DixzAI está analizando...</div>`;
@@ -414,17 +500,18 @@ async function askAI(){
     const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:finalQ,files:filesToSend,style:'natural'})});
     const data=await res.json();
     document.getElementById(tid)?.remove();
-    let answer=cleanResponse(data.answer||'He recibido el archivo. ¿Qué te gustaría saber exactamente?');
+    let answer=cleanResponse(data.answer||'He recibido el archivo. ¿Qué te gustaría saber?');
     messagesEl.innerHTML+=`<div class="chat-message chat-ai"><b>DixzAI</b><br>${escapeHTML(answer).replace(/\n/g,'<br>')}<br><button class="speak-btn" onclick="speakText(\`${answer.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`)">🔊 Leer respuesta</button></div>`;
   }catch(e){
     document.getElementById(tid)?.remove();
     let fallback='He recibido tu archivo. ';
-    if(hasImage) fallback+='Puedo ver la imagen. Cuéntame qué quieres que analice o explique de ella.';
-    else if(hasDoc) fallback+='He recibido el documento. ¿Quieres un resumen o que busque algo específico?';
-    else fallback+='No pude procesar la solicitud en este momento.';
+    if(hasImage) fallback+='Puedo ver la imagen. ¿Qué quieres que analice?';
+    else if(hasDoc) fallback+='He recibido el documento. ¿Quieres un resumen?';
+    else fallback+='No pude procesar la solicitud.';
     messagesEl.innerHTML+=`<div class="chat-message chat-ai"><b>DixzAI</b><br>${fallback}</div>`;
   }
-  messagesEl.scrollTop=messagesEl.scrollHeight;saveHistory();
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+  saveCurrentChat();
 }
 
 let currentMode='Fast';
@@ -442,9 +529,15 @@ function toggleVoice(){
   recognition.start();
 }
 
-refreshUser();showEmpty(true);
-if(!STORE.current)setTimeout(()=>openAuth(),350);else loadHistory();
-window.addEventListener('beforeunload',saveHistory);
+refreshUser();
+showEmpty(true);
+if(!STORE.current) setTimeout(()=>openAuth(),350);
+else {
+  const chats=STORE.getChats(STORE.current.email);
+  if(chats.length) loadChat(chats[chats.length-1].id);
+  else startNewChat();
+}
+window.addEventListener('beforeunload', saveCurrentChat);
 </script>
 </body>
 </html>
