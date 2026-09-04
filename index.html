@@ -170,6 +170,17 @@ header{
   font-weight:700;font-size:16px;cursor:pointer;
   box-shadow:0 6px 20px rgba(34,197,94,.3);
 }
+.error-box{
+  background:#fef2f2;
+  border:1px solid #fecaca;
+  color:#b91c1c;
+  padding:14px;
+  border-radius:14px;
+  font-size:14px;
+  margin-top:14px;
+  display:none;
+  line-height:1.5;
+}
 </style>
 </head>
 <body>
@@ -236,30 +247,48 @@ header{
   </div>
 </div>
 
-<!-- Plans -->
+<!-- Plans (más opciones) -->
 <div class="overlay" id="plansOverlay" onclick="if(event.target===this)closePlans()">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <h2>Planes DixzAI</h2>
     <p class="muted">Elige el plan que mejor se adapte a ti</p>
+
     <div class="plan-card">
       <h3>Free</h3>
       <div class="plan-price">$0</div>
-      <p>Acceso básico al asistente.</p>
-      <button class="plan-btn outline" onclick="selectPlan('Free')">Plan actual</button>
+      <p>Acceso básico al asistente. Ideal para empezar.</p>
+      <button class="plan-btn outline" onclick="selectPlan('Free')">Usar Free</button>
     </div>
+
+    <div class="plan-card">
+      <h3>Starter</h3>
+      <div class="plan-price">$9<span style="font-size:14px;font-weight:500">/mes</span></div>
+      <p>Más mensajes y mejor velocidad de respuesta.</p>
+      <button class="plan-btn" onclick="selectPlan('Starter')">Elegir Starter</button>
+    </div>
+
     <div class="plan-card popular">
       <h3>Pro</h3>
       <div class="plan-price">$19<span style="font-size:14px;font-weight:500">/mes</span></div>
-      <p>Más capacidad y funciones avanzadas.</p>
+      <p>Capacidad avanzada, prioridad y funciones premium.</p>
       <button class="plan-btn" onclick="selectPlan('Pro')">Elegir Pro</button>
     </div>
+
+    <div class="plan-card">
+      <h3>Business</h3>
+      <div class="plan-price">$49<span style="font-size:14px;font-weight:500">/mes</span></div>
+      <p>Para equipos pequeños. Incluye colaboración y soporte prioritario.</p>
+      <button class="plan-btn" onclick="selectPlan('Business')">Elegir Business</button>
+    </div>
+
     <div class="plan-card">
       <h3>Enterprise</h3>
       <div class="plan-price">Custom</div>
-      <p>Para equipos y empresas.</p>
-      <button class="plan-btn outline" onclick="selectPlan('Enterprise')">Contactar</button>
+      <p>Soluciones a medida, seguridad avanzada y soporte dedicado.</p>
+      <button class="plan-btn outline" onclick="selectPlan('Enterprise')">Contactar ventas</button>
     </div>
+
     <button class="close-btn" onclick="closePlans()">Cerrar</button>
   </div>
 </div>
@@ -268,8 +297,8 @@ header{
 <div class="overlay" id="paymentOverlay">
   <div class="sheet">
     <div class="sheet-handle"></div>
-    <h2 id="payTitle">Pagar plan Pro</h2>
-    <p class="muted" id="paySubtitle">$19 / mes · Cancela cuando quieras</p>
+    <h2 id="payTitle">Pagar plan</h2>
+    <p class="muted" id="paySubtitle">Selecciona un método de pago</p>
 
     <div class="pay-methods">
       <div class="pay-method active" onclick="selectPayMethod(this,'card')">💳 Tarjeta</div>
@@ -300,6 +329,11 @@ header{
     <div id="otherForm" style="display:none;text-align:center;padding:20px 0">
       <p style="color:var(--muted);font-size:14px">PayPal · Transferencia · Criptomonedas</p>
       <p style="margin-top:8px;font-size:13px">Contacta a support@dixzai.com</p>
+    </div>
+
+    <div class="error-box" id="payError">
+      El pago ha sido rechazado.<br>
+      Verifica los datos de tu tarjeta o intenta con otro método de pago.
     </div>
 
     <button class="pay-btn" onclick="confirmPayment()">Confirmar pago</button>
@@ -406,7 +440,7 @@ function loginUser(){
   loadHistory();
 }
 function logout(){
-  saveHistory(); // guarda antes de salir
+  saveHistory();
   localStorage.removeItem('dixzai_current');
   refreshUser();
   document.getElementById('chatMessages').innerHTML='';
@@ -448,6 +482,7 @@ function loadHistory(){
 
 /* ===== PLANS + PAYMENT ===== */
 let selectedPlan = null;
+
 function openPlans(){ document.getElementById('plansOverlay').classList.add('open') }
 function closePlans(){ document.getElementById('plansOverlay').classList.remove('open') }
 function openCompany(){ document.getElementById('companyOverlay').classList.add('open') }
@@ -458,29 +493,38 @@ function selectPlan(plan){
   if(!u){ closePlans(); openAuth(); return; }
 
   if(plan === 'Free'){
-    // Free no necesita pago
     updateUserPlan('Free');
     closePlans();
-    alert('Plan Free activado');
     return;
   }
 
   if(plan === 'Enterprise'){
     closePlans();
-    alert('Para Enterprise contacta a support@dixzai.com');
+    alert('Para el plan Enterprise escribe a support@dixzai.com');
     return;
   }
 
-  // Pro → abrir pago
+  // Planes de pago → abrir pantalla de pago
   selectedPlan = plan;
   document.getElementById('payTitle').textContent = 'Pagar plan ' + plan;
-  document.getElementById('paySubtitle').textContent = plan==='Pro' ? '$19 / mes · Cancela cuando quieras' : 'Plan personalizado';
+  document.getElementById('paySubtitle').textContent = getPlanPrice(plan);
+  document.getElementById('payError').style.display = 'none';
   closePlans();
   document.getElementById('paymentOverlay').classList.add('open');
 }
 
+function getPlanPrice(plan){
+  const prices = {
+    'Starter': '$9 / mes',
+    'Pro': '$19 / mes',
+    'Business': '$49 / mes'
+  };
+  return (prices[plan] || '') + ' · Cancela cuando quieras';
+}
+
 function closePayment(){
   document.getElementById('paymentOverlay').classList.remove('open');
+  document.getElementById('payError').style.display = 'none';
 }
 
 function selectPayMethod(el, method){
@@ -490,13 +534,20 @@ function selectPayMethod(el, method){
   document.getElementById('appleForm').style.display = method==='apple' ? 'block' : 'none';
   document.getElementById('googleForm').style.display = method==='google' ? 'block' : 'none';
   document.getElementById('otherForm').style.display = method==='other' ? 'block' : 'none';
+  document.getElementById('payError').style.display = 'none';
 }
 
 function confirmPayment(){
-  // Simulación de pago exitoso
-  updateUserPlan(selectedPlan || 'Pro');
-  closePayment();
-  alert('¡Pago realizado con éxito! Plan ' + (selectedPlan||'Pro') + ' activado.');
+  // Simulación realista de rechazo
+  const errorBox = document.getElementById('payError');
+  errorBox.style.display = 'block';
+  errorBox.innerHTML = `
+    El pago ha sido rechazado.<br>
+    Verifica los datos de tu tarjeta o intenta con otro método de pago.
+  `;
+
+  // Opcional: hacer scroll al error
+  errorBox.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
 function updateUserPlan(plan){
@@ -579,7 +630,7 @@ async function askAI(){
   pendingFiles=[];
   filePreview.innerHTML='';
   messagesEl.scrollTop=messagesEl.scrollHeight;
-  saveHistory(); // guarda después de cada mensaje
+  saveHistory();
 
   const tid='t'+Date.now();
   messagesEl.innerHTML+=`<div id="${tid}" class="chat-message chat-ai">DixzAI está pensando...</div>`;
@@ -643,8 +694,6 @@ if(!STORE.current){
 }else{
   loadHistory();
 }
-
-// Guarda historial al cerrar la página
 window.addEventListener('beforeunload', saveHistory);
 </script>
 </body>
