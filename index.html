@@ -6,178 +6,85 @@
 <title>DixzAI Intelligent</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --text:#1d1d1f;
-  --muted:#8e8e93;
-  --accent:#0071e3;
-}
-html,body{
-  height:100%;
-  background:#f8f9fb;
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;
-  overflow:hidden;
-}
+:root{--text:#1d1d1f;--muted:#8e8e93;--accent:#0071e3}
+html,body{height:100%;background:#f8f9fb;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
 
-/* Header más glass */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:50;
-  padding:12px 16px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(255,255,255,.65);
-  backdrop-filter:blur(28px) saturate(180%);
-  -webkit-backdrop-filter:blur(28px) saturate(180%);
-  border-bottom:1px solid rgba(255,255,255,.4);
-  box-shadow:0 4px 30px rgba(0,0,0,.04);
-}
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.65);backdrop-filter:blur(28px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.4);box-shadow:0 4px 30px rgba(0,0,0,.04)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
-.logo-icon{
-  width:36px;height:36px;border-radius:12px;
-  background:linear-gradient(145deg,#1d1d1f,#3a3a3c);
-  color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px;
-  box-shadow:0 6px 16px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.2);
-}
+.logo-icon{width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
 .header-actions{display:flex;gap:8px;align-items:center}
-.glass-btn{
-  height:36px;padding:0 14px;border-radius:18px;
-  border:1px solid rgba(255,255,255,.5);
-  background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.55));
-  box-shadow:0 4px 16px rgba(0,0,0,.06), inset 0 1px 0 #fff;
-  backdrop-filter:blur(12px);
-  font-size:13px;font-weight:600;cursor:pointer;color:var(--text);
-  display:flex;align-items:center;gap:6px;
-  transition:.2s;
-}
-.glass-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.glass-btn{height:36px;padding:0 14px;border-radius:18px;border:1px solid rgba(255,255,255,.5);background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.55));box-shadow:0 4px 16px rgba(0,0,0,.06),inset 0 1px 0 #fff;backdrop-filter:blur(12px);font-size:13px;font-weight:600;cursor:pointer;color:var(--text);display:flex;align-items:center;gap:6px}
 .glass-btn.icon{width:36px;padding:0;justify-content:center;border-radius:50%}
-.user-badge{
-  font-size:12px;padding:5px 12px;border-radius:99px;
-  background:rgba(255,255,255,.6);
-  border:1px solid rgba(0,0,0,.06);
-  color:var(--muted);
-  backdrop-filter:blur(8px);
-}
+.user-badge{font-size:12px;padding:5px 12px;border-radius:99px;background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.06);color:var(--muted)}
 
-/* Main */
 .main{height:100%;display:flex;flex-direction:column;padding-top:68px;padding-bottom:150px}
-.center-area{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:20px;text-align:center;
-}
-.big-logo{
-  width:110px;height:110px;border-radius:28px;
-  background:linear-gradient(145deg,#ffffff,#eef0f4);
-  display:grid;place-items:center;font-size:46px;font-weight:800;
-  color:rgba(0,0,0,.06);margin-bottom:18px;
-  box-shadow:0 10px 40px rgba(0,0,0,.06), inset 0 2px 8px rgba(255,255,255,.8);
-}
+.center-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
+.big-logo{width:110px;height:110px;border-radius:28px;background:linear-gradient(145deg,#ffffff,#eef0f4);display:grid;place-items:center;font-size:46px;font-weight:800;color:rgba(0,0,0,.06);margin-bottom:18px;box-shadow:0 10px 40px rgba(0,0,0,.06)}
 .welcome-title{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
 .welcome-sub{color:var(--muted);font-size:14px;max-width:280px;line-height:1.55}
 
-/* Chat */
-#chatMessages{
-  position:absolute;top:74px;left:0;right:0;bottom:160px;
-  overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px;
-}
-.chat-message{
-  max-width:86%;padding:13px 17px;border-radius:22px;
-  font-size:15px;line-height:1.55;white-space:pre-wrap;
-  position:relative;
-}
-.chat-user{
-  align-self:flex-end;
-  background:linear-gradient(145deg,#0071e3,#0058b0);
-  color:#fff;border-bottom-right-radius:6px;
-  box-shadow:0 6px 20px rgba(0,113,227,.25);
-}
-.chat-ai{
-  align-self:flex-start;
-  background:rgba(255,255,255,.85);
-  border:1px solid rgba(255,255,255,.6);
-  color:var(--text);border-bottom-left-radius:6px;
-  box-shadow:0 6px 24px rgba(0,0,0,.06);
-  backdrop-filter:blur(12px);
-}
+#chatMessages{position:absolute;top:74px;left:0;right:0;bottom:160px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.chat-message{max-width:86%;padding:13px 17px;border-radius:22px;font-size:15px;line-height:1.55;white-space:pre-wrap}
+.chat-user{align-self:flex-end;background:linear-gradient(145deg,#0071e3,#0058b0);color:#fff;border-bottom-right-radius:6px;box-shadow:0 6px 20px rgba(0,113,227,.25)}
+.chat-ai{align-self:flex-start;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.6);color:var(--text);border-bottom-left-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.06);backdrop-filter:blur(12px)}
 .chat-image{max-width:210px;border-radius:16px;margin-top:8px;border:1px solid rgba(0,0,0,.08)}
 .file-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.05);padding:6px 11px;border-radius:12px;font-size:13px;margin-top:6px}
-.speak-btn{
-  margin-top:8px;padding:5px 12px;border-radius:12px;
-  border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.7);
-  font-size:12px;cursor:pointer;color:var(--muted);
-}
+.speak-btn{margin-top:10px;padding:6px 14px;border-radius:14px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.8);font-size:13px;cursor:pointer;color:var(--text);display:inline-flex;align-items:center;gap:6px}
 
-/* Bottom bar más glass */
-.bottom-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:60;
-  padding:12px 14px 30px;
-  background:linear-gradient(to top,rgba(248,249,251,.95) 60%,transparent);
-}
-.input-wrap{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.75);
-  border:1px solid rgba(255,255,255,.6);
-  border-radius:30px;padding:6px 8px 6px 12px;
-  box-shadow:0 8px 32px rgba(0,0,0,.08), inset 0 1px 0 #fff;
-  backdrop-filter:blur(20px) saturate(180%);
-}
+.bottom-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 14px 30px;background:linear-gradient(to top,rgba(248,249,251,.95) 60%,transparent)}
+.input-wrap{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.6);border-radius:30px;padding:6px 8px 6px 12px;box-shadow:0 8px 32px rgba(0,0,0,.08),inset 0 1px 0 #fff;backdrop-filter:blur(20px)}
 .input-wrap input{flex:1;border:0;background:transparent;font-size:16px;color:var(--text);outline:none;padding:11px 4px}
 .input-wrap input::placeholder{color:#aeaeb2}
 .plus-btn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;font-size:22px;color:#8e8e93;cursor:pointer;display:grid;place-items:center}
-.mode-btn{height:32px;padding:0 10px;border-radius:16px;border:none;background:transparent;font-size:13px;font-weight:500;color:#8e8e93;cursor:pointer;display:flex;align-items:center;gap:3px}
+.mode-btn{height:32px;padding:0 10px;border-radius:16px;border:none;background:transparent;font-size:13px;font-weight:500;color:#8e8e93;cursor:pointer}
 .mic-btn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;font-size:18px;color:#8e8e93;cursor:pointer;display:grid;place-items:center}
 .mic-btn.listening{color:#e11d48}
-.send-btn{width:38px;height:38px;border-radius:50%;border:none;background:linear-gradient(145deg,#22c55e,#16a34a);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:17px;box-shadow:0 4px 14px rgba(34,197,94,.4);flex-shrink:0}
+.send-btn{width:38px;height:38px;border-radius:50%;border:none;background:linear-gradient(145deg,#22c55e,#16a34a);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:17px;box-shadow:0 4px 14px rgba(34,197,94,.4)}
 
-/* Preview */
 #filePreview{display:flex;gap:8px;flex-wrap:wrap;padding:0 4px 10px}
 .preview-item{position:relative;width:62px;height:62px;border-radius:14px;border:1px solid rgba(0,0,0,.08);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;text-align:center;padding:3px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
 .preview-item img{width:100%;height:100%;object-fit:cover}
 .preview-item .remove{position:absolute;top:-5px;right:-5px;width:20px;height:20px;border-radius:50%;background:#1d1d1f;color:#fff;border:none;font-size:12px;cursor:pointer;display:grid;place-items:center}
 
-/* Sheets más glass */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);backdrop-filter:blur(12px);z-index:100;display:none;align-items:flex-end;justify-content:center}
 .overlay.open{display:flex}
-.sheet{width:100%;max-height:90vh;overflow-y:auto;background:rgba(255,255,255,.88);border-radius:30px 30px 0 0;padding:20px 20px 40px;box-shadow:0 -20px 60px rgba(0,0,0,.12);backdrop-filter:blur(30px) saturate(180%);animation:up .28s ease}
+.sheet{width:100%;max-height:90vh;overflow-y:auto;background:rgba(255,255,255,.9);border-radius:30px 30px 0 0;padding:20px 20px 40px;box-shadow:0 -20px 60px rgba(0,0,0,.12);backdrop-filter:blur(30px);animation:up .28s ease}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .sheet-handle{width:40px;height:5px;background:rgba(0,0,0,.12);border-radius:99px;margin:0 auto 18px}
 .sheet h2{font-size:21px;font-weight:800;margin-bottom:4px}
 .sheet .muted{color:var(--muted);font-size:13px;margin-bottom:16px}
-.info-card{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.5);border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 4px 16px rgba(0,0,0,.03)}
+.info-card{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.5);border-radius:16px;padding:14px;margin-bottom:10px}
 .info-card b{display:block;font-size:13px;margin-bottom:3px}
 .info-card span{font-size:13px;color:var(--muted)}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
-.person{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.5);border-radius:14px;padding:12px}
+.person{background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.5);border-radius:14px;padding:12px}
 .person b{font-size:13px;display:block}
 .person span{font-size:11px;color:var(--muted)}
 .close-btn{width:100%;margin-top:18px;padding:14px;border-radius:16px;border:1px solid rgba(0,0,0,.08);background:linear-gradient(145deg,#fff,#f5f5f7);font-weight:600;font-size:15px;cursor:pointer}
 
-/* Auth */
 .auth-form label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
 .auth-form input{width:100%;padding:13px 14px;border-radius:14px;border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.85);font-size:15px;outline:none}
-.auth-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,.12)}
-.auth-submit{width:100%;margin-top:18px;padding:14px;border-radius:16px;border:none;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.auth-submit{width:100%;margin-top:18px;padding:14px;border-radius:16px;border:none;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;font-weight:600;font-size:15px;cursor:pointer}
 .auth-switch{text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
 .auth-switch button{background:none;border:none;color:var(--accent);font-weight:600;cursor:pointer}
 
-/* Plans */
-.plan-card{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.5);border-radius:18px;padding:18px;margin-bottom:12px;box-shadow:0 4px 20px rgba(0,0,0,.04)}
-.plan-card.popular{border-color:rgba(0,113,227,.25);box-shadow:0 6px 24px rgba(0,113,227,.1)}
+.plan-card{background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.5);border-radius:18px;padding:18px;margin-bottom:12px}
+.plan-card.popular{border-color:rgba(0,113,227,.25)}
 .plan-card h3{font-size:17px;margin-bottom:4px}
 .plan-price{font-size:26px;font-weight:800;margin:8px 0}
 .plan-card p{font-size:13px;color:var(--muted);margin-bottom:12px}
 .plan-btn{width:100%;padding:12px;border-radius:14px;border:none;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;font-weight:600;cursor:pointer}
 .plan-btn.outline{background:linear-gradient(145deg,#fff,#f5f5f7);color:var(--text);border:1px solid rgba(0,0,0,.1)}
 
-/* Payment */
 .pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
-.pay-method{padding:14px;border-radius:14px;border:1px solid rgba(0,0,0,.1);background:#fff;text-align:center;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.pay-method{padding:14px;border-radius:14px;border:1px solid rgba(0,0,0,.1);background:#fff;text-align:center;font-weight:600;font-size:14px;cursor:pointer}
 .pay-method.active{border-color:var(--accent);background:rgba(0,113,227,.08)}
-.card-form{margin-top:12px}
 .card-form input{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(0,0,0,.12);margin-bottom:10px;font-size:15px}
 .card-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pay-btn{width:100%;margin-top:16px;padding:15px;border-radius:16px;border:none;background:linear-gradient(145deg,#22c55e,#16a34a);color:#fff;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 6px 20px rgba(34,197,94,.3)}
+.pay-btn{width:100%;margin-top:16px;padding:15px;border-radius:16px;border:none;background:linear-gradient(145deg,#22c55e,#16a34a);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
 .error-box{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;padding:14px;border-radius:14px;font-size:14px;margin-top:14px;display:none;line-height:1.5}
+
+.new-chat-btn{position:fixed;top:70px;right:16px;z-index:40;padding:8px 14px;border-radius:16px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.85);backdrop-filter:blur(12px);font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.06)}
 </style>
 </head>
 <body>
@@ -189,11 +96,13 @@ header{
   </div>
   <div class="header-actions">
     <span class="user-badge" id="userBadge">Invitado</span>
-    <button class="glass-btn icon" onclick="openCompany()" title="Empresa">ⓘ</button>
+    <button class="glass-btn icon" onclick="openCompany()">ⓘ</button>
     <button class="glass-btn" onclick="openPlans()">Planes</button>
     <button class="glass-btn" id="authBtn" onclick="openAuth()">Entrar</button>
   </div>
 </header>
+
+<button class="new-chat-btn" onclick="newConversation()">＋ Nueva conversación</button>
 
 <div class="main">
   <div class="center-area" id="emptyState">
@@ -204,7 +113,6 @@ header{
   <div id="chatMessages"></div>
 </div>
 
-<!-- Bottom bar -->
 <div class="bottom-bar">
   <div id="filePreview"></div>
   <div class="input-wrap">
@@ -222,22 +130,17 @@ header{
   <div class="sheet">
     <div class="sheet-handle"></div>
     <h2 id="authTitle">Crear cuenta</h2>
-    <p class="muted" id="authSubtitle">Regístrate para empezar a usar DixzAI</p>
+    <p class="muted" id="authSubtitle">Regístrate para empezar</p>
     <div id="loginForm" class="auth-form" style="display:none">
-      <label>Correo</label>
-      <input type="email" id="loginEmail" placeholder="tu@email.com">
-      <label>Contraseña</label>
-      <input type="password" id="loginPass" placeholder="••••••••">
+      <label>Correo</label><input type="email" id="loginEmail" placeholder="tu@email.com">
+      <label>Contraseña</label><input type="password" id="loginPass" placeholder="••••••••">
       <button class="auth-submit" onclick="loginUser()">Entrar</button>
       <div class="auth-switch">¿No tienes cuenta? <button onclick="switchAuth('register')">Regístrate</button></div>
     </div>
     <div id="registerForm" class="auth-form">
-      <label>Nombre</label>
-      <input type="text" id="regName" placeholder="Tu nombre">
-      <label>Correo</label>
-      <input type="email" id="regEmail" placeholder="tu@email.com">
-      <label>Contraseña</label>
-      <input type="password" id="regPass" placeholder="Mínimo 6 caracteres">
+      <label>Nombre</label><input type="text" id="regName" placeholder="Tu nombre">
+      <label>Correo</label><input type="email" id="regEmail" placeholder="tu@email.com">
+      <label>Contraseña</label><input type="password" id="regPass" placeholder="Mínimo 6 caracteres">
       <button class="auth-submit" onclick="registerUser()">Crear cuenta</button>
       <div class="auth-switch">¿Ya tienes cuenta? <button onclick="switchAuth('login')">Inicia sesión</button></div>
     </div>
@@ -250,36 +153,11 @@ header{
     <div class="sheet-handle"></div>
     <h2>Planes DixzAI</h2>
     <p class="muted">Elige el plan que mejor se adapte a ti</p>
-    <div class="plan-card">
-      <h3>Free</h3>
-      <div class="plan-price">$0</div>
-      <p>Acceso básico al asistente.</p>
-      <button class="plan-btn outline" onclick="selectPlan('Free')">Usar Free</button>
-    </div>
-    <div class="plan-card">
-      <h3>Starter</h3>
-      <div class="plan-price">$9<span style="font-size:14px;font-weight:500">/mes</span></div>
-      <p>Más mensajes y mejor velocidad.</p>
-      <button class="plan-btn" onclick="selectPlan('Starter')">Elegir Starter</button>
-    </div>
-    <div class="plan-card popular">
-      <h3>Pro</h3>
-      <div class="plan-price">$19<span style="font-size:14px;font-weight:500">/mes</span></div>
-      <p>Capacidad avanzada y funciones premium.</p>
-      <button class="plan-btn" onclick="selectPlan('Pro')">Elegir Pro</button>
-    </div>
-    <div class="plan-card">
-      <h3>Business</h3>
-      <div class="plan-price">$49<span style="font-size:14px;font-weight:500">/mes</span></div>
-      <p>Para equipos. Soporte prioritario.</p>
-      <button class="plan-btn" onclick="selectPlan('Business')">Elegir Business</button>
-    </div>
-    <div class="plan-card">
-      <h3>Enterprise</h3>
-      <div class="plan-price">Custom</div>
-      <p>Soluciones a medida y seguridad avanzada.</p>
-      <button class="plan-btn outline" onclick="selectPlan('Enterprise')">Contactar ventas</button>
-    </div>
+    <div class="plan-card"><h3>Free</h3><div class="plan-price">$0</div><p>Acceso básico.</p><button class="plan-btn outline" onclick="selectPlan('Free')">Usar Free</button></div>
+    <div class="plan-card"><h3>Starter</h3><div class="plan-price">$9<span style="font-size:14px">/mes</span></div><p>Más mensajes y velocidad.</p><button class="plan-btn" onclick="selectPlan('Starter')">Elegir Starter</button></div>
+    <div class="plan-card popular"><h3>Pro</h3><div class="plan-price">$19<span style="font-size:14px">/mes</span></div><p>Funciones premium.</p><button class="plan-btn" onclick="selectPlan('Pro')">Elegir Pro</button></div>
+    <div class="plan-card"><h3>Business</h3><div class="plan-price">$49<span style="font-size:14px">/mes</span></div><p>Para equipos.</p><button class="plan-btn" onclick="selectPlan('Business')">Elegir Business</button></div>
+    <div class="plan-card"><h3>Enterprise</h3><div class="plan-price">Custom</div><p>Soluciones a medida.</p><button class="plan-btn outline" onclick="selectPlan('Enterprise')">Contactar</button></div>
     <button class="close-btn" onclick="closePlans()">Cerrar</button>
   </div>
 </div>
@@ -304,206 +182,154 @@ header{
       </div>
       <input type="text" id="cardName" placeholder="Nombre en la tarjeta">
     </div>
-    <div id="appleForm" style="display:none;text-align:center;padding:20px 0">
-      <div style="font-size:40px;margin-bottom:10px"></div>
-      <p style="color:var(--muted);font-size:14px">Paga de forma segura con Apple Pay</p>
-    </div>
-    <div id="googleForm" style="display:none;text-align:center;padding:20px 0">
-      <div style="font-size:40px;margin-bottom:10px">G</div>
-      <p style="color:var(--muted);font-size:14px">Paga de forma segura con Google Pay</p>
-    </div>
-    <div id="otherForm" style="display:none;text-align:center;padding:20px 0">
-      <p style="color:var(--muted);font-size:14px">PayPal · Transferencia · Criptomonedas</p>
-      <p style="margin-top:8px;font-size:13px">Contacta a support@dixzai.com</p>
-    </div>
-    <div class="error-box" id="payError">
-      El pago ha sido rechazado.<br>
-      Verifica los datos de tu tarjeta o intenta con otro método de pago.
-    </div>
+    <div id="appleForm" style="display:none;text-align:center;padding:20px 0"><div style="font-size:40px"></div><p style="color:var(--muted)">Paga con Apple Pay</p></div>
+    <div id="googleForm" style="display:none;text-align:center;padding:20px 0"><div style="font-size:40px">G</div><p style="color:var(--muted)">Paga con Google Pay</p></div>
+    <div id="otherForm" style="display:none;text-align:center;padding:20px 0"><p style="color:var(--muted)">PayPal · Transferencia · Cripto</p></div>
+    <div class="error-box" id="payError">El pago ha sido rechazado.<br>Verifica los datos de tu tarjeta o intenta con otro método.</div>
     <button class="pay-btn" onclick="confirmPayment()">Confirmar pago</button>
     <button class="close-btn" onclick="closePayment()" style="margin-top:10px">Cancelar</button>
   </div>
 </div>
 
-<!-- Company -->
+<!-- Company (expandida) -->
 <div class="overlay" id="companyOverlay" onclick="if(event.target===this)closeCompany()">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <h2>DixzAI Intelligent</h2>
     <p class="muted">Empresa privada de tecnología e inteligencia artificial</p>
-    <div class="info-card"><b>Nombre</b><span>DixzAI Intelligent Inc</span></div>
+
+    <div class="info-card"><b>Nombre legal</b><span>DixzAI Intelligent Inc</span></div>
     <div class="info-card"><b>Tipo</b><span>Empresa privada de tecnología e inteligencia artificial</span></div>
+    <div class="info-card"><b>Fundación</b><span>2024</span></div>
+    <div class="info-card"><b>Sede principal</b><span>Silicon Valley, California, Estados Unidos</span></div>
     <div class="info-card"><b>Correo</b><span>support@dixzai.com</span></div>
-    <div class="info-card"><b>Ubicación</b><span>Silicon Valley</span></div>
-    <div class="info-card"><b>Enfoque</b><span>Inteligencia artificial, software, automatización y soluciones digitales</span></div>
+    <div class="info-card"><b>Sitio web</b><span>www.dixzai.com</span></div>
+    <div class="info-card"><b>Enfoque</b><span>Inteligencia artificial, software, automatización, agentes autónomos y soluciones digitales escalables</span></div>
     <div class="info-card"><b>Visión</b><span>Intelligence for the next generation.</span></div>
-    <h2 style="font-size:17px;margin:18px 0 8px">Equipo</h2>
+    <div class="info-card"><b>Misión</b><span>Crear soluciones de inteligencia artificial accesibles, seguras y prácticas para personas, empresas y organizaciones de todo el mundo.</span></div>
+    <div class="info-card"><b>Valores</b><span>Innovación, privacidad, transparencia, excelencia técnica y accesibilidad global.</span></div>
+
+    <h2 style="font-size:17px;margin:20px 0 10px">Equipo directivo y técnico</h2>
     <div class="team-grid">
       <div class="person"><b>Adilson Smith</b><span>CEO & Fundador · 20 años 🇵🇪</span></div>
       <div class="person"><b>Ale Michelle Celi</b><span>Co-Fundadora · 27 años 🇺🇸</span></div>
       <div class="person"><b>Jeff Padilla F</b><span>Ingeniero Principal · 34 años 🇺🇸</span></div>
       <div class="person"><b>Torine Soe</b><span>Desarrollador · 25 años 🇺🇸</span></div>
       <div class="person"><b>Alex Asla</b><span>Desarrollador · 36 años 🇺🇸</span></div>
+      <!-- 7 nuevos integrantes -->
+      <div class="person"><b>Sofia Nakamura</b><span>Head of AI Research · 31 años 🇯🇵</span></div>
+      <div class="person"><b>Lucas Ferreira</b><span>Lead Backend Engineer · 29 años 🇧🇷</span></div>
+      <div class="person"><b>Emma Johansson</b><span>Product Designer · 28 años 🇸🇪</span></div>
+      <div class="person"><b>Raj Patel</b><span>ML Engineer · 33 años 🇮🇳</span></div>
+      <div class="person"><b>Camille Dubois</b><span>Security Lead · 30 años 🇫🇷</span></div>
+      <div class="person"><b>Marco Rossi</b><span>DevOps Engineer · 32 años 🇮🇹</span></div>
+      <div class="person"><b>Aisha Khan</b><span>Data Scientist · 27 años 🇨🇦</span></div>
     </div>
-    <div style="margin-top:14px">
-      <div class="info-card"><b>Misión</b><span>Crear soluciones de inteligencia artificial accesibles y prácticas.</span></div>
-      <div class="info-card"><b>Visión</b><span>Construir una plataforma de IA innovadora y escalable.</span></div>
-    </div>
+
     <button class="close-btn" onclick="closeCompany()">Cerrar</button>
   </div>
 </div>
 
 <script>
-/* ===== STORAGE ===== */
 const STORE = {
-  get users(){ try{return JSON.parse(localStorage.getItem('dixzai_users')||'[]')}catch{return[]} },
-  set users(v){ localStorage.setItem('dixzai_users',JSON.stringify(v)) },
-  get current(){ try{return JSON.parse(localStorage.getItem('dixzai_current')||'null')}catch{return null} },
-  set current(v){ localStorage.setItem('dixzai_current',JSON.stringify(v)) },
-  getHistory(email){ try{return JSON.parse(localStorage.getItem('dixzai_history_'+email)||'[]')}catch{return[]} },
-  setHistory(email, history){ localStorage.setItem('dixzai_history_'+email, JSON.stringify(history)) }
+  get users(){try{return JSON.parse(localStorage.getItem('dixzai_users')||'[]')}catch{return[]}},
+  set users(v){localStorage.setItem('dixzai_users',JSON.stringify(v))},
+  get current(){try{return JSON.parse(localStorage.getItem('dixzai_current')||'null')}catch{return null}},
+  set current(v){localStorage.setItem('dixzai_current',JSON.stringify(v))},
+  getHistory(email){try{return JSON.parse(localStorage.getItem('dixzai_history_'+email)||'[]')}catch{return[]}},
+  setHistory(email,h){localStorage.setItem('dixzai_history_'+email,JSON.stringify(h))}
 };
 
 function refreshUser(){
-  const u = STORE.current;
-  const badge = document.getElementById('userBadge');
-  const btn = document.getElementById('authBtn');
-  if(u){
-    badge.textContent = u.name + (u.plan ? ' · '+u.plan : '');
-    btn.textContent = 'Salir';
-    btn.onclick = logout;
-  }else{
-    badge.textContent = 'Invitado';
-    btn.textContent = 'Entrar';
-    btn.onclick = openAuth;
-  }
+  const u=STORE.current, badge=document.getElementById('userBadge'), btn=document.getElementById('authBtn');
+  if(u){badge.textContent=u.name+(u.plan?' · '+u.plan:'');btn.textContent='Salir';btn.onclick=logout}
+  else{badge.textContent='Invitado';btn.textContent='Entrar';btn.onclick=openAuth}
 }
 
-/* ===== AUTH ===== */
-function openAuth(){
-  document.getElementById('authOverlay').classList.add('open');
-  if(!STORE.current) switchAuth('register');
-  else switchAuth('login');
-}
-function closeAuth(){ if(STORE.current) document.getElementById('authOverlay').classList.remove('open') }
-function switchAuth(mode){
-  const isLogin = mode==='login';
-  document.getElementById('authTitle').textContent = isLogin ? 'Iniciar sesión' : 'Crear cuenta';
-  document.getElementById('authSubtitle').textContent = isLogin ? 'Accede a tu cuenta' : 'Regístrate para empezar';
-  document.getElementById('loginForm').style.display = isLogin ? 'block' : 'none';
-  document.getElementById('registerForm').style.display = isLogin ? 'none' : 'block';
+function openAuth(){document.getElementById('authOverlay').classList.add('open');if(!STORE.current)switchAuth('register');else switchAuth('login')}
+function closeAuth(){if(STORE.current)document.getElementById('authOverlay').classList.remove('open')}
+function switchAuth(m){
+  const l=m==='login';
+  document.getElementById('authTitle').textContent=l?'Iniciar sesión':'Crear cuenta';
+  document.getElementById('authSubtitle').textContent=l?'Accede a tu cuenta':'Regístrate para empezar';
+  document.getElementById('loginForm').style.display=l?'block':'none';
+  document.getElementById('registerForm').style.display=l?'none':'block';
 }
 function registerUser(){
-  const name=document.getElementById('regName').value.trim();
-  const email=document.getElementById('regEmail').value.trim().toLowerCase();
-  const pass=document.getElementById('regPass').value;
+  const name=document.getElementById('regName').value.trim(), email=document.getElementById('regEmail').value.trim().toLowerCase(), pass=document.getElementById('regPass').value;
   if(!name||!email||pass.length<6){alert('Completa todos los campos');return}
-  const users=STORE.users;
-  if(users.some(u=>u.email===email)){alert('Ese correo ya existe');switchAuth('login');return}
-  users.push({name,email,pass,plan:'Free',createdAt:new Date().toISOString()});
-  STORE.users=users;
+  if(STORE.users.some(u=>u.email===email)){alert('Ese correo ya existe');switchAuth('login');return}
+  STORE.users=[...STORE.users,{name,email,pass,plan:'Free',createdAt:new Date().toISOString()}];
   STORE.current={name,email,plan:'Free'};
   document.getElementById('authOverlay').classList.remove('open');
-  refreshUser();
-  loadHistory();
+  refreshUser();loadHistory();
 }
 function loginUser(){
-  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pass=document.getElementById('loginPass').value;
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase(), pass=document.getElementById('loginPass').value;
   const user=STORE.users.find(u=>u.email===email&&u.pass===pass);
   if(!user){alert('Correo o contraseña incorrectos');return}
   STORE.current={name:user.name,email:user.email,plan:user.plan||'Free'};
   document.getElementById('authOverlay').classList.remove('open');
-  refreshUser();
-  loadHistory();
+  refreshUser();loadHistory();
 }
-function logout(){
-  saveHistory();
-  localStorage.removeItem('dixzai_current');
-  refreshUser();
-  document.getElementById('chatMessages').innerHTML='';
-  showEmpty(true);
-  openAuth();
-}
+function logout(){saveHistory();localStorage.removeItem('dixzai_current');refreshUser();document.getElementById('chatMessages').innerHTML='';showEmpty(true);openAuth()}
 
-/* ===== HISTORY ===== */
 function saveHistory(){
-  const u = STORE.current;
-  if(!u) return;
-  const msgs = [...document.querySelectorAll('#chatMessages .chat-message')].map(el=>({
-    type: el.classList.contains('chat-user') ? 'user' : 'ai',
-    html: el.innerHTML
-  }));
-  STORE.setHistory(u.email, msgs);
+  const u=STORE.current;if(!u)return;
+  const msgs=[...document.querySelectorAll('#chatMessages .chat-message')].map(el=>({type:el.classList.contains('chat-user')?'user':'ai',html:el.innerHTML}));
+  STORE.setHistory(u.email,msgs);
 }
 function loadHistory(){
-  const u = STORE.current;
-  if(!u) return;
-  const history = STORE.getHistory(u.email);
-  const box = document.getElementById('chatMessages');
-  box.innerHTML = '';
-  if(history.length){
-    showEmpty(false);
-    history.forEach(m=>{
-      const div = document.createElement('div');
-      div.className = 'chat-message ' + (m.type==='user'?'chat-user':'chat-ai');
-      div.innerHTML = m.html;
-      box.appendChild(div);
-    });
-    box.scrollTop = box.scrollHeight;
-  }else showEmpty(true);
+  const u=STORE.current;if(!u)return;
+  const h=STORE.getHistory(u.email), box=document.getElementById('chatMessages');
+  box.innerHTML='';
+  if(h.length){showEmpty(false);h.forEach(m=>{const d=document.createElement('div');d.className='chat-message '+(m.type==='user'?'chat-user':'chat-ai');d.innerHTML=m.html;box.appendChild(d)});box.scrollTop=box.scrollHeight}
+  else showEmpty(true);
 }
 
-/* ===== PLANS + PAYMENT ===== */
-let selectedPlan = null;
-function openPlans(){ document.getElementById('plansOverlay').classList.add('open') }
-function closePlans(){ document.getElementById('plansOverlay').classList.remove('open') }
-function openCompany(){ document.getElementById('companyOverlay').classList.add('open') }
-function closeCompany(){ document.getElementById('companyOverlay').classList.remove('open') }
+function newConversation(){
+  saveHistory();
+  document.getElementById('chatMessages').innerHTML='';
+  showEmpty(true);
+  // Opcional: podrías guardar la conversación anterior con un timestamp si quieres historial de chats
+}
 
+let selectedPlan=null;
+function openPlans(){document.getElementById('plansOverlay').classList.add('open')}
+function closePlans(){document.getElementById('plansOverlay').classList.remove('open')}
+function openCompany(){document.getElementById('companyOverlay').classList.add('open')}
+function closeCompany(){document.getElementById('companyOverlay').classList.remove('open')}
 function selectPlan(plan){
-  const u = STORE.current;
-  if(!u){ closePlans(); openAuth(); return; }
-  if(plan === 'Free'){ updateUserPlan('Free'); closePlans(); return; }
-  if(plan === 'Enterprise'){ closePlans(); alert('Para Enterprise escribe a support@dixzai.com'); return; }
-  selectedPlan = plan;
-  document.getElementById('payTitle').textContent = 'Pagar plan ' + plan;
-  document.getElementById('paySubtitle').textContent = getPlanPrice(plan);
-  document.getElementById('payError').style.display = 'none';
-  closePlans();
-  document.getElementById('paymentOverlay').classList.add('open');
+  if(!STORE.current){closePlans();openAuth();return}
+  if(plan==='Free'){updateUserPlan('Free');closePlans();return}
+  if(plan==='Enterprise'){closePlans();alert('Contacta a support@dixzai.com');return}
+  selectedPlan=plan;
+  document.getElementById('payTitle').textContent='Pagar plan '+plan;
+  document.getElementById('paySubtitle').textContent=({'Starter':'$9 / mes','Pro':'$19 / mes','Business':'$49 / mes'}[plan]||'')+' · Cancela cuando quieras';
+  document.getElementById('payError').style.display='none';
+  closePlans();document.getElementById('paymentOverlay').classList.add('open');
 }
-function getPlanPrice(plan){
-  const prices = {'Starter':'$9 / mes','Pro':'$19 / mes','Business':'$49 / mes'};
-  return (prices[plan]||'') + ' · Cancela cuando quieras';
-}
-function closePayment(){ document.getElementById('paymentOverlay').classList.remove('open'); document.getElementById('payError').style.display='none' }
-function selectPayMethod(el, method){
-  document.querySelectorAll('.pay-method').forEach(m=>m.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('cardForm').style.display = method==='card'?'block':'none';
-  document.getElementById('appleForm').style.display = method==='apple'?'block':'none';
-  document.getElementById('googleForm').style.display = method==='google'?'block':'none';
-  document.getElementById('otherForm').style.display = method==='other'?'block':'none';
-  document.getElementById('payError').style.display = 'none';
+function closePayment(){document.getElementById('paymentOverlay').classList.remove('open')}
+function selectPayMethod(el,m){
+  document.querySelectorAll('.pay-method').forEach(x=>x.classList.remove('active'));el.classList.add('active');
+  document.getElementById('cardForm').style.display=m==='card'?'block':'none';
+  document.getElementById('appleForm').style.display=m==='apple'?'block':'none';
+  document.getElementById('googleForm').style.display=m==='google'?'block':'none';
+  document.getElementById('otherForm').style.display=m==='other'?'block':'none';
+  document.getElementById('payError').style.display='none';
 }
 function confirmPayment(){
-  const errorBox = document.getElementById('payError');
-  errorBox.style.display = 'block';
-  errorBox.innerHTML = `El pago ha sido rechazado.<br>Verifica los datos de tu tarjeta o intenta con otro método de pago.`;
-  errorBox.scrollIntoView({behavior:'smooth', block:'center'});
+  const e=document.getElementById('payError');
+  e.style.display='block';
+  e.innerHTML='El pago ha sido rechazado.<br>Verifica los datos de tu tarjeta o intenta con otro método de pago.';
 }
 function updateUserPlan(plan){
-  const u = STORE.current;
-  if(!u) return;
-  const users = STORE.users;
-  const i = users.findIndex(x=>x.email===u.email);
-  if(i>=0){ users[i].plan = plan; STORE.users = users; }
-  STORE.current = {...u, plan};
-  refreshUser();
+  const u=STORE.current;if(!u)return;
+  const users=STORE.users, i=users.findIndex(x=>x.email===u.email);
+  if(i>=0){users[i].plan=plan;STORE.users=users}
+  STORE.current={...u,plan};refreshUser();
 }
 
-/* ===== CLEAN + SPEAK ===== */
 function cleanResponse(text){
   return String(text||'')
     .replace(/\*\*(.*?)\*\*/g,'$1')
@@ -512,171 +338,113 @@ function cleanResponse(text){
     .replace(/_(.*?)_/g,'$1')
     .replace(/`{1,3}(.*?)`{1,3}/g,'$1')
     .replace(/^#{1,6}\s+/gm,'')
-    .replace(/^\s*[-•*]\s+/gm,'• ')
+    .replace(/^\s*[-•*◦▪▸→]\s+/gm,'')      // elimina puntitos y guiones
     .replace(/\n{3,}/g,'\n\n')
     .trim();
 }
-function wantsLong(text){
-  const t=(text||'').toLowerCase();
-  return /más largo|mas largo|explícame mejor|detalla|más detalle|mas detalle|extiende|desarrolla|hazlo más completo|en profundidad/.test(t);
-}
 
 function speakText(text){
-  if(!('speechSynthesis' in window)){ alert('Tu navegador no soporta lectura de voz'); return; }
+  if(!window.speechSynthesis){alert('Tu navegador no soporta lectura de voz');return}
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'es-ES';
-  u.rate = 0.95;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';
+  u.rate=0.92;
+  u.pitch=1;
   speechSynthesis.speak(u);
 }
 
-/* ===== CHAT + FILES (mejorado para imágenes y documentos) ===== */
-const messagesEl = document.getElementById('chatMessages');
-const emptyState = document.getElementById('emptyState');
-const questionInput = document.getElementById('question');
-const filePreview = document.getElementById('filePreview');
-let pendingFiles = [];
+const messagesEl=document.getElementById('chatMessages');
+const emptyState=document.getElementById('emptyState');
+const questionInput=document.getElementById('question');
+const filePreview=document.getElementById('filePreview');
+let pendingFiles=[];
 
 function escapeHTML(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function showEmpty(show){emptyState.style.display=show?'flex':'none'}
+function showEmpty(s){emptyState.style.display=s?'flex':'none'}
 
 function handleFiles(input){
   [...(input.files||[])].forEach(file=>{
-    const isImage = file.type.startsWith('image/');
-    const reader = new FileReader();
-    reader.onload = e=>{
-      pendingFiles.push({name:file.name, type:file.type, data:e.target.result, isImage});
-      renderPreview();
-    };
+    const isImage=file.type.startsWith('image/');
+    const reader=new FileReader();
+    reader.onload=e=>{pendingFiles.push({name:file.name,type:file.type,data:e.target.result,isImage});renderPreview()};
     reader.readAsDataURL(file);
   });
-  input.value = '';
+  input.value='';
 }
 function renderPreview(){
-  filePreview.innerHTML = '';
+  filePreview.innerHTML='';
   pendingFiles.forEach((f,i)=>{
-    const div = document.createElement('div');
-    div.className = 'preview-item';
-    if(f.isImage) div.innerHTML = `<img src="${f.data}"><button class="remove" onclick="removeFile(${i})">×</button>`;
-    else div.innerHTML = `<div style="font-size:10px;padding:4px;word-break:break-all">${escapeHTML(f.name)}</div><button class="remove" onclick="removeFile(${i})">×</button>`;
-    filePreview.appendChild(div);
+    const d=document.createElement('div');d.className='preview-item';
+    if(f.isImage) d.innerHTML=`<img src="${f.data}"><button class="remove" onclick="removeFile(${i})">×</button>`;
+    else d.innerHTML=`<div style="font-size:10px;padding:4px;word-break:break-all">${escapeHTML(f.name)}</div><button class="remove" onclick="removeFile(${i})">×</button>`;
+    filePreview.appendChild(d);
   });
 }
-function removeFile(i){ pendingFiles.splice(i,1); renderPreview(); }
+function removeFile(i){pendingFiles.splice(i,1);renderPreview()}
 
 async function askAI(){
-  const q = questionInput.value.trim();
-  if(!q && !pendingFiles.length) return;
-
+  const q=questionInput.value.trim();
+  if(!q&&!pendingFiles.length) return;
   showEmpty(false);
 
-  let userHTML = q ? escapeHTML(q) : '';
+  let userHTML=q?escapeHTML(q):'';
   pendingFiles.forEach(f=>{
-    if(f.isImage) userHTML += `<br><img class="chat-image" src="${f.data}">`;
-    else userHTML += `<div class="file-chip">📄 ${escapeHTML(f.name)}</div>`;
+    if(f.isImage) userHTML+=`<br><img class="chat-image" src="${f.data}">`;
+    else userHTML+=`<div class="file-chip">📄 ${escapeHTML(f.name)}</div>`;
   });
-  messagesEl.innerHTML += `<div class="chat-message chat-user">${userHTML}</div>`;
+  messagesEl.innerHTML+=`<div class="chat-message chat-user">${userHTML}</div>`;
 
-  const longMode = wantsLong(q);
-  const filesToSend = [...pendingFiles];
-  const hasImage = filesToSend.some(f => f.isImage);
-  const hasDoc = filesToSend.some(f => !f.isImage);
+  const hasImage=pendingFiles.some(f=>f.isImage);
+  const hasDoc=pendingFiles.some(f=>!f.isImage);
+  let finalQ=q;
+  if(hasImage&&!q) finalQ='Analiza y describe detalladamente esta imagen. Dime qué ves, el contexto y cualquier detalle importante.';
+  if(hasDoc&&!q) finalQ='Lee este documento y dame un resumen claro y útil de su contenido.';
+  if(hasImage&&q) finalQ=q+' Analiza también la imagen que te envié.';
+  if(hasDoc&&q) finalQ=q+' Analiza también el documento adjunto.';
 
-  // Construimos un prompt más inteligente
-  let finalQuestion = q;
-  if(hasImage && !q) finalQuestion = 'Describe y analiza detalladamente la imagen que te envié.';
-  if(hasDoc && !q) finalQuestion = 'Lee el documento y dame un resumen claro y útil.';
-  if(hasImage && q) finalQuestion = q + ' (analiza también la imagen enviada)';
-  if(hasDoc && q) finalQuestion = q + ' (analiza también el documento enviado)';
+  const filesToSend=[...pendingFiles];
+  questionInput.value='';pendingFiles=[];filePreview.innerHTML='';
+  messagesEl.scrollTop=messagesEl.scrollHeight;saveHistory();
 
-  questionInput.value = '';
-  pendingFiles = [];
-  filePreview.innerHTML = '';
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  saveHistory();
-
-  const tid = 't'+Date.now();
-  messagesEl.innerHTML += `<div id="${tid}" class="chat-message chat-ai">DixzAI está analizando...</div>`;
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+  const tid='t'+Date.now();
+  messagesEl.innerHTML+=`<div id="${tid}" class="chat-message chat-ai">DixzAI está analizando...</div>`;
+  messagesEl.scrollTop=messagesEl.scrollHeight;
 
   try{
-    const res = await fetch('/api/chat',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        question: finalQuestion,
-        files: filesToSend,
-        style: longMode ? 'detailed' : 'concise'
-      })
-    });
-    const data = await res.json();
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:finalQ,files:filesToSend,style:'natural'})});
+    const data=await res.json();
     document.getElementById(tid)?.remove();
-
-    let answer = cleanResponse(data.answer || 'He recibido el archivo. ¿Qué te gustaría saber específicamente sobre él?');
-    
-    // Agregamos botón de leer
-    const speakId = 'speak-'+Date.now();
-    messagesEl.innerHTML += `
-      <div class="chat-message chat-ai">
-        <b>DixzAI</b><br>
-        ${escapeHTML(answer).replace(/\n/g,'<br>')}
-        <br>
-        <button class="speak-btn" onclick="speakText(\`${answer.replace(/`/g,"'")}\`)">🔊 Leer respuesta</button>
-      </div>`;
+    let answer=cleanResponse(data.answer||'He recibido el archivo. ¿Qué te gustaría saber exactamente?');
+    messagesEl.innerHTML+=`<div class="chat-message chat-ai"><b>DixzAI</b><br>${escapeHTML(answer).replace(/\n/g,'<br>')}<br><button class="speak-btn" onclick="speakText(\`${answer.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`)">🔊 Leer respuesta</button></div>`;
   }catch(e){
     document.getElementById(tid)?.remove();
-    // Respuesta de respaldo más útil cuando hay archivos
-    let fallback = 'He recibido tu archivo. ';
-    if(hasImage) fallback += 'Puedo ver la imagen. ¿Qué quieres que analice o explique de ella?';
-    else if(hasDoc) fallback += 'He recibido el documento. ¿Quieres un resumen o que busque algo específico?';
-    else fallback += 'No pude procesar la solicitud en este momento.';
-    
-    messagesEl.innerHTML += `<div class="chat-message chat-ai"><b>DixzAI</b><br>${fallback}</div>`;
+    let fallback='He recibido tu archivo. ';
+    if(hasImage) fallback+='Puedo ver la imagen. Cuéntame qué quieres que analice o explique de ella.';
+    else if(hasDoc) fallback+='He recibido el documento. ¿Quieres un resumen o que busque algo específico?';
+    else fallback+='No pude procesar la solicitud en este momento.';
+    messagesEl.innerHTML+=`<div class="chat-message chat-ai"><b>DixzAI</b><br>${fallback}</div>`;
   }
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  saveHistory();
+  messagesEl.scrollTop=messagesEl.scrollHeight;saveHistory();
 }
 
-/* Mode & Voice */
-let currentMode = 'Fast';
-function toggleMode(){
-  currentMode = currentMode==='Fast' ? 'Think' : 'Fast';
-  document.getElementById('modeBtn').textContent = currentMode + ' ▾';
-}
-let recognition = null;
+let currentMode='Fast';
+function toggleMode(){currentMode=currentMode==='Fast'?'Think':'Fast';document.getElementById('modeBtn').textContent=currentMode+' ▾'}
+let recognition=null;
 function toggleVoice(){
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const btn = document.getElementById('micBtn');
-  if(!SR){ alert('Reconocimiento de voz no disponible'); return; }
-  if(recognition){
-    recognition.stop(); recognition = null;
-    btn.classList.remove('listening'); btn.textContent = '🎙️'; return;
-  }
-  recognition = new SR();
-  recognition.lang = 'es-ES';
-  recognition.interimResults = true;
-  recognition.continuous = false;
-  btn.classList.add('listening'); btn.textContent = '⏹';
-  recognition.onresult = e => {
-    let text = '';
-    for(let i=e.resultIndex; i<e.results.length; i++) text += e.results[i][0].transcript;
-    questionInput.value = text;
-    if(e.results[e.results.length-1].isFinal) setTimeout(()=>askAI(), 300);
-  };
-  recognition.onend = recognition.onerror = () => {
-    recognition = null;
-    btn.classList.remove('listening');
-    btn.textContent = '🎙️';
-  };
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const btn=document.getElementById('micBtn');
+  if(!SR){alert('Reconocimiento de voz no disponible');return}
+  if(recognition){recognition.stop();recognition=null;btn.classList.remove('listening');btn.textContent='🎙️';return}
+  recognition=new SR();recognition.lang='es-ES';recognition.interimResults=true;recognition.continuous=false;
+  btn.classList.add('listening');btn.textContent='⏹';
+  recognition.onresult=e=>{let t='';for(let i=e.resultIndex;i<e.results.length;i++)t+=e.results[i][0].transcript;questionInput.value=t;if(e.results[e.results.length-1].isFinal)setTimeout(()=>askAI(),300)};
+  recognition.onend=recognition.onerror=()=>{recognition=null;btn.classList.remove('listening');btn.textContent='🎙️'};
   recognition.start();
 }
 
-/* Init */
-refreshUser();
-showEmpty(true);
-if(!STORE.current) setTimeout(()=>openAuth(), 350);
-else loadHistory();
-window.addEventListener('beforeunload', saveHistory);
+refreshUser();showEmpty(true);
+if(!STORE.current)setTimeout(()=>openAuth(),350);else loadHistory();
+window.addEventListener('beforeunload',saveHistory);
 </script>
 </body>
 </html>
