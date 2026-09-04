@@ -563,3 +563,82 @@ async function askAI(){
   const longMode = wantsLong(q);
   const filesToSend = [...pendingFiles];
   questionInput.value = '';
+  pendingFiles = [];
+  filePreview.innerHTML = '';
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  const tid = 't'+Date.now();
+  messagesEl.innerHTML += `<div id="${tid}" class="chat-message chat-ai">DixzAI está pensando...</div>`;
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  try{
+    const res = await fetch('/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        question: q || 'Analiza los archivos',
+        files: filesToSend,
+        style: longMode ? 'detailed' : 'concise'
+      })
+    });
+    const data = await res.json();
+    document.getElementById(tid)?.remove();
+    let answer = cleanResponse(data.answer || 'No pude generar una respuesta.');
+    messagesEl.innerHTML += `<div class="chat-message chat-ai"><b>DixzAI</b><br>${escapeHTML(answer).replace(/\n/g,'<br>')}</div>`;
+  }catch(e){
+    document.getElementById(tid)?.remove();
+    messagesEl.innerHTML += `<div class="chat-message chat-ai">No pude procesar tu solicitud.</div>`;
+  }
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+/* Mode */
+let currentMode = 'Fast';
+function toggleMode(){
+  currentMode = currentMode === 'Fast' ? 'Think' : 'Fast';
+  document.getElementById('modeBtn').textContent = currentMode + ' ▾';
+}
+
+/* Voice */
+let recognition = null;
+function toggleVoice(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('micBtn');
+  if(!SR){ alert('Reconocimiento de voz no disponible'); return; }
+  if(recognition){
+    recognition.stop();
+    recognition = null;
+    btn.classList.remove('listening');
+    btn.textContent = '🎙️';
+    return;
+  }
+  recognition = new SR();
+  recognition.lang = 'es-ES';
+  recognition.interimResults = true;
+  recognition.continuous = false;
+  btn.classList.add('listening');
+  btn.textContent = '⏹';
+
+  recognition.onresult = e=>{
+    let text = '';
+    for(let i=e.resultIndex;i<e.results.length;i++) text += e.results[i][0].transcript;
+    questionInput.value = text;
+    if(e.results[e.results.length-1].isFinal) setTimeout(()=>askAI(),250);
+  };
+  recognition.onend = recognition.onerror = ()=>{
+    recognition = null;
+    btn.classList.remove('listening');
+    btn.textContent = '🎙️';
+  };
+  recognition.start();
+}
+
+/* Init - primera vez obliga a registrarse */
+refreshUser();
+showEmpty(true);
+if(!STORE.current){
+  setTimeout(()=>openAuth(), 400);
+}
+</script>
+</body>
+</html>
