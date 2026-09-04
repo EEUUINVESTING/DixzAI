@@ -87,10 +87,12 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
 .top-actions{position:fixed;top:70px;right:16px;z-index:40;display:flex;gap:8px}
 .new-chat-btn,.history-btn{padding:8px 14px;border-radius:16px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.85);backdrop-filter:blur(12px);font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.06)}
 
-.history-item{padding:14px;border-radius:16px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);margin-bottom:10px;cursor:pointer}
-.history-item:hover{background:#fff;border-color:var(--accent)}
+.history-item{padding:14px;border-radius:16px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.history-item .info{flex:1;cursor:pointer}
 .history-item b{display:block;font-size:14px;margin-bottom:4px}
 .history-item span{font-size:12px;color:var(--muted)}
+.delete-chat-btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.08);background:#fff;color:#e11d48;font-size:16px;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
+.delete-all-btn{width:100%;margin-top:12px;padding:12px;border-radius:14px;border:1px solid #fecaca;background:#fef2f2;color:#b91c1c;font-weight:600;font-size:14px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -156,13 +158,14 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
   </div>
 </div>
 
-<!-- History -->
+<!-- History con controles de datos -->
 <div class="overlay" id="historyOverlay" onclick="if(event.target===this)closeHistory()">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <h2>Historial de conversaciones</h2>
-    <p class="muted">Tus conversaciones guardadas</p>
+    <p class="muted">Tus conversaciones guardadas · Controles de datos</p>
     <div id="historyList"></div>
+    <button class="delete-all-btn" onclick="deleteAllChats()">Eliminar todo el historial</button>
     <button class="close-btn" onclick="closeHistory()">Cerrar</button>
   </div>
 </div>
@@ -211,13 +214,12 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
   </div>
 </div>
 
-<!-- Company (sin Misión ni Visión) -->
+<!-- Company -->
 <div class="overlay" id="companyOverlay" onclick="if(event.target===this)closeCompany()">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <h2>DixzAI Intelligent</h2>
     <p class="muted">Empresa privada de tecnología e inteligencia artificial</p>
-
     <div class="info-card"><b>Nombre legal</b><span>DixzAI Intelligent Inc</span></div>
     <div class="info-card"><b>Tipo</b><span>Empresa privada de tecnología e inteligencia artificial</span></div>
     <div class="info-card"><b>Fundación</b><span>2026</span></div>
@@ -226,7 +228,6 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
     <div class="info-card"><b>Sitio web</b><span>www.dixzai.com</span></div>
     <div class="info-card"><b>Enfoque</b><span>Inteligencia artificial, software, automatización, agentes autónomos y soluciones digitales escalables</span></div>
     <div class="info-card"><b>Valores</b><span>Innovación, privacidad, transparencia, excelencia técnica y accesibilidad global.</span></div>
-
     <h2 style="font-size:17px;margin:20px 0 10px">Equipo directivo y técnico</h2>
     <div class="team-grid">
       <div class="person"><b>Adilson Smith</b><span>CEO & Fundador · 20 años 🇵🇪</span></div>
@@ -240,10 +241,9 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
       <div class="person"><b>Emma Johansson</b><span>Product Designer · 28 años 🇸🇪</span></div>
       <div class="person"><b>Raj Patel</b><span>ML Engineer · 33 años 🇮🇳</span></div>
       <div class="person"><b>Camille Dubois</b><span>Security Lead · 30 años 🇫🇷</span></div>
-      <div class="person"><b>Mark Ross</b><span>DevOps Engineer · 32 años 🇮🇹</span></div>
+      <div class="person"><b>Marck Ross</b><span>DevOps Engineer · 32 años 🇮🇹</span></div>
       <div class="person"><b>Aisha Khan</b><span>Data Scientist · 27 años 🇨🇦</span></div>
     </div>
-
     <button class="close-btn" onclick="closeCompany()">Cerrar</button>
   </div>
 </div>
@@ -304,7 +304,7 @@ function logout(){
   openAuth();
 }
 
-/* ===== CHATS HISTORY ===== */
+/* ===== CHATS + CONTROLES DE DATOS ===== */
 function getCurrentMessages(){
   return [...document.querySelectorAll('#chatMessages .chat-message')].map(el=>({
     type: el.classList.contains('chat-user') ? 'user' : 'ai',
@@ -361,25 +361,59 @@ function openHistory(){
   const u=STORE.current;
   if(!u){openAuth();return}
   saveCurrentChat();
+  renderHistoryList();
+  document.getElementById('historyOverlay').classList.add('open');
+}
+
+function renderHistoryList(){
+  const u=STORE.current;
   const list=document.getElementById('historyList');
   const chats=STORE.getChats(u.email).reverse();
+
   if(chats.length===0){
     list.innerHTML='<p class="muted">No tienes conversaciones guardadas todavía.</p>';
-  }else{
-    list.innerHTML=chats.map(c=>`
-      <div class="history-item" onclick="loadChat('${c.id}')">
+    return;
+  }
+
+  list.innerHTML = chats.map(c => `
+    <div class="history-item">
+      <div class="info" onclick="loadChat('${c.id}')">
         <b>${c.title || 'Conversación'}</b>
         <span>${new Date(c.updatedAt).toLocaleString()}</span>
       </div>
-    `).join('');
-  }
-  document.getElementById('historyOverlay').classList.add('open');
+      <button class="delete-chat-btn" onclick="deleteChat('${c.id}', event)" title="Eliminar">🗑️</button>
+    </div>
+  `).join('');
 }
-function closeHistory(){document.getElementById('historyOverlay').classList.remove('open')}
 
-function newConversation(){
-  startNewChat();
+function deleteChat(id, event){
+  event.stopPropagation();
+  if(!confirm('¿Eliminar esta conversación permanentemente?')) return;
+
+  const u = STORE.current;
+  let chats = STORE.getChats(u.email);
+  chats = chats.filter(c => c.id !== id);
+  STORE.setChats(u.email, chats);
+
+  // Si se eliminó la conversación actual, empezar una nueva
+  if(currentChatId === id){
+    startNewChat();
+  }
+
+  renderHistoryList();
 }
+
+function deleteAllChats(){
+  if(!confirm('¿Estás seguro de eliminar TODO el historial? Esta acción no se puede deshacer.')) return;
+
+  const u = STORE.current;
+  STORE.setChats(u.email, []);
+  startNewChat();
+  renderHistoryList();
+}
+
+function closeHistory(){document.getElementById('historyOverlay').classList.remove('open')}
+function newConversation(){startNewChat()}
 
 /* ===== REST ===== */
 let selectedPlan=null;
@@ -393,7 +427,7 @@ function selectPlan(plan){
   if(plan==='Enterprise'){closePlans();alert('Contacta a support@dixzai.com');return}
   selectedPlan=plan;
   document.getElementById('payTitle').textContent='Pagar plan '+plan;
-  document.getElementById('paySubtitle').textContent=({'Starter':'$9 USD / mes','Pro':'$19 USD / mes','Business':'$49 USD / mes'}[plan]||'')+' · Cancela cuando quieras';
+  document.getElementById('paySubtitle').textContent=({'Starter':'$9 USD/ mes','Pro':'$19 USD/ mes','Business':'$49 USD/ mes'}[plan]||'')+' · Cancela cuando quieras';
   document.getElementById('payError').style.display='none';
   closePlans();document.getElementById('paymentOverlay').classList.add('open');
 }
