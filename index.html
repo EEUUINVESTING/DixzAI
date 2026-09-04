@@ -89,169 +89,86 @@ header{
   color:var(--text);border-bottom-left-radius:6px;
   box-shadow:0 4px 16px rgba(0,0,0,.05);
 }
-.chat-image{
-  max-width:200px;border-radius:14px;margin-top:6px;
-  border:1px solid rgba(0,0,0,.08);
-}
-.file-chip{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(0,0,0,.06);padding:6px 10px;border-radius:12px;
-  font-size:13px;margin-top:6px;
-}
+.chat-image{max-width:200px;border-radius:14px;margin-top:6px;border:1px solid rgba(0,0,0,.08)}
+.file-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.06);padding:6px 10px;border-radius:12px;font-size:13px;margin-top:6px}
 
-/* ===== BOTTOM BAR (exacto como la imagen) ===== */
+/* Bottom bar */
 .bottom-bar{
   position:fixed;left:0;right:0;bottom:0;z-index:60;
   padding:12px 14px 28px;
   background:linear-gradient(to top,rgba(255,255,255,.98) 70%,transparent);
 }
 .input-wrap{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:#f5f5f7;
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:28px;
-  padding:6px 8px 6px 12px;
+  display:flex;align-items:center;gap:8px;
+  background:#f5f5f7;border:1px solid rgba(0,0,0,.08);
+  border-radius:28px;padding:6px 8px 6px 12px;
   box-shadow:0 4px 20px rgba(0,0,0,.06);
 }
-.input-wrap input{
-  flex:1;
-  border:0;
-  background:transparent;
-  font-size:16px;
-  color:var(--text);
-  outline:none;
-  padding:10px 4px;
-}
+.input-wrap input{flex:1;border:0;background:transparent;font-size:16px;color:var(--text);outline:none;padding:10px 4px}
 .input-wrap input::placeholder{color:#aeaeb2}
-
-.plus-btn{
-  width:34px;height:34px;border-radius:50%;
-  border:none;background:transparent;
-  font-size:22px;color:#8e8e93;cursor:pointer;
-  display:grid;place-items:center;
-}
-.mode-btn{
-  height:32px;padding:0 10px;
-  border-radius:16px;
-  border:none;
-  background:transparent;
-  font-size:13px;font-weight:500;
-  color:#8e8e93;cursor:pointer;
-  display:flex;align-items:center;gap:3px;
-}
-.mic-btn{
-  width:34px;height:34px;border-radius:50%;
-  border:none;background:transparent;
-  font-size:18px;color:#8e8e93;cursor:pointer;
-  display:grid;place-items:center;
-}
+.plus-btn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;font-size:22px;color:#8e8e93;cursor:pointer;display:grid;place-items:center}
+.mode-btn{height:32px;padding:0 10px;border-radius:16px;border:none;background:transparent;font-size:13px;font-weight:500;color:#8e8e93;cursor:pointer;display:flex;align-items:center;gap:3px}
+.mic-btn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;font-size:18px;color:#8e8e93;cursor:pointer;display:grid;place-items:center}
 .mic-btn.listening{color:#e11d48}
-.send-btn{
-  width:36px;height:36px;border-radius:50%;
-  border:none;
-  background:#22c55e;          /* verde */
-  color:#fff;
-  display:grid;place-items:center;
-  cursor:pointer;
-  font-size:16px;
-  box-shadow:0 4px 12px rgba(34,197,94,.35);
-  flex-shrink:0;
-}
+.send-btn{width:36px;height:36px;border-radius:50%;border:none;background:#22c55e;color:#fff;display:grid;place-items:center;cursor:pointer;font-size:16px;box-shadow:0 4px 12px rgba(34,197,94,.35);flex-shrink:0}
 
-/* Preview archivos */
-#filePreview{
-  display:flex;gap:8px;flex-wrap:wrap;padding:0 4px 10px;
-}
-.preview-item{
-  position:relative;
-  width:60px;height:60px;border-radius:12px;
-  border:1px solid rgba(0,0,0,.1);
-  overflow:hidden;background:#f5f5f7;
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;text-align:center;padding:3px;
-}
+/* Preview */
+#filePreview{display:flex;gap:8px;flex-wrap:wrap;padding:0 4px 10px}
+.preview-item{position:relative;width:60px;height:60px;border-radius:12px;border:1px solid rgba(0,0,0,.1);overflow:hidden;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-size:10px;text-align:center;padding:3px}
 .preview-item img{width:100%;height:100%;object-fit:cover}
-.preview-item .remove{
-  position:absolute;top:-4px;right:-4px;
-  width:18px;height:18px;border-radius:50%;
-  background:#1d1d1f;color:#fff;border:none;
-  font-size:11px;cursor:pointer;display:grid;place-items:center;
-}
+.preview-item .remove{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:#1d1d1f;color:#fff;border:none;font-size:11px;cursor:pointer;display:grid;place-items:center}
 
 /* Sheets */
-.overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.28);
-  backdrop-filter:blur(10px);z-index:100;
-  display:none;align-items:flex-end;justify-content:center;
-}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.28);backdrop-filter:blur(10px);z-index:100;display:none;align-items:flex-end;justify-content:center}
 .overlay.open{display:flex}
-.sheet{
-  width:100%;max-height:88vh;overflow-y:auto;
-  background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,255,255,.9));
-  border-radius:28px 28px 0 0;padding:18px 20px 36px;
-  box-shadow:0 -16px 50px rgba(0,0,0,.12);
-  animation:up .25s ease;
-}
+.sheet{width:100%;max-height:90vh;overflow-y:auto;background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(255,255,255,.92));border-radius:28px 28px 0 0;padding:18px 20px 36px;box-shadow:0 -16px 50px rgba(0,0,0,.12);animation:up .25s ease}
 @keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
 .sheet-handle{width:38px;height:5px;background:rgba(0,0,0,.12);border-radius:99px;margin:0 auto 16px}
 .sheet h2{font-size:20px;font-weight:800;margin-bottom:4px}
 .sheet .muted{color:var(--muted);font-size:13px;margin-bottom:16px}
-.info-card{
-  background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.06);
-  border-radius:16px;padding:14px;margin-bottom:10px;
-}
+.info-card{background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:14px;margin-bottom:10px}
 .info-card b{display:block;font-size:13px;margin-bottom:3px}
 .info-card span{font-size:13px;color:var(--muted)}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
-.person{
-  background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);
-  border-radius:14px;padding:12px;
-}
+.person{background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);border-radius:14px;padding:12px}
 .person b{font-size:13px;display:block}
 .person span{font-size:11px;color:var(--muted)}
-.close-btn{
-  width:100%;margin-top:18px;padding:14px;border-radius:16px;
-  border:1px solid rgba(0,0,0,.08);background:linear-gradient(145deg,#fff,#f5f5f7);
-  font-weight:600;font-size:15px;cursor:pointer;
-}
+.close-btn{width:100%;margin-top:18px;padding:14px;border-radius:16px;border:1px solid rgba(0,0,0,.08);background:linear-gradient(145deg,#fff,#f5f5f7);font-weight:600;font-size:15px;cursor:pointer}
 
 /* Auth */
 .auth-form label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
-.auth-form input{
-  width:100%;padding:13px 14px;border-radius:14px;
-  border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.85);
-  font-size:15px;outline:none;
-}
+.auth-form input{width:100%;padding:13px 14px;border-radius:14px;border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.85);font-size:15px;outline:none}
 .auth-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,.12)}
-.auth-submit{
-  width:100%;margin-top:18px;padding:14px;border-radius:16px;border:none;
-  background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;
-  font-weight:600;font-size:15px;cursor:pointer;
-  box-shadow:0 6px 20px rgba(0,0,0,.18);
-}
+.auth-submit{width:100%;margin-top:18px;padding:14px;border-radius:16px;border:none;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18)}
 .auth-switch{text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
 .auth-switch button{background:none;border:none;color:var(--accent);font-weight:600;cursor:pointer}
 
 /* Plans */
-.plan-card{
-  background:rgba(255,255,255,.8);
-  border:1px solid rgba(0,0,0,.07);
-  border-radius:18px;padding:18px;margin-bottom:12px;
-}
+.plan-card{background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.07);border-radius:18px;padding:18px;margin-bottom:12px}
 .plan-card.popular{border-color:rgba(0,113,227,.3);box-shadow:0 4px 20px rgba(0,113,227,.1)}
 .plan-card h3{font-size:17px;margin-bottom:4px}
 .plan-price{font-size:26px;font-weight:800;margin:8px 0}
 .plan-card p{font-size:13px;color:var(--muted);margin-bottom:12px}
-.plan-btn{
-  width:100%;padding:12px;border-radius:14px;border:none;
-  background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;
-  font-weight:600;cursor:pointer;
+.plan-btn{width:100%;padding:12px;border-radius:14px;border:none;background:linear-gradient(145deg,#1d1d1f,#3a3a3c);color:#fff;font-weight:600;cursor:pointer}
+.plan-btn.outline{background:linear-gradient(145deg,#fff,#f5f5f7);color:var(--text);border:1px solid rgba(0,0,0,.1)}
+
+/* Payment */
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.pay-method{
+  padding:14px;border-radius:14px;border:1px solid rgba(0,0,0,.1);
+  background:#fff;text-align:center;font-weight:600;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.plan-btn.outline{
-  background:linear-gradient(145deg,#fff,#f5f5f7);
-  color:var(--text);border:1px solid rgba(0,0,0,.1);
+.pay-method:hover{border-color:var(--accent);background:rgba(0,113,227,.04)}
+.pay-method.active{border-color:var(--accent);background:rgba(0,113,227,.08)}
+.card-form{margin-top:12px}
+.card-form input{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(0,0,0,.12);margin-bottom:10px;font-size:15px}
+.card-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay-btn{
+  width:100%;margin-top:16px;padding:15px;border-radius:16px;border:none;
+  background:linear-gradient(145deg,#22c55e,#16a34a);color:#fff;
+  font-weight:700;font-size:16px;cursor:pointer;
+  box-shadow:0 6px 20px rgba(34,197,94,.3);
 }
 </style>
 </head>
@@ -279,20 +196,16 @@ header{
   <div id="chatMessages"></div>
 </div>
 
-<!-- BOTTOM BAR (igual a la imagen) -->
+<!-- Bottom bar -->
 <div class="bottom-bar">
   <div id="filePreview"></div>
   <div class="input-wrap">
     <button class="plus-btn" onclick="document.getElementById('filePick').click()">+</button>
     <input type="file" id="filePick" accept="image/*,.pdf,.doc,.docx,.txt,.csv,.xlsx" multiple hidden onchange="handleFiles(this)">
-    
     <input id="question" type="text" placeholder="Pregunta lo que quieras" onkeydown="if(event.key==='Enter')askAI()">
-    
     <button class="mode-btn" onclick="toggleMode()" id="modeBtn">Fast ▾</button>
-    
     <button class="mic-btn" onclick="toggleVoice()" id="micBtn">🎙️</button>
-    
-    <button class="send-btn" onclick="askAI()" title="Enviar">↑</button>
+    <button class="send-btn" onclick="askAI()">↑</button>
   </div>
 </div>
 
@@ -302,7 +215,6 @@ header{
     <div class="sheet-handle"></div>
     <h2 id="authTitle">Crear cuenta</h2>
     <p class="muted" id="authSubtitle">Regístrate para empezar a usar DixzAI</p>
-
     <div id="loginForm" class="auth-form" style="display:none">
       <label>Correo</label>
       <input type="email" id="loginEmail" placeholder="tu@email.com">
@@ -311,7 +223,6 @@ header{
       <button class="auth-submit" onclick="loginUser()">Entrar</button>
       <div class="auth-switch">¿No tienes cuenta? <button onclick="switchAuth('register')">Regístrate</button></div>
     </div>
-
     <div id="registerForm" class="auth-form">
       <label>Nombre</label>
       <input type="text" id="regName" placeholder="Tu nombre">
@@ -331,7 +242,6 @@ header{
     <div class="sheet-handle"></div>
     <h2>Planes DixzAI</h2>
     <p class="muted">Elige el plan que mejor se adapte a ti</p>
-
     <div class="plan-card">
       <h3>Free</h3>
       <div class="plan-price">$0</div>
@@ -354,20 +264,61 @@ header{
   </div>
 </div>
 
+<!-- Payment -->
+<div class="overlay" id="paymentOverlay">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <h2 id="payTitle">Pagar plan Pro</h2>
+    <p class="muted" id="paySubtitle">$19 / mes · Cancela cuando quieras</p>
+
+    <div class="pay-methods">
+      <div class="pay-method active" onclick="selectPayMethod(this,'card')">💳 Tarjeta</div>
+      <div class="pay-method" onclick="selectPayMethod(this,'apple')"> Apple Pay</div>
+      <div class="pay-method" onclick="selectPayMethod(this,'google')">G Pay</div>
+      <div class="pay-method" onclick="selectPayMethod(this,'other')">Otros</div>
+    </div>
+
+    <div id="cardForm" class="card-form">
+      <input type="text" id="cardNumber" placeholder="Número de tarjeta" maxlength="19">
+      <div class="card-row">
+        <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
+        <input type="text" id="cardCvc" placeholder="CVC" maxlength="4">
+      </div>
+      <input type="text" id="cardName" placeholder="Nombre en la tarjeta">
+    </div>
+
+    <div id="appleForm" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:40px;margin-bottom:10px"></div>
+      <p style="color:var(--muted);font-size:14px">Paga de forma segura con Apple Pay</p>
+    </div>
+
+    <div id="googleForm" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:40px;margin-bottom:10px">G</div>
+      <p style="color:var(--muted);font-size:14px">Paga de forma segura con Google Pay</p>
+    </div>
+
+    <div id="otherForm" style="display:none;text-align:center;padding:20px 0">
+      <p style="color:var(--muted);font-size:14px">PayPal · Transferencia · Criptomonedas</p>
+      <p style="margin-top:8px;font-size:13px">Contacta a support@dixzai.com</p>
+    </div>
+
+    <button class="pay-btn" onclick="confirmPayment()">Confirmar pago</button>
+    <button class="close-btn" onclick="closePayment()" style="margin-top:10px">Cancelar</button>
+  </div>
+</div>
+
 <!-- Company -->
 <div class="overlay" id="companyOverlay" onclick="if(event.target===this)closeCompany()">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <h2>DixzAI Intelligent</h2>
     <p class="muted">Empresa privada de tecnología e inteligencia artificial</p>
-
     <div class="info-card"><b>Nombre</b><span>DixzAI Intelligent Inc</span></div>
     <div class="info-card"><b>Tipo</b><span>Empresa privada de tecnología e inteligencia artificial</span></div>
     <div class="info-card"><b>Correo</b><span>support@dixzai.com</span></div>
     <div class="info-card"><b>Ubicación</b><span>Silicon Valley</span></div>
     <div class="info-card"><b>Enfoque</b><span>Inteligencia artificial, software, automatización y soluciones digitales</span></div>
     <div class="info-card"><b>Visión</b><span>Intelligence for the next generation.</span></div>
-
     <h2 style="font-size:17px;margin:18px 0 8px">Equipo</h2>
     <div class="team-grid">
       <div class="person"><b>Adilson Smith</b><span>CEO & Fundador · 20 años 🇵🇪</span></div>
@@ -376,7 +327,6 @@ header{
       <div class="person"><b>Torine Soe</b><span>Desarrollador · 25 años 🇺🇸</span></div>
       <div class="person"><b>Alex Asla</b><span>Desarrollador · 36 años 🇺🇸</span></div>
     </div>
-
     <div style="margin-top:14px">
       <div class="info-card"><b>Misión</b><span>Crear soluciones de inteligencia artificial accesibles y prácticas.</span></div>
       <div class="info-card"><b>Visión</b><span>Construir una plataforma de IA innovadora y escalable.</span></div>
@@ -391,7 +341,13 @@ const STORE = {
   get users(){ try{return JSON.parse(localStorage.getItem('dixzai_users')||'[]')}catch{return[]} },
   set users(v){ localStorage.setItem('dixzai_users',JSON.stringify(v)) },
   get current(){ try{return JSON.parse(localStorage.getItem('dixzai_current')||'null')}catch{return null} },
-  set current(v){ localStorage.setItem('dixzai_current',JSON.stringify(v)) }
+  set current(v){ localStorage.setItem('dixzai_current',JSON.stringify(v)) },
+  getHistory(email){
+    try{ return JSON.parse(localStorage.getItem('dixzai_history_'+email)||'[]') }catch{return[]}
+  },
+  setHistory(email, history){
+    localStorage.setItem('dixzai_history_'+email, JSON.stringify(history));
+  }
 };
 
 function refreshUser(){
@@ -409,70 +365,89 @@ function refreshUser(){
   }
 }
 
-/* ===== AUTH (primera vez obliga a registrarse) ===== */
+/* ===== AUTH ===== */
 function openAuth(){
   document.getElementById('authOverlay').classList.add('open');
-  if(!STORE.current){
-    switchAuth('register');
-  }else{
-    switchAuth('login');
-  }
+  if(!STORE.current) switchAuth('register');
+  else switchAuth('login');
 }
 function closeAuth(){
-  if(STORE.current){
-    document.getElementById('authOverlay').classList.remove('open');
-  }
+  if(STORE.current) document.getElementById('authOverlay').classList.remove('open');
 }
-
 function switchAuth(mode){
-  const isLogin = mode === 'login';
+  const isLogin = mode==='login';
   document.getElementById('authTitle').textContent = isLogin ? 'Iniciar sesión' : 'Crear cuenta';
   document.getElementById('authSubtitle').textContent = isLogin ? 'Accede a tu cuenta' : 'Regístrate para empezar';
   document.getElementById('loginForm').style.display = isLogin ? 'block' : 'none';
   document.getElementById('registerForm').style.display = isLogin ? 'none' : 'block';
 }
-
 function registerUser(){
-  const name = document.getElementById('regName').value.trim();
-  const email = document.getElementById('regEmail').value.trim().toLowerCase();
-  const pass = document.getElementById('regPass').value;
-  if(!name || !email || pass.length < 6){
-    alert('Completa todos los campos (mínimo 6 caracteres en la contraseña)');
-    return;
-  }
-  const users = STORE.users;
-  if(users.some(u => u.email === email)){
-    alert('Ese correo ya está registrado. Inicia sesión.');
-    switchAuth('login');
-    return;
-  }
-  users.push({name, email, pass, plan:'Free', createdAt:new Date().toISOString()});
-  STORE.users = users;
-  STORE.current = {name, email, plan:'Free'};
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('regPass').value;
+  if(!name||!email||pass.length<6){alert('Completa todos los campos (mín. 6 caracteres)');return}
+  const users=STORE.users;
+  if(users.some(u=>u.email===email)){alert('Ese correo ya existe. Inicia sesión.');switchAuth('login');return}
+  users.push({name,email,pass,plan:'Free',createdAt:new Date().toISOString()});
+  STORE.users=users;
+  STORE.current={name,email,plan:'Free'};
   document.getElementById('authOverlay').classList.remove('open');
   refreshUser();
+  loadHistory();
 }
-
 function loginUser(){
-  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pass = document.getElementById('loginPass').value;
-  const user = STORE.users.find(u => u.email === email && u.pass === pass);
-  if(!user){
-    alert('Correo o contraseña incorrectos');
-    return;
-  }
-  STORE.current = {name:user.name, email:user.email, plan:user.plan||'Free'};
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('loginPass').value;
+  const user=STORE.users.find(u=>u.email===email&&u.pass===pass);
+  if(!user){alert('Correo o contraseña incorrectos');return}
+  STORE.current={name:user.name,email:user.email,plan:user.plan||'Free'};
   document.getElementById('authOverlay').classList.remove('open');
   refreshUser();
+  loadHistory();
 }
-
 function logout(){
+  saveHistory(); // guarda antes de salir
   localStorage.removeItem('dixzai_current');
   refreshUser();
+  document.getElementById('chatMessages').innerHTML='';
+  showEmpty(true);
   openAuth();
 }
 
-/* ===== PLANS & COMPANY ===== */
+/* ===== HISTORY ===== */
+function saveHistory(){
+  const u = STORE.current;
+  if(!u) return;
+  const msgs = [...document.querySelectorAll('#chatMessages .chat-message')].map(el=>{
+    return {
+      type: el.classList.contains('chat-user') ? 'user' : 'ai',
+      html: el.innerHTML
+    };
+  });
+  STORE.setHistory(u.email, msgs);
+}
+function loadHistory(){
+  const u = STORE.current;
+  if(!u) return;
+  const history = STORE.getHistory(u.email);
+  const box = document.getElementById('chatMessages');
+  box.innerHTML = '';
+  if(history.length){
+    showEmpty(false);
+    history.forEach(m=>{
+      const div = document.createElement('div');
+      div.className = 'chat-message ' + (m.type==='user' ? 'chat-user' : 'chat-ai');
+      div.innerHTML = m.html;
+      box.appendChild(div);
+    });
+    box.scrollTop = box.scrollHeight;
+  }else{
+    showEmpty(true);
+  }
+}
+
+/* ===== PLANS + PAYMENT ===== */
+let selectedPlan = null;
 function openPlans(){ document.getElementById('plansOverlay').classList.add('open') }
 function closePlans(){ document.getElementById('plansOverlay').classList.remove('open') }
 function openCompany(){ document.getElementById('companyOverlay').classList.add('open') }
@@ -481,16 +456,60 @@ function closeCompany(){ document.getElementById('companyOverlay').classList.rem
 function selectPlan(plan){
   const u = STORE.current;
   if(!u){ closePlans(); openAuth(); return; }
+
+  if(plan === 'Free'){
+    // Free no necesita pago
+    updateUserPlan('Free');
+    closePlans();
+    alert('Plan Free activado');
+    return;
+  }
+
+  if(plan === 'Enterprise'){
+    closePlans();
+    alert('Para Enterprise contacta a support@dixzai.com');
+    return;
+  }
+
+  // Pro → abrir pago
+  selectedPlan = plan;
+  document.getElementById('payTitle').textContent = 'Pagar plan ' + plan;
+  document.getElementById('paySubtitle').textContent = plan==='Pro' ? '$19 / mes · Cancela cuando quieras' : 'Plan personalizado';
+  closePlans();
+  document.getElementById('paymentOverlay').classList.add('open');
+}
+
+function closePayment(){
+  document.getElementById('paymentOverlay').classList.remove('open');
+}
+
+function selectPayMethod(el, method){
+  document.querySelectorAll('.pay-method').forEach(m=>m.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('cardForm').style.display = method==='card' ? 'block' : 'none';
+  document.getElementById('appleForm').style.display = method==='apple' ? 'block' : 'none';
+  document.getElementById('googleForm').style.display = method==='google' ? 'block' : 'none';
+  document.getElementById('otherForm').style.display = method==='other' ? 'block' : 'none';
+}
+
+function confirmPayment(){
+  // Simulación de pago exitoso
+  updateUserPlan(selectedPlan || 'Pro');
+  closePayment();
+  alert('¡Pago realizado con éxito! Plan ' + (selectedPlan||'Pro') + ' activado.');
+}
+
+function updateUserPlan(plan){
+  const u = STORE.current;
+  if(!u) return;
   const users = STORE.users;
-  const i = users.findIndex(x => x.email === u.email);
+  const i = users.findIndex(x=>x.email===u.email);
   if(i>=0){ users[i].plan = plan; STORE.users = users; }
   STORE.current = {...u, plan};
   refreshUser();
-  closePlans();
-  alert('Plan '+plan+' seleccionado');
 }
 
-/* ===== CLEAN RESPONSE (sin asteriscos) ===== */
+/* ===== CLEAN RESPONSE ===== */
 function cleanResponse(text){
   return String(text||'')
     .replace(/\*\*(.*?)\*\*/g,'$1')
@@ -503,9 +522,8 @@ function cleanResponse(text){
     .replace(/\n{3,}/g,'\n\n')
     .trim();
 }
-
 function wantsLong(text){
-  const t = (text||'').toLowerCase();
+  const t=(text||'').toLowerCase();
   return /más largo|mas largo|explícame mejor|detalla|más detalle|mas detalle|extiende|desarrolla|hazlo más completo|en profundidad/.test(t);
 }
 
@@ -516,129 +534,118 @@ const questionInput = document.getElementById('question');
 const filePreview = document.getElementById('filePreview');
 let pendingFiles = [];
 
-function escapeHTML(t){ return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function showEmpty(show){ emptyState.style.display = show ? 'flex' : 'none'; }
+function escapeHTML(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function showEmpty(show){emptyState.style.display=show?'flex':'none'}
 
 function handleFiles(input){
   [...(input.files||[])].forEach(file=>{
-    const isImage = file.type.startsWith('image/');
-    const reader = new FileReader();
-    reader.onload = e=>{
-      pendingFiles.push({name:file.name, type:file.type, data:e.target.result, isImage});
+    const isImage=file.type.startsWith('image/');
+    const reader=new FileReader();
+    reader.onload=e=>{
+      pendingFiles.push({name:file.name,type:file.type,data:e.target.result,isImage});
       renderPreview();
     };
     reader.readAsDataURL(file);
   });
-  input.value = '';
+  input.value='';
 }
-
 function renderPreview(){
-  filePreview.innerHTML = '';
+  filePreview.innerHTML='';
   pendingFiles.forEach((f,i)=>{
-    const div = document.createElement('div');
-    div.className = 'preview-item';
-    if(f.isImage){
-      div.innerHTML = `<img src="${f.data}"><button class="remove" onclick="removeFile(${i})">×</button>`;
-    }else{
-      div.innerHTML = `<div style="font-size:10px;padding:4px;word-break:break-all">${escapeHTML(f.name)}</div><button class="remove" onclick="removeFile(${i})">×</button>`;
-    }
+    const div=document.createElement('div');
+    div.className='preview-item';
+    if(f.isImage) div.innerHTML=`<img src="${f.data}"><button class="remove" onclick="removeFile(${i})">×</button>`;
+    else div.innerHTML=`<div style="font-size:10px;padding:4px;word-break:break-all">${escapeHTML(f.name)}</div><button class="remove" onclick="removeFile(${i})">×</button>`;
     filePreview.appendChild(div);
   });
 }
-function removeFile(i){ pendingFiles.splice(i,1); renderPreview(); }
+function removeFile(i){pendingFiles.splice(i,1);renderPreview()}
 
 async function askAI(){
-  const q = questionInput.value.trim();
-  if(!q && !pendingFiles.length) return;
-
+  const q=questionInput.value.trim();
+  if(!q&&!pendingFiles.length) return;
   showEmpty(false);
 
-  let userHTML = q ? escapeHTML(q) : '';
+  let userHTML=q?escapeHTML(q):'';
   pendingFiles.forEach(f=>{
-    if(f.isImage) userHTML += `<br><img class="chat-image" src="${f.data}">`;
-    else userHTML += `<div class="file-chip">📄 ${escapeHTML(f.name)}</div>`;
+    if(f.isImage) userHTML+=`<br><img class="chat-image" src="${f.data}">`;
+    else userHTML+=`<div class="file-chip">📄 ${escapeHTML(f.name)}</div>`;
   });
-  messagesEl.innerHTML += `<div class="chat-message chat-user">${userHTML}</div>`;
+  messagesEl.innerHTML+=`<div class="chat-message chat-user">${userHTML}</div>`;
 
-  const longMode = wantsLong(q);
-  const filesToSend = [...pendingFiles];
-  questionInput.value = '';
-  pendingFiles = [];
-  filePreview.innerHTML = '';
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+  const longMode=wantsLong(q);
+  const filesToSend=[...pendingFiles];
+  questionInput.value='';
+  pendingFiles=[];
+  filePreview.innerHTML='';
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+  saveHistory(); // guarda después de cada mensaje
 
-  const tid = 't'+Date.now();
-  messagesEl.innerHTML += `<div id="${tid}" class="chat-message chat-ai">DixzAI está pensando...</div>`;
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+  const tid='t'+Date.now();
+  messagesEl.innerHTML+=`<div id="${tid}" class="chat-message chat-ai">DixzAI está pensando...</div>`;
+  messagesEl.scrollTop=messagesEl.scrollHeight;
 
   try{
-    const res = await fetch('/api/chat',{
+    const res=await fetch('/api/chat',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        question: q || 'Analiza los archivos',
-        files: filesToSend,
-        style: longMode ? 'detailed' : 'concise'
-      })
+      body:JSON.stringify({question:q||'Analiza los archivos',files:filesToSend,style:longMode?'detailed':'concise'})
     });
-    const data = await res.json();
+    const data=await res.json();
     document.getElementById(tid)?.remove();
-    let answer = cleanResponse(data.answer || 'No pude generar una respuesta.');
-    messagesEl.innerHTML += `<div class="chat-message chat-ai"><b>DixzAI</b><br>${escapeHTML(answer).replace(/\n/g,'<br>')}</div>`;
+    let answer=cleanResponse(data.answer||'No pude generar una respuesta.');
+    messagesEl.innerHTML+=`<div class="chat-message chat-ai"><b>DixzAI</b><br>${escapeHTML(answer).replace(/\n/g,'<br>')}</div>`;
   }catch(e){
     document.getElementById(tid)?.remove();
-    messagesEl.innerHTML += `<div class="chat-message chat-ai">No pude procesar tu solicitud.</div>`;
+    messagesEl.innerHTML+=`<div class="chat-message chat-ai">No pude procesar tu solicitud.</div>`;
   }
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+  saveHistory();
 }
 
-/* Mode */
-let currentMode = 'Fast';
+/* Mode & Voice */
+let currentMode='Fast';
 function toggleMode(){
-  currentMode = currentMode === 'Fast' ? 'Think' : 'Fast';
-  document.getElementById('modeBtn').textContent = currentMode + ' ▾';
+  currentMode=currentMode==='Fast'?'Think':'Fast';
+  document.getElementById('modeBtn').textContent=currentMode+' ▾';
 }
-
-/* Voice */
-let recognition = null;
+let recognition=null;
 function toggleVoice(){
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const btn = document.getElementById('micBtn');
-  if(!SR){ alert('Reconocimiento de voz no disponible'); return; }
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const btn=document.getElementById('micBtn');
+  if(!SR){alert('Reconocimiento de voz no disponible');return}
   if(recognition){
-    recognition.stop();
-    recognition = null;
-    btn.classList.remove('listening');
-    btn.textContent = '🎙️';
-    return;
+    recognition.stop();recognition=null;
+    btn.classList.remove('listening');btn.textContent='🎙️';return;
   }
-  recognition = new SR();
-  recognition.lang = 'es-ES';
-  recognition.interimResults = true;
-  recognition.continuous = false;
-  btn.classList.add('listening');
-  btn.textContent = '⏹';
-
-  recognition.onresult = e=>{
-    let text = '';
-    for(let i=e.resultIndex;i<e.results.length;i++) text += e.results[i][0].transcript;
-    questionInput.value = text;
+  recognition=new SR();
+  recognition.lang='es-ES';
+  recognition.interimResults=true;
+  recognition.continuous=false;
+  btn.classList.add('listening');btn.textContent='⏹';
+  recognition.onresult=e=>{
+    let text='';
+    for(let i=e.resultIndex;i<e.results.length;i++) text+=e.results[i][0].transcript;
+    questionInput.value=text;
     if(e.results[e.results.length-1].isFinal) setTimeout(()=>askAI(),250);
   };
-  recognition.onend = recognition.onerror = ()=>{
-    recognition = null;
-    btn.classList.remove('listening');
-    btn.textContent = '🎙️';
+  recognition.onend=recognition.onerror=()=>{
+    recognition=null;btn.classList.remove('listening');btn.textContent='🎙️';
   };
   recognition.start();
 }
 
-/* Init - primera vez obliga a registrarse */
+/* Init */
 refreshUser();
 showEmpty(true);
 if(!STORE.current){
-  setTimeout(()=>openAuth(), 400);
+  setTimeout(()=>openAuth(),300);
+}else{
+  loadHistory();
 }
+
+// Guarda historial al cerrar la página
+window.addEventListener('beforeunload', saveHistory);
 </script>
 </body>
 </html>
