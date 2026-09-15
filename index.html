@@ -131,7 +131,14 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
     <input type="file" id="filePick" accept="image/*,.pdf,.doc,.docx,.txt,.csv,.xlsx,.pptx" multiple hidden onchange="handleFiles(this)">
     <input id="question" type="text" placeholder="Pregunta lo que quieras" onkeydown="if(event.key==='Enter')askAI()">
     <button class="mode-btn" onclick="toggleMode()" id="modeBtn">Fast ▾</button>
-    <button class="mic-btn" onclick="toggleVoice()" id="micBtn">🎙️</button>
+    <button class="mic-btn" onclick="toggleVoice()" id="micBtn" aria-label="Usar voz">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M18 10v2a6 6 0 0 1-12 0v-2M12 18v3M9 21h6"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
     <button class="send-btn" onclick="askAI()">↑</button>
   </div>
 </div>
