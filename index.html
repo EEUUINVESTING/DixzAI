@@ -400,22 +400,80 @@ isolation:isolate;
     <div class="attach-menu" id="attachMenu">
 
   <button type="button" class="attach-option" onclick="document.getElementById('filePick').click(); toggleAttachMenu();">
-    <span>🖼️</span>
+    <span class="attach-icon">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3" y="4" width="18" height="16" rx="3"
+          stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="8.5" cy="9" r="1.5"
+            stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4 17l4.5-4.5 3.5 3 2.5-2.5L20 18"
+          stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </svg>
+</span>
     <span>Fotos</span>
   </button>
 
   <button type="button" class="attach-option" onclick="openCameraPicker()">
-    <span>📷</span>
+    <span class="attach-icon">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M8.5 6.5 10 4.5h4l1.5 2H19
+             a2 2 0 0 1 2 2v9
+             a2 2 0 0 1-2 2H5
+             a2 2 0 0 1-2-2v-9
+             a2 2 0 0 1 2-2h3.5Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"/>
+    <circle cx="12" cy="13" r="3.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+  </svg>
+</span>
     <span>Cámara</span>
   </button>
 
-  <button type="button" class="attach-option">
-    <span>📄</span>
+  <button type="button" class="attach-option" onclick="document.getElementById('filePick').click(); toggleAttachMenu();">
+    <span class="attach-icon">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M7 3.5h6.5L18.5 8v12
+             a1.5 1.5 0 0 1-1.5 1.5H7
+             A1.5 1.5 0 0 1 5.5 20V5
+             A1.5 1.5 0 0 1 7 3.5Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"/>
+    <path d="M13.5 3.5V8h5"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"/>
+    <path d="M8.5 12h7M8.5 15.5h7"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"/>
+  </svg>
+</span>
     <span>Archivos</span>
   </button>
 
-  <button type="button" class="attach-option">
-    <span>✨</span>
+  <button type="button" class="attach-option" onclick="openImageCreator()">
+    <span class="attach-icon">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 3l1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3Z"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linejoin="round"/>
+    <path d="M18.5 13l.7 2.3 2.3.7-2.3.7-.7 2.3-.7-2.3-2.3-.7 2.3-.7.7-2.3Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linejoin="round"/>
+    <path d="M6 14l.8 2.5 2.5.8-2.5.8L6 20.5l-.8-2.4-2.5-.8 2.5-.8L6 14Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linejoin="round"/>
+  </svg>
+</span>
     <span>Crear imagen</span>
   </button>
 
