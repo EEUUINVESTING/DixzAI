@@ -563,11 +563,11 @@ function toggleVoice(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   const btn=document.getElementById('micBtn');
   if(!SR){alert('Reconocimiento de voz no disponible');return}
-  if(recognition){recognition.stop();recognition=null;btn.classList.remove('listening');btn.textContent='🎙️';return}
+  if(recognition){recognition.stop();recognition=null;btn.classList.remove('listening');return}
   recognition=new SR();recognition.lang='es-ES';recognition.interimResults=true;recognition.continuous=false;
-  btn.classList.add('listening');btn.textContent='⏹';
+  btn.classList.add('listening');
   recognition.onresult=e=>{let t='';for(let i=e.resultIndex;i<e.results.length;i++)t+=e.results[i][0].transcript;questionInput.value=t;if(e.results[e.results.length-1].isFinal)setTimeout(()=>askAI(),300)};
-  recognition.onend=recognition.onerror=()=>{recognition=null;btn.classList.remove('listening');btn.textContent='🎙️'};
+  recognition.onend=recognition.onerror=()=>{recognition=null;btn.classList.remove('listening')}
   recognition.start();
 }
 
