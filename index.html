@@ -940,6 +940,58 @@ isolation:isolate;
     padding:0 10px !important;
   }
 }
+/* ===== HEADER RESPONSIVE PARA TELÉFONO ===== */
+
+@media (max-width:600px){
+
+  header{
+    padding:8px 10px !important;
+  }
+
+  .logo{
+    gap:5px !important;
+  }
+
+  .logo > span{
+    font-size:17px !important;
+  }
+
+  .header-actions{
+    display:flex !important;
+    align-items:center !important;
+    gap:5px !important;
+    margin-left:auto !important;
+    padding:0 !important;
+  }
+
+  /* Ocultamos solo el nombre largo para ganar espacio */
+  #userBadge{
+    display:none !important;
+  }
+
+  /* Información */
+  .header-actions .icon{
+    display:flex !important;
+    width:34px !important;
+    height:34px !important;
+    min-width:34px !important;
+    padding:0 !important;
+  }
+
+  /* Planes */
+  .header-actions button{
+    height:34px !important;
+    padding:0 10px !important;
+    font-size:12px !important;
+    white-space:nowrap !important;
+  }
+
+  /* Entrar / Salir */
+  #authBtn{
+    padding:0 9px !important;
+  }
+
+}
 </style>
 </head>
 <body>
