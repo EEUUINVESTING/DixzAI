@@ -867,6 +867,79 @@ isolation:isolate;
     max-width:86vw !important;
   }
 }
+/* ===== HEADER DIXZAI EN TELÉFONO ===== */
+@media (max-width:600px){
+
+  header{
+    height:60px !important;
+    padding:0 10px !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+  }
+
+  .logo{
+    flex-shrink:0 !important;
+    gap:5px !important;
+  }
+
+  .logo > span{
+    font-size:17px !important;
+  }
+
+  .menu-btn{
+    width:30px !important;
+    height:30px !important;
+    margin-right:0 !important;
+  }
+
+  .logo-icon{
+    width:30px !important;
+    height:30px !important;
+  }
+
+  .logo-icon img{
+    width:22px !important;
+    height:22px !important;
+  }
+
+  .header-actions{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:5px !important;
+
+    padding:0 !important;
+    margin:0 !important;
+
+    width:auto !important;
+    min-width:0 !important;
+  }
+
+  /* Ocultamos SOLO el nombre porque ya estará dentro del menú ☰ */
+  #userBadge{
+    display:none !important;
+  }
+
+  .header-actions .glass-btn{
+    height:34px !important;
+    min-width:0 !important;
+    padding:0 10px !important;
+    font-size:12px !important;
+    white-space:nowrap !important;
+  }
+
+  .header-actions .glass-btn.icon{
+    width:34px !important;
+    min-width:34px !important;
+    padding:0 !important;
+  }
+
+  #authBtn{
+    padding:0 10px !important;
+  }
+}
 </style>
 </head>
 <body>
