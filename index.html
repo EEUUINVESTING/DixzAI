@@ -764,7 +764,109 @@ isolation:isolate;
 .sidebar-chat:hover{
   background:rgba(0,0,0,.05);
 }
+/* ===== DIXZAI RESPONSIVE PARA TELÉFONO ===== */
 
+@media (max-width: 600px){
+
+  header{
+    height:60px !important;
+    padding:0 10px !important;
+    gap:6px !important;
+  }
+
+  .logo{
+    gap:5px !important;
+    flex-shrink:0 !important;
+  }
+
+  .logo > span{
+    font-size:18px !important;
+  }
+
+  .logo-icon{
+    width:28px !important;
+    height:28px !important;
+  }
+
+  .logo-icon img{
+    width:24px !important;
+    height:24px !important;
+  }
+
+  .menu-btn{
+    width:30px !important;
+    height:30px !important;
+    font-size:19px !important;
+    flex-shrink:0 !important;
+  }
+
+  .header-actions{
+    margin-left:auto !important;
+    padding-left:0 !important;
+    gap:5px !important;
+  }
+
+  /* Ocultamos elementos que ya estarán en ☰ */
+  .header-actions .user-badge,
+  .header-actions .history-btn,
+  .header-actions .new-chat-btn,
+  .header-actions .icon{
+    display:none !important;
+  }
+
+  /* Planes también se oculta para ganar espacio */
+  .header-actions button[onclick="openPlans()"]{
+    display:none !important;
+  }
+
+  /* Dejamos Entrar / Salir */
+  #authBtn{
+    display:flex !important;
+    height:34px !important;
+    padding:0 12px !important;
+    font-size:12px !important;
+  }
+
+  /* Chat */
+  #chatMessages{
+    top:65px !important;
+    bottom:100px !important;
+
+    width:100% !important;
+    padding:18px 12px 30px !important;
+  }
+
+  .chat-message{
+    max-width:82vw !important;
+  }
+
+  .ai-response-row{
+    margin-left:0 !important;
+    max-width:90vw !important;
+  }
+
+  .ai-response-row .chat-ai{
+    max-width:calc(90vw - 30px) !important;
+  }
+
+  /* Caja para escribir */
+  .composer{
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+
+  .input-wrap{
+    width:100% !important;
+    max-width:none !important;
+    min-height:52px !important;
+  }
+
+  /* Panel lateral */
+  .sidebar{
+    width:285px !important;
+    max-width:86vw !important;
+  }
+}
 </style>
 </head>
 <body>
