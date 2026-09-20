@@ -47,6 +47,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 16px;display:
   font-size:0 !important;
   overflow:hidden;
   margin:0;
+  position:relative;
 }
 .big-logo img{
   width:190px !important;
@@ -793,9 +794,20 @@ isolation:isolate;
   background:rgba(0,0,0,.05);
 }
 
+.history-item{position:relative}
+.history-more-btn{width:34px;height:34px;min-width:34px;border:1px solid rgba(0,0,0,.07);border-radius:50%;background:rgba(255,255,255,.72);color:var(--text);font-size:18px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.history-more-btn:hover{background:#fff}
+.history-actions-menu{position:absolute;right:8px;top:48px;z-index:1200;width:190px;padding:7px;border:1px solid rgba(0,0,0,.08);border-radius:15px;background:rgba(255,255,255,.98);box-shadow:0 14px 38px rgba(0,0,0,.16);backdrop-filter:blur(22px);display:none}
+.history-actions-menu.open{display:block}
+.history-action{width:100%;height:38px;padding:0 10px;border:0;border-radius:10px;background:transparent;color:var(--text);font-size:13px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:9px}
+.history-action:hover{background:rgba(32,185,75,.09);color:#15963b}
+.history-action.danger{color:#d11a3a}
+.history-action.danger:hover{background:rgba(225,29,72,.08)}
+
 .quick-prompts{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:min(520px,100%);margin-top:24px}
 .prompt-chip{padding:12px 14px;border:1px solid rgba(0,0,0,.065);border-radius:16px;background:rgba(255,255,255,.68);box-shadow:0 5px 18px rgba(0,0,0,.035);color:#4b4b50;text-align:left;font-size:13px;cursor:pointer;backdrop-filter:blur(16px);transition:.18s}
 .prompt-chip:hover{transform:translateY(-2px);background:#fff;box-shadow:0 8px 22px rgba(0,0,0,.065)}
+.prompt-chip:active{transform:scale(.96) !important;box-shadow:inset 0 2px 8px rgba(0,0,0,.10) !important}
 .message-actions{display:flex;align-items:center;gap:4px;margin-top:7px;opacity:.62}
 .message-action{width:29px;height:29px;border:1px solid rgba(0,0,0,.06);border-radius:50%;background:rgba(255,255,255,.72);color:#57575c;display:grid;place-items:center;cursor:pointer;font-size:13px}
 .message-action:hover{opacity:1;background:#fff}
@@ -1054,7 +1066,18 @@ body.dark .big-logo img{mix-blend-mode:screen}
 
 }
 /* ===== AJUSTE FINAL: CHAT ORDENADO ===== */
+#emptyState{
+  position:relative !important;
+  z-index:5 !important;
+  pointer-events:auto !important;
+}
+.quick-prompts,.prompt-chip{
+  position:relative;
+  z-index:6;
+  pointer-events:auto !important;
+}
 #chatMessages{
+  z-index:1 !important;
   width:min(calc(100% - 32px),820px) !important;
   padding-left:10px !important;
   padding-right:10px !important;
@@ -1158,6 +1181,17 @@ body.dark .ai-avatar{
   background:linear-gradient(145deg,#181a1e,#020304);
   box-shadow:inset 0 1px 1px rgba(255,255,255,.12),0 7px 18px rgba(0,0,0,.72);
 }
+body.dark .logo-icon img,
+body.dark .big-logo img,
+body.dark .ai-avatar{
+  mix-blend-mode:normal !important;
+  filter:grayscale(1) invert(1) contrast(2.6) brightness(1.12) drop-shadow(0 0 1px rgba(255,255,255,.9)) !important;
+  background:#000 !important;
+}
+body.dark .big-logo::after{
+  opacity:.22;
+  width:22%;
+}
 body.dark .message-action{
   color:#b8bbc1 !important;
   background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025)) !important;
@@ -1172,6 +1206,10 @@ body.dark .sheet,body.dark .sidebar,body.dark .attach-menu{
   border-color:rgba(255,255,255,.09) !important;
   box-shadow:0 24px 70px rgba(0,0,0,.82),inset 0 1px 0 rgba(255,255,255,.055) !important;
 }
+body.dark .history-more-btn,body.dark .history-actions-menu{background:rgba(17,18,21,.96);border-color:rgba(255,255,255,.10);color:#f5f5f7}
+body.dark .history-action{color:#ececef}
+body.dark .history-action:hover{background:rgba(32,185,75,.13);color:#65e58a}
+body.dark .history-action.danger{color:#ff708d}
 body.dark .info-card,body.dark .plan-card,body.dark .person{
   color:var(--text);
   background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025)) !important;
@@ -1191,18 +1229,21 @@ body.dark .sidebar-theme{background:linear-gradient(145deg,rgba(255,255,255,.075
   .ai-response-row .chat-ai{min-width:0 !important;max-width:100% !important}
   .chat-user{max-width:84vw !important}
   .attach-menu{
-    width:210px !important;
-    flex-direction:column !important;
-    gap:3px !important;
+    left:0 !important;
+    bottom:calc(100% + 12px) !important;
+    width:min(440px,calc(100vw - 28px)) !important;
+    flex-direction:row !important;
+    gap:4px !important;
   }
   .attach-option{
-    flex:none !important;
-    height:44px !important;
-    padding:0 12px !important;
-    flex-direction:row !important;
-    justify-content:flex-start !important;
-    gap:11px !important;
-    text-align:left !important;
+    flex:1 1 0 !important;
+    height:68px !important;
+    padding:7px 3px !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    gap:5px !important;
+    text-align:center !important;
+    font-size:12px !important;
   }
 }
 </style>
@@ -1495,7 +1536,7 @@ body.dark .sidebar-theme{background:linear-gradient(145deg,rgba(255,255,255,.075
     <p class="muted">Empresa privada de tecnología e inteligencia artificial</p>
     <div class="info-card"><b>Nombre legal</b><span>DixzAI Intelligent Inc</span></div>
     <div class="info-card"><b>Tipo</b><span>Empresa privada de tecnología e inteligencia artificial</span></div>
-    <div class="info-card"><b>Fundación</b><span>2024</span></div>
+    <div class="info-card"><b>Fundación</b><span>Julio-2026</span></div>
     <div class="info-card"><b>Sede principal</b><span>Silicon Valley, California, Estados Unidos</span></div>
     <div class="info-card"><b>Correo</b><span>support@dixzai.com</span></div>
     <div class="info-card"><b>Sitio web</b><span>www.dixzai.com</span></div>
@@ -1504,17 +1545,19 @@ body.dark .sidebar-theme{background:linear-gradient(145deg,rgba(255,255,255,.075
     <h2 style="font-size:17px;margin:20px 0 10px">Equipo directivo y técnico</h2>
     <div class="team-grid">
       <div class="person"><b>Adilson Smith</b><span>CEO & Fundador · 20 años 🇵🇪</span></div>
-      <div class="person"><b>Ale Michelle Celi</b><span>Co-Fundadora · 27 años 🇺🇸</span></div>
+      <div class="person"><b>Ale Michelle Ce</b><span>Co-Fundadora · 27 años 🇺🇸</span></div>
       <div class="person"><b>Jeff Padilla F</b><span>Ingeniero Principal · 34 años 🇺🇸</span></div>
-      <div class="person"><b>Torine Soe</b><span>Desarrollador · 25 años 🇺🇸</span></div>
+      <div class="person"><b>Torine Soe</b><span>Desarrolladora · 25 años 🇺🇸</span></div>
       <div class="person"><b>Alex Asla</b><span>Desarrollador · 36 años 🇺🇸</span></div>
-      <div class="person"><b>Sofia Nakamura</b><span>Head of AI Research · 31 años 🇯🇵</span></div>
-      <div class="person"><b>Lucas Ferreira</b><span>Lead Backend Engineer · 29 años 🇧🇷</span></div>
-      <div class="person"><b>Emma Johansson</b><span>Product Designer · 28 años 🇸🇪</span></div>
-      <div class="person"><b>Raj Patel</b><span>ML Engineer · 33 años 🇮🇳</span></div>
-      <div class="person"><b>Camille Dubois</b><span>Security Lead · 30 años 🇫🇷</span></div>
-      <div class="person"><b>Marco Rossi</b><span>DevOps Engineer · 32 años 🇮🇹</span></div>
-      <div class="person"><b>Aisha Khan</b><span>Data Scientist · 27 años 🇨🇦</span></div>
+      <div class="person"><b>Anngheli Dannae</b><span>Presidenta de DixzAI · 24 años 🇺🇸</span></div>
+      <div class="person"><b>Amelia Brown</b><span>Arquitecta de sistemas · 26 años 🇺🇸</span></div>
+      <div class="person"><b>Sofia Nakamura</b><span>Jefe de investigación de inteligencia artificial · 31 años 🇯🇵</span></div>
+      <div class="person"><b>Lucas Ferreira</b><span>Ingeniero principal backend · 29 años 🇧🇷</span></div>
+      <div class="person"><b>Emma Johansson</b><span>Ingeniero principal backend · 28 años 🇸🇪</span></div>
+      <div class="person"><b>Raj Patel</b><span>Ingeniero ML · 33 años 🇮🇳</span></div>
+      <div class="person"><b>Camila Dubois</b><span>Líder de seguridad · 30 años 🇫🇷</span></div>
+      <div class="person"><b>Mar Ross</b><span>Ingeniero DevOps · 32 años 🇮🇹</span></div>
+      <div class="person"><b>Aisha Khan</b><span>Científica de datos · 27 años 🇨🇦</span></div>
     </div>
     <button class="close-btn" onclick="closeCompany()">Cerrar</button>
   </div>
@@ -1743,7 +1786,7 @@ function renderSidebarHistory(query=''){
         <b>${escapeHTML(c.title || 'Nueva conversación')}</b>
         <span>${new Date(c.updatedAt).toLocaleString('es-PE')}</span>
       </div>
-      <button class="glass-btn icon" onclick="deleteChat('${c.id}',event)" aria-label="Eliminar">×</button>
+      ${historyActionsHTML(c.id)}
     </div>
   `).join('');
 }
@@ -1760,8 +1803,76 @@ function renderHistoryList(){
         <b>${escapeHTML(c.title||'Nueva conversación')}</b>
         <span>${new Date(c.updatedAt).toLocaleString('es-PE')}</span>
       </div>
-      <button class="glass-btn icon" onclick="deleteChat('${c.id}',event)" aria-label="Eliminar">×</button>
+      ${historyActionsHTML(c.id)}
     </div>`).join('') : '<p class="muted">Aún no tienes conversaciones.</p>';
+}
+
+function historyActionsHTML(id){
+  return `<button class="history-more-btn" onclick="toggleHistoryActions('${id}',event)" aria-label="Más opciones">•••</button>
+    <div class="history-actions-menu" id="historyActions-${id}">
+      <button class="history-action" onclick="shareChat('${id}',event)">↗ Compartir</button>
+      <button class="history-action" onclick="shareChatWhatsApp('${id}',event)">◉ WhatsApp</button>
+      <button class="history-action" onclick="copyChat('${id}',event)">⧉ Copiar conversación</button>
+      <button class="history-action" onclick="renameChat('${id}',event)">✎ Renombrar</button>
+      <button class="history-action danger" onclick="deleteChat('${id}',event)">⌫ Eliminar</button>
+    </div>`;
+}
+
+function closeHistoryActions(){
+  document.querySelectorAll('.history-actions-menu.open').forEach(menu=>menu.classList.remove('open'));
+}
+
+function toggleHistoryActions(id,event){
+  event.stopPropagation();
+  const menu=document.getElementById('historyActions-'+id);
+  const wasOpen=menu?.classList.contains('open');
+  closeHistoryActions();
+  if(menu&&!wasOpen) menu.classList.add('open');
+}
+
+function getChatShareData(id){
+  saveCurrentChat();
+  const owner=activeHistoryOwner || getHistoryOwner();
+  const chat=STORE.getChats(owner).find(item=>item.id===id);
+  if(!chat) return null;
+  const text=(chat.messages||[]).map(message=>{
+    const holder=document.createElement('div');
+    holder.innerHTML=message.html||'';
+    holder.querySelectorAll('.message-time,.message-actions').forEach(el=>el.remove());
+    return `${message.type==='user'?'Tú':'DixzAI'}: ${holder.textContent.trim()}`;
+  }).filter(Boolean).join('\n\n');
+  return {title:chat.title||'Conversación de DixzAI',text:`${chat.title||'Conversación de DixzAI'}\n\n${text}`};
+}
+
+async function shareChat(id,event){
+  event.stopPropagation();closeHistoryActions();
+  const data=getChatShareData(id);if(!data) return showToast('No se encontró la conversación');
+  try{
+    if(navigator.share) await navigator.share(data);
+    else{await navigator.clipboard.writeText(data.text);showToast('Conversación copiada para compartir')}
+  }catch(error){if(error?.name!=='AbortError') showToast('No se pudo compartir')}
+}
+
+function shareChatWhatsApp(id,event){
+  event.stopPropagation();closeHistoryActions();
+  const data=getChatShareData(id);if(!data) return showToast('No se encontró la conversación');
+  window.open(`https://wa.me/?text=${encodeURIComponent(data.text)}`,'_blank','noopener,noreferrer');
+}
+
+async function copyChat(id,event){
+  event.stopPropagation();closeHistoryActions();
+  const data=getChatShareData(id);if(!data) return showToast('No se encontró la conversación');
+  try{await navigator.clipboard.writeText(data.text);showToast('Conversación copiada')}catch{showToast('No se pudo copiar')}
+}
+
+function renameChat(id,event){
+  event.stopPropagation();closeHistoryActions();
+  const owner=activeHistoryOwner || getHistoryOwner();
+  const chats=STORE.getChats(owner);const chat=chats.find(item=>item.id===id);if(!chat) return;
+  const title=prompt('Nuevo nombre para la conversación:',chat.title||'Nueva conversación');
+  if(!title||!title.trim()) return;
+  chat.title=title.trim().slice(0,70);chat.updatedAt=new Date().toISOString();STORE.setChats(owner,chats);
+  renderSidebarHistory(document.getElementById('historySearch')?.value||'');renderHistoryList();showToast('Conversación renombrada');
 }
 
 function openHistory(){
@@ -1901,155 +2012,44 @@ function closePlans(){document.getElementById('plansOverlay').classList.remove('
 function openCompany(){document.getElementById('companyOverlay').classList.add('open')}
 function closeCompany(){document.getElementById('companyOverlay').classList.remove('open')}
 async function selectPlan(plan){
-  if(!window.isFirebaseLoggedIn || !window.isFirebaseLoggedIn()){
-  closePlans();
-  openAuth();
-  return;
-}
-  if(plan === 'Free'){
-  closePlans();
-  return;
-}
-  const firebaseUid =
-  typeof window.getFirebaseUid === 'function'
-    ? window.getFirebaseUid()
-    : null;
-
-if (!firebaseUid) {
-  closePlans();
-  openAuth();
-  return;
-}
-const firebaseIdToken =
-  typeof window.getFirebaseIdToken === 'function'
-    ? await window.getFirebaseIdToken()
-    : null;
-
-if (!firebaseIdToken) {
-  closePlans();
-  openAuth();
-  return;
-}
-  if(plan === 'Starter'){
-  try {
-    const response = await fetch(
-      'https://dixzai-payments.adilsonsmithhq.workers.dev/create-subscription',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${firebaseIdToken}`
-        },
-        body: JSON.stringify({
-          plan: 'Starter'
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    console.log('Respuesta segura:', data);
-
-    if (!response.ok || !data.ok) {
-      alert('No se pudo validar la suscripción.');
-      return;
-    }
-
-    if (data.checkoutUrl) {
-  window.location.href = data.checkoutUrl;
-} else {
-  alert('No se recibió el enlace de pago.');
-}
-
-  } catch (error) {
-    console.error(error);
-    alert('Error al conectar con el servidor de pagos.');
-  }
-
-  return;
-}
-if(plan === 'Pro'){
-  try {
-    const response = await fetch(
-      'https://dixzai-payments.adilsonsmithhq.workers.dev/create-subscription',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${firebaseIdToken}`
-        },
-        body: JSON.stringify({
-          plan: 'Pro'
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    console.log('Respuesta segura:', data);
-
-    if (!response.ok || !data.ok) {
-      alert('No se pudo validar la suscripción.');
-      return;
-    }
-
-    if (data.checkoutUrl) {
-      window.location.href = data.checkoutUrl;
-    } else {
-      alert('No se recibió el enlace de pago.');
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert('Error al conectar con el servidor de pagos.');
-  }
-
-  return;
-}
-if(plan === 'Business'){
-  try {
-    const response = await fetch(
-      'https://dixzai-payments.adilsonsmithhq.workers.dev/create-subscription',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${firebaseIdToken}`
-        },
-        body: JSON.stringify({
-          plan: 'Business'
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    console.log('Respuesta segura:', data);
-
-    if (!response.ok || !data.ok) {
-      alert('No se pudo validar la suscripción.');
-      return;
-    }
-
-    if (data.checkoutUrl) {
-      window.location.href = data.checkoutUrl;
-    } else {
-      alert('No se recibió el enlace de pago.');
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert('Error al conectar con el servidor de pagos.');
-  }
-
-  return;
-}
+  if(plan==='Free'){closePlans();return}
   if(plan==='Enterprise'){closePlans();alert('Contacta a support@dixzai.com');return}
-  selectedPlan=plan;
-  document.getElementById('payTitle').textContent='Pagar plan '+plan;
-  document.getElementById('paySubtitle').textContent=({'Starter':'S/19.9 / mes','Pro':'S/39.9 / mes','Business':'$49 / mes'}[plan]||'')+' · Cancela cuando quieras';
-  document.getElementById('payError').style.display='none';
-  closePlans();document.getElementById('paymentOverlay').classList.add('open');
+
+  if(typeof window.isFirebaseLoggedIn!=='function'||!window.isFirebaseLoggedIn()){
+    closePlans();openAuth();return;
+  }
+
+  const button=document.activeElement?.classList.contains('plan-btn')?document.activeElement:null;
+  const originalText=button?.textContent;
+  if(button){button.disabled=true;button.textContent='Conectando con Mercado Pago…'}
+
+  try{
+    const firebaseIdToken=typeof window.getFirebaseIdToken==='function'
+      ? await window.getFirebaseIdToken(true)
+      : null;
+    if(!firebaseIdToken) throw new Error('No se pudo obtener una sesión válida. Vuelve a iniciar sesión.');
+
+    const response=await fetch('https://dixzai-payments.adilsonsmithhq.workers.dev/create-subscription',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${firebaseIdToken}`},
+      body:JSON.stringify({plan})
+    });
+
+    const raw=await response.text();
+    let data={};
+    try{data=raw?JSON.parse(raw):{}}catch{throw new Error('El servidor de pagos respondió de forma incorrecta. Intenta nuevamente.')}
+    if(!response.ok||data.ok===false) throw new Error(data.message||data.error||'No se pudo crear la suscripción.');
+
+    const checkoutUrl=data.checkoutUrl||data.init_point||data.url;
+    if(!checkoutUrl||!/^https:\/\//i.test(checkoutUrl)) throw new Error('Mercado Pago no devolvió el enlace de pago.');
+    closePlans();
+    window.location.assign(checkoutUrl);
+  }catch(error){
+    console.error('Error de Mercado Pago:',error);
+    alert(error?.message||'Error al conectar con Mercado Pago. Intenta nuevamente.');
+  }finally{
+    if(button){button.disabled=false;button.textContent=originalText}
+  }
 }
 function closePayment(){document.getElementById('paymentOverlay').classList.remove('open')}
 function selectPayMethod(el,m){
@@ -2278,9 +2278,13 @@ updateNetworkStatus();
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape'){
     closeSidebar();
+    closeHistoryActions();
     document.getElementById('attachMenu')?.classList.remove('open');
     document.querySelectorAll('.overlay.open').forEach(el=>el.classList.remove('open'));
   }
+});
+document.addEventListener('click',event=>{
+  if(!event.target.closest('.history-more-btn,.history-actions-menu')) closeHistoryActions();
 });
 initializeChatSession(true);
 /* Firebase termina de restaurar la sesión de forma asíncrona. Si cambia el
