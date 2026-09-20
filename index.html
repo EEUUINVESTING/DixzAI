@@ -740,9 +740,11 @@ isolation:isolate;
 
 .sidebar-search{width:100%;height:40px;margin-top:14px;padding:0 12px;border:1px solid rgba(0,0,0,.07);border-radius:12px;background:rgba(255,255,255,.72);outline:none;color:var(--text);font-size:13px}
 .sidebar-search:focus{border-color:rgba(32,185,75,.35);box-shadow:0 0 0 3px rgba(32,185,75,.08)}
-.sidebar-tools{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.sidebar-tools{display:grid;grid-template-columns:1fr;gap:7px;margin-top:12px}
 .sidebar-tool{height:38px;border:1px solid rgba(0,0,0,.07);border-radius:12px;background:rgba(255,255,255,.7);color:var(--text);font-size:12px;font-weight:600;cursor:pointer}
 .sidebar-tool:hover{background:#fff}
+.sidebar-theme{width:100%;height:42px;margin-top:8px;padding:0 14px;border:1px solid rgba(0,0,0,.07);border-radius:14px;background:rgba(255,255,255,.72);color:var(--text);font-size:13px;font-weight:600;text-align:left;cursor:pointer}
+.sidebar-theme:hover{background:#fff}
 
 .sidebar-title{
   margin:25px 8px 9px;
@@ -1051,6 +1053,158 @@ body.dark .big-logo img{mix-blend-mode:screen}
   }
 
 }
+/* ===== AJUSTE FINAL: CHAT ORDENADO ===== */
+#chatMessages{
+  width:min(calc(100% - 32px),820px) !important;
+  padding-left:10px !important;
+  padding-right:10px !important;
+}
+.ai-response-row{
+  width:min(76%,620px) !important;
+  max-width:min(76%,620px) !important;
+  margin-left:0 !important;
+  display:grid !important;
+  grid-template-columns:30px minmax(0,1fr) !important;
+  align-items:start !important;
+  gap:10px !important;
+}
+.ai-avatar{
+  width:30px !important;
+  height:30px !important;
+  min-width:30px !important;
+  margin-top:7px !important;
+  border-radius:10px;
+  object-fit:contain;
+}
+.ai-response-row .chat-ai{
+  width:fit-content !important;
+  min-width:150px !important;
+  max-width:100% !important;
+  margin:0 !important;
+  overflow-wrap:anywhere;
+}
+.chat-user{max-width:min(72%,680px) !important}
+.input-wrap{position:relative !important}
+.attach-menu{
+  left:0 !important;
+  bottom:calc(100% + 12px) !important;
+  width:440px !important;
+  max-width:calc(100vw - 28px) !important;
+  flex-direction:row !important;
+  gap:5px !important;
+}
+.attach-option{
+  flex:1 1 0;
+  height:68px !important;
+  padding:7px 5px !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  gap:5px !important;
+  text-align:center !important;
+}
+
+/* ===== MODO OSCURO AMOLED + VIDRIO GLOSS ===== */
+body.dark{
+  --text:#f7f7f8;
+  --muted:#8c8c93;
+  background:#000 !important;
+  color:var(--text);
+}
+body.dark::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 100%,rgba(16,185,75,.075),transparent 34%),
+    radial-gradient(circle at 12% 0%,rgba(255,255,255,.025),transparent 28%),
+    #000;
+}
+body.dark header{
+  background:linear-gradient(180deg,rgba(13,14,16,.91),rgba(4,5,6,.82)) !important;
+  border-bottom:1px solid rgba(255,255,255,.085) !important;
+  box-shadow:0 10px 35px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.055) !important;
+  backdrop-filter:blur(32px) saturate(145%) !important;
+}
+body.dark .bottom-bar{
+  background:linear-gradient(to top,#000 58%,rgba(0,0,0,.93) 76%,transparent) !important;
+}
+body.dark .input-wrap{
+  background:linear-gradient(145deg,rgba(27,29,32,.92),rgba(8,9,11,.94)) !important;
+  border:1px solid rgba(255,255,255,.13) !important;
+  box-shadow:0 14px 45px rgba(0,0,0,.8),inset 0 1px 1px rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.8) !important;
+  backdrop-filter:blur(28px) saturate(150%) !important;
+}
+body.dark .input-wrap:focus-within{
+  border-color:rgba(54,211,105,.38) !important;
+  box-shadow:0 14px 48px rgba(0,0,0,.9),0 0 0 3px rgba(32,185,75,.07),inset 0 1px 1px rgba(255,255,255,.14) !important;
+}
+body.dark .chat-user{
+  color:#dffbea !important;
+  background:linear-gradient(145deg,rgba(31,92,53,.78),rgba(8,45,24,.78) 55%,rgba(16,72,37,.7)) !important;
+  border:1px solid rgba(112,255,159,.19) !important;
+  box-shadow:inset 0 1px 1px rgba(207,255,222,.18),inset 0 -1px 0 rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.58) !important;
+}
+body.dark .ai-response-row .chat-ai,
+body.dark #chatMessages > .chat-ai{
+  color:#ededf0 !important;
+  background:linear-gradient(145deg,rgba(29,30,34,.92),rgba(12,13,16,.9) 60%,rgba(20,21,24,.88)) !important;
+  border:1px solid rgba(255,255,255,.095) !important;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.085),inset 0 -1px 0 rgba(0,0,0,.75),0 12px 34px rgba(0,0,0,.62) !important;
+  backdrop-filter:blur(26px) saturate(135%) !important;
+}
+body.dark .ai-avatar{
+  background:linear-gradient(145deg,#181a1e,#020304);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.12),0 7px 18px rgba(0,0,0,.72);
+}
+body.dark .message-action{
+  color:#b8bbc1 !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025)) !important;
+  border-color:rgba(255,255,255,.09) !important;
+}
+body.dark .message-time{color:#777b82 !important}
+body.dark .chat-user .message-time{color:rgba(211,255,225,.58) !important}
+body.dark .mode-btn{color:#d8d8dc;background:rgba(255,255,255,.065);border-color:rgba(255,255,255,.08)}
+body.dark .plus-btn,body.dark .mic-btn{color:#a7a7ae}
+body.dark .sheet,body.dark .sidebar,body.dark .attach-menu{
+  background:linear-gradient(145deg,rgba(22,23,26,.97),rgba(5,6,8,.97)) !important;
+  border-color:rgba(255,255,255,.09) !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.82),inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+body.dark .info-card,body.dark .plan-card,body.dark .person{
+  color:var(--text);
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025)) !important;
+  border-color:rgba(255,255,255,.085) !important;
+}
+body.dark .sidebar-theme{background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));border-color:rgba(255,255,255,.09);color:var(--text)}
+
+@media (max-width:600px){
+  #chatMessages{width:100% !important;padding-left:12px !important;padding-right:12px !important}
+  .ai-response-row{
+    width:92vw !important;
+    max-width:92vw !important;
+    grid-template-columns:27px minmax(0,1fr) !important;
+    gap:8px !important;
+  }
+  .ai-avatar{width:27px !important;height:27px !important;min-width:27px !important}
+  .ai-response-row .chat-ai{min-width:0 !important;max-width:100% !important}
+  .chat-user{max-width:84vw !important}
+  .attach-menu{
+    width:210px !important;
+    flex-direction:column !important;
+    gap:3px !important;
+  }
+  .attach-option{
+    flex:none !important;
+    height:44px !important;
+    padding:0 12px !important;
+    flex-direction:row !important;
+    justify-content:flex-start !important;
+    gap:11px !important;
+    text-align:left !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -1061,7 +1215,7 @@ body.dark .big-logo img{mix-blend-mode:screen}
   ☰
 </button>
     <div class="logo-icon">
-  <img src="https://raw.githubusercontent.com/EEUUINVESTING/DixzAI/main/logo.png" alt="DixzAI">
+  <img src="./assets/imgs/dixzai-logo.jpeg" alt="">
 </div>
     <span>DixzAI</span>
   </div>
@@ -1095,6 +1249,10 @@ body.dark .big-logo img{mix-blend-mode:screen}
     ◇ Planes y suscripción
   </button>
 
+  <button class="sidebar-theme" id="themeBtn" onclick="toggleTheme()">
+    ◐ Modo oscuro
+  </button>
+
   <input class="sidebar-search" id="historySearch" type="search" placeholder="Buscar conversaciones" oninput="renderSidebarHistory(this.value)">
 
   <div class="sidebar-title">Historial</div>
@@ -1107,7 +1265,6 @@ body.dark .big-logo img{mix-blend-mode:screen}
 
   <div class="sidebar-tools">
     <button class="sidebar-tool" onclick="exportChats()">⇩ Exportar</button>
-    <button class="sidebar-tool" id="themeBtn" onclick="toggleTheme()">◐ Tema</button>
   </div>
 
 </aside>
@@ -1117,15 +1274,15 @@ body.dark .big-logo img{mix-blend-mode:screen}
 <div class="main">
   <div class="center-area" id="emptyState">
   <div class="big-logo">
-    <img src="https://raw.githubusercontent.com/EEUUINVESTING/DixzAI/main/logo.png" alt="DixzAI">
+    <img src="./assets/imgs/dixzai-logo.jpeg" alt="DixzAI">
   </div>
   <h1 class="welcome-title">¿En qué puedo ayudarte?</h1>
   <p class="welcome-sub">Pregunta, crea, analiza y desarrolla tus ideas con DixzAI.</p>
   <div class="quick-prompts">
-    <button class="prompt-chip" onclick="usePrompt('Ayúdame a organizar mis ideas para un proyecto')">Organizar un proyecto</button>
-    <button class="prompt-chip" onclick="usePrompt('Explícame este tema de manera clara y resumida')">Explicar un tema</button>
-    <button class="prompt-chip" onclick="usePrompt('Escribe una propuesta profesional para mi empresa')">Crear una propuesta</button>
-    <button class="prompt-chip" onclick="openImageCreator()">Crear una imagen</button>
+    <button type="button" class="prompt-chip" data-quick-prompt="Ayúdame a organizar paso a paso un proyecto profesional">Organizar un proyecto</button>
+    <button type="button" class="prompt-chip" data-quick-prompt="Explícame un tema de manera clara y resumida. Primero pregúntame qué tema quiero aprender.">Explicar un tema</button>
+    <button type="button" class="prompt-chip" data-quick-prompt="Ayúdame a crear una propuesta profesional. Primero pregúntame para qué empresa o proyecto será.">Crear una propuesta</button>
+    <button type="button" class="prompt-chip" id="quickImageBtn">Crear una imagen</button>
   </div>
 </div>
   <div id="chatMessages"></div>
@@ -1338,7 +1495,7 @@ body.dark .big-logo img{mix-blend-mode:screen}
     <p class="muted">Empresa privada de tecnología e inteligencia artificial</p>
     <div class="info-card"><b>Nombre legal</b><span>DixzAI Intelligent Inc</span></div>
     <div class="info-card"><b>Tipo</b><span>Empresa privada de tecnología e inteligencia artificial</span></div>
-    <div class="info-card"><b>Fundación</b><span>2026</span></div>
+    <div class="info-card"><b>Fundación</b><span>2024</span></div>
     <div class="info-card"><b>Sede principal</b><span>Silicon Valley, California, Estados Unidos</span></div>
     <div class="info-card"><b>Correo</b><span>support@dixzai.com</span></div>
     <div class="info-card"><b>Sitio web</b><span>www.dixzai.com</span></div>
@@ -1347,7 +1504,7 @@ body.dark .big-logo img{mix-blend-mode:screen}
     <h2 style="font-size:17px;margin:20px 0 10px">Equipo directivo y técnico</h2>
     <div class="team-grid">
       <div class="person"><b>Adilson Smith</b><span>CEO & Fundador · 20 años 🇵🇪</span></div>
-      <div class="person"><b>Ale Michelle Ce</b><span>Co-Fundadora · 27 años 🇺🇸</span></div>
+      <div class="person"><b>Ale Michelle Celi</b><span>Co-Fundadora · 27 años 🇺🇸</span></div>
       <div class="person"><b>Jeff Padilla F</b><span>Ingeniero Principal · 34 años 🇺🇸</span></div>
       <div class="person"><b>Torine Soe</b><span>Desarrollador · 25 años 🇺🇸</span></div>
       <div class="person"><b>Alex Asla</b><span>Desarrollador · 36 años 🇺🇸</span></div>
@@ -1547,7 +1704,7 @@ function loadChat(id){
     if(m.type==='ai'){
       const row=document.createElement('div');
       row.className='ai-response-row';
-      row.innerHTML='<img class="ai-avatar" src="https://raw.githubusercontent.com/EEUUINVESTING/DixzAI/main/logo.png" alt="DixzAI">';
+      row.innerHTML='<img class="ai-avatar" src="./assets/imgs/dixzai-logo.jpeg" alt="DixzAI">';
       row.appendChild(d);
       box.appendChild(row);
       addMessageActions(d);
@@ -1661,12 +1818,30 @@ function exportChats(){
 function toggleTheme(){
   const dark=document.body.classList.toggle('dark');
   localStorage.setItem('dixzai_theme',dark?'dark':'light');
-  document.getElementById('themeBtn').textContent=dark?'☀ Claro':'◐ Oscuro';
+  document.getElementById('themeBtn').textContent=dark?'☀ Modo claro':'◐ Modo oscuro';
 }
 
-function usePrompt(text){
-  questionInput.value=text;
+async function usePrompt(text){
+  if(isGenerating){showToast('Espera a que termine la respuesta actual');return}
+  questionInput.value=String(text||'').trim();
   questionInput.focus();
+  if(!questionInput.value) return;
+  await askAI();
+}
+
+function initializeQuickPrompts(){
+  document.querySelectorAll('[data-quick-prompt]').forEach(button=>{
+    button.addEventListener('click',event=>{
+      event.preventDefault();
+      usePrompt(button.dataset.quickPrompt);
+    });
+  });
+  document.getElementById('quickImageBtn')?.addEventListener('click',event=>{
+    event.preventDefault();
+    openImageCreator();
+    showEmpty(false);
+    questionInput.scrollIntoView({behavior:'smooth',block:'center'});
+  });
 }
 
 function formatMessageDate(value=new Date()){
@@ -2087,10 +2262,11 @@ function toggleVoice(){
 
 refreshUser();
 showEmpty(true);
+initializeQuickPrompts();
 if(localStorage.getItem('dixzai_theme')==='dark'){
   document.body.classList.add('dark');
   const themeBtn=document.getElementById('themeBtn');
-  if(themeBtn) themeBtn.textContent='☀ Claro';
+  if(themeBtn) themeBtn.textContent='☀ Modo claro';
 }
 function updateNetworkStatus(){
   document.body.classList.toggle('offline',!navigator.onLine);
